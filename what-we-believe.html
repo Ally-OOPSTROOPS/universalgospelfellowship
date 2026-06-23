@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="What we believe at Universal Gospel Fellowship Center — three pillars of teaching: salvation and sanctification, spiritual authority and freedom, and holiness as a way of life. Scripture is our authority.">
+<meta name="keywords" content="what we believe, three pillars, deliverance ministry, inner healing, sanctification, holiness, spiritual authority, UGFC">
+<meta property="og:title" content="What We Believe · Universal Gospel Fellowship Center">
+<meta property="og:description" content="A foundation for genuine transformation. Scripture is our authority. Three pillars of our teaching.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://universalgospelfellowshipcenter.com/what-we-believe.html">
+<title>What We Believe · Universal Gospel Fellowship Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  /* Page-scoped layout for the doctrinal landing page.
+     Global tokens (colors, fonts) are inherited from assets/styles.css. */
+
+  .doc-page { padding-top: 7rem; padding-bottom: 4rem; }
+
+  .doc-hero {
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    max-width: var(--max-narrow);
+    margin: 0 auto;
+  }
+  .doc-hero .doc-eyebrow {
+    font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.4em;
+    color: var(--gold-mid); text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  .doc-hero h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    color: var(--gold-bright); line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .doc-hero .doc-subtitle {
+    font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.3em;
+    color: var(--cream-dim); text-transform: uppercase; margin-bottom: 2rem;
+  }
+  .doc-hero .doc-divider {
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+    margin: 0 auto;
+  }
+
+  .doc-body {
+    max-width: var(--max-narrow);
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .doc-section { margin: 3.5rem 0; }
+  .doc-section h2 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    color: var(--gold-bright);
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+    padding-bottom: 0.6rem;
+  }
+  .doc-section p {
+    font-size: 1.08rem;
+    line-height: 1.8;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+  .doc-section p strong { color: var(--gold-bright); }
+
+  .pillars { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+  @media (min-width: 820px) { .pillars { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .pillar {
+    background: rgba(11,18,40,0.55);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 4px;
+    padding: 1.8rem 1.5rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .pillar:hover {
+    border-color: rgba(242,196,90,0.55);
+    transform: translateY(-3px);
+  }
+  .pillar .pillar-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.2rem;
+    color: var(--gold-mid);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .pillar h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 1rem;
+  }
+  .pillar p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--cream);
+  }
+
+  .doc-cta-block {
+    background: linear-gradient(135deg, rgba(11,18,40,0.7), rgba(42,21,72,0.4));
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    margin: 4rem 0 2rem;
+    text-align: center;
+  }
+  .doc-cta-block h3 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.6rem;
+    color: var(--gold-bright);
+    margin-bottom: 1rem;
+  }
+  .doc-cta-block p {
+    font-size: 1.05rem;
+    color: var(--cream-dim);
+    margin-bottom: 1.5rem;
+  }
+  .doc-cta-actions {
+    display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+  }
+  .doc-cta {
+    padding: 0.85rem 1.6rem;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .doc-cta-primary {
+    background: linear-gradient(135deg, var(--gold-mid), var(--gold-bright));
+    color: var(--midnight); font-weight: 700;
+  }
+  .doc-cta-primary:hover { color: var(--midnight); filter: brightness(1.1); }
+  .doc-cta-secondary {
+    background: transparent;
+    border: 1px solid var(--gold-mid);
+    color: var(--gold-bright);
+  }
+  .doc-cta-secondary:hover { background: rgba(201,168,76,0.12); color: var(--gold-bright); }
+
+  .doc-closing {
+    text-align: center;
+    margin: 3rem 0 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--cream);
+  }
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<!-- ============== NAVIGATION ============== -->
+<nav>
+  <a href="index.html#hero" class="nav-brand">
+    <div class="nav-brand-mark">U</div>
+    <div>
+      <div class="nav-brand-text">Universal Gospel<br>Fellowship Center</div>
+      <div class="nav-brand-sub">Est. 2005 · The Remnant</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="what-we-believe.html">Believe</a></li>
+    <li><a href="faq-deliverance.html">FAQ</a></li>
+    <li><a href="statement-of-faith.html">Doctrine</a></li>
+    <li><a href="index.html#offerings">Offerings</a></li>
+    <li><a href="index.html#partner">Sow</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Connect</a></li>
+  </ul>
+  <button class="menu-toggle" aria-label="Open menu">☰</button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="menu-close" aria-label="Close menu">×</button>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="what-we-believe.html">What We Believe</a></li>
+    <li><a href="faq-deliverance.html">FAQ · Why We Teach Deliverance</a></li>
+    <li><a href="statement-of-faith.html">Statement of Faith</a></li>
+    <li><a href="index.html#authority">Leadership</a></li>
+    <li><a href="index.html#swat">SWAT Outreach</a></li>
+    <li><a href="index.html#offspring">Ally · Children's Ministry</a></li>
+    <li><a href="index.html#offerings">What We Offer</a></li>
+    <li><a href="index.html#partner">Sow Into This Work</a></li>
+    <li><a href="index.html#contact">Connect</a></li>
+    <li><a href="legal.html">Important Information &amp; Legal</a></li>
+  </ul>
+</div>
+
+<!-- ============== PAGE ============== -->
+<main class="doc-page">
+
+  <header class="doc-hero">
+    <div class="doc-eyebrow">A Foundation for Genuine Transformation</div>
+    <h1>What We Believe</h1>
+    <div class="doc-subtitle">The Remnant · Scripture · No Compromise</div>
+    <div class="doc-divider"></div>
+  </header>
+
+  <div class="doc-body">
+
+    <!-- Our Approach -->
+    <section class="doc-section">
+      <h2>Our Approach</h2>
+      <p>We believe that true transformation happens when we address the whole person — spirit, soul, and body. Many families have found that conventional approaches alone don't fully explain (or resolve) the emotional, behavioral, or relational struggles they face. <strong>We offer something different.</strong></p>
+    </section>
+
+    <!-- What We Stand On -->
+    <section class="doc-section">
+      <h2>What We Stand On</h2>
+      <p>Scripture is our authority. Every principle we teach comes directly from the Word — from Genesis to Revelation, unchanged and uncompromised. We believe what Scripture teaches about salvation, healing, holiness, and spiritual freedom.</p>
+    </section>
+
+    <!-- Three Pillars -->
+    <section class="doc-section">
+      <h2>Three Pillars of Our Teaching</h2>
+
+      <div class="pillars">
+        <article class="pillar">
+          <div class="pillar-num">I</div>
+          <h3>Salvation &amp; Sanctification</h3>
+          <p>True transformation begins with genuine conversion to Yasha (Jesus Christ) — not just a moment, but a daily surrender. Sanctification is not a one-time event; it is the ongoing process of being set apart for AhaYah's purposes. This daily work changes not just the inside, but how a person lives, speaks, and presents themselves to the world.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar-num">II</div>
+          <h3>Spiritual Authority &amp; Freedom</h3>
+          <p>Yasha gave His followers authority to bring freedom to those held captive — whether by emotional wounds, ungodly patterns, generational issues, or spiritual oppression. Many emotional and behavioral struggles have roots we cannot see. Inner healing and spiritual deliverance address these invisible dimensions. This is not psychology rebranded; it is spiritual power exercised in Yasha's Name.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar-num">III</div>
+          <h3>Holiness as a Way of Life</h3>
+          <p>True believers separate themselves from worldly pursuits. This shows up in how they dress, speak, and conduct themselves. Holiness is not hiding from the world; it is being distinctly set apart for AhaYah's use. Children who learn to walk in holiness and spiritual authority develop resilience, discernment, and genuine confidence rooted in something eternal.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Who This Is For -->
+    <section class="doc-section">
+      <h2>Who This Is For</h2>
+      <p>Parents who sense their child's struggles run deeper than behavior charts and reward systems. Families who recognize that emotional pain, irrational fears, compulsive behaviors, or unexplained rage might have <strong>spiritual roots</strong>. People who want their children — and themselves — genuinely transformed, not just managed.</p>
+    </section>
+
+    <!-- The Difference -->
+    <section class="doc-section">
+      <h2>The Difference</h2>
+      <p>We meet you where you are. We do not dismiss psychology or conventional help. But we also do not ignore the spiritual dimensions that conventional systems cannot address. We teach you how to recognize spiritual oppression, exercise authority in Yasha's Name, and bring genuine inner healing and freedom to yourself and your family.</p>
+    </section>
+
+    <!-- What Happens Next -->
+    <section class="doc-section">
+      <h2>What Happens Next</h2>
+      <p><strong>Ally, the Time-Traveling His-Story Horse</strong>, teaches children about his-story while opening their minds to spiritual truth. Parents discover the connection between faith, spiritual authority, and family transformation. Courses in spiritual deliverance and inner healing show you exactly how to apply these principles in your own life.</p>
+    </section>
+
+    <!-- Start Here CTA -->
+    <div class="doc-cta-block">
+      <h3>Start Here</h3>
+      <p>Read our complete Statement of Faith to understand our full doctrinal foundation. Explore the FAQ to see if your family's struggles make sense in this framework. Watch Ally's story and see how spiritual truth opens doors for children.</p>
+      <div class="doc-cta-actions">
+        <a href="statement-of-faith.html" class="doc-cta doc-cta-primary">Read the Full Statement of Faith</a>
+        <a href="faq-deliverance.html" class="doc-cta doc-cta-secondary">Read the FAQ</a>
+        <a href="index.html#offerings" class="doc-cta doc-cta-secondary">See Our Offerings</a>
+      </div>
+    </div>
+
+    <p class="doc-closing">Because transformation is possible. Real transformation. Not managed behavior — genuine freedom.<br>In Yasha, Amein.</p>
+
+  </div>
+</main>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="footer-inner">
+
+    <div class="footer-identity">
+      <div class="footer-brand-mark">U</div>
+      <div class="footer-brand-text">
+        <strong>Universal Gospel Fellowship Center</strong>
+        <span>Est. 2005 · IRS EIN on file · Not a 501(c)(3)</span>
+      </div>
+    </div>
+
+    <div class="footer-three-gen">
+      <span><strong>2005</strong> UGFC — Parent</span>
+      <span class="footer-sep">·</span>
+      <span><strong>2018</strong> SWAT — Church-without-walls</span>
+      <span class="footer-sep">·</span>
+      <span><strong>2026</strong> Ally — Digital Child</span>
+    </div>
+
+    <div class="footer-legal-block">
+      <h4>Important Information &amp; Legal</h4>
+      <p>This ministry operates under specific doctrinal and legal commitments that we make publicly available. Please review before engaging financially or in ministry.</p>
+      <a href="legal.html" class="footer-legal-cta">Read Full Legal &amp; Compliance Disclosures →</a>
+      <ul class="footer-legal-summary">
+        <li>Not a 501(c)(3) — gifts NOT tax-deductible</li>
+        <li>Ministry, not licensed medical/psychological care</li>
+        <li>No refunds on offerings — all sales final</li>
+        <li>Spiritual results not guaranteed</li>
+        <li><a href="legal.html#s6">Privacy Policy</a> · <a href="legal.html#s5">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-bottom">
+      <p>Glory to AhaYah Alone · &copy; 2005&ndash;2026 Universal Gospel Fellowship Center · All rights reserved</p>
+      <p class="footer-sister-sites">Sister sites: <a href="https://allystoryhorse.com">allystoryhorse.com</a> · <a href="https://swatchurch.com">swatchurch.com</a></p>
+    </div>
+
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

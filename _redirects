@@ -1,0 +1,45 @@
+# Cloudflare Pages — _redirects
+# Format:  <source>  <destination>  <status>
+# Docs:    https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# This file is consumed at the build output root. It must be deployed inside
+# the universalgospelfellowshipcenter/ directory so Cloudflare picks it up.
+
+# -----------------------------------------------------------------------------
+# Anchored section shortcuts (deep-link aliases)
+# -----------------------------------------------------------------------------
+/swat                  /#swat                  301
+/leadership            /#leadership            301
+/offerings             /#offerings             301
+/fruit                 /#fruit                 301
+/contact               /#contact               301
+/ally                  /#ally                  301
+
+# -----------------------------------------------------------------------------
+# Doctrinal page shortcuts (clean URLs without .html)
+# -----------------------------------------------------------------------------
+/believe               /what-we-believe.html   301
+/what-we-believe       /what-we-believe.html   301
+/faq                   /faq-deliverance.html   301
+/deliverance           /faq-deliverance.html   301
+/statement             /statement-of-faith.html 301
+/statement-of-faith    /statement-of-faith.html 301
+/doctrine              /statement-of-faith.html 301
+/legal                 /legal.html             301
+
+# -----------------------------------------------------------------------------
+# Legacy paths from earlier site iterations
+# -----------------------------------------------------------------------------
+# (Add entries here as you discover old URLs in indexed search results,
+#  printed materials, or Chamber publications.)
+
+# /old-page            /new-page               301
+
+# -----------------------------------------------------------------------------
+# SPA-style fallback (DO NOT enable without testing)
+# -----------------------------------------------------------------------------
+# Uncomment the following line ONLY if every unknown path should fall back to
+# index.html. With a multi-page site (index.html + thank-you.html + legal.html)
+# this is usually NOT what you want.
+#
+# /*                   /index.html             200
