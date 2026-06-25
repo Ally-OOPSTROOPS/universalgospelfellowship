@@ -1,28 +1,3 @@
-/**
- * POST /api/apply
- *
- * Receives a contact / application form payload from the frontend and
- * forwards it to Formspree. Used for:
- *   - General contact inquiries
- *   - Tier 4 (Ordination) application intake
- *   - Tier 5 (Mentorship) "By Selection Only" application intake
- *
- * Request JSON:
- *   {
- *     "name":      "Full Name",         (required)
- *     "email":     "you@example.com",   (required)
- *     "phone":     "+1 555 0100",       (optional)
- *     "reason":    "Free-form label, e.g. 'Inner Healing', 'Ordination',
- *                   'Mentorship', 'General Question'",   (required)
- *     "message":   "Body of the message.",               (required)
- *     "consent":   true                                  (required; must be true)
- *   }
- *
- * Response JSON:
- *   { "ok": true }                  on success
- *   { "ok": false, "error": "..." } on failure
- */
-
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function jsonResponse(body, status = 200) {
@@ -61,11 +36,8 @@ export async function onRequestPost({ request, env }) {
   if (typeof message !== "string" || !message.trim()) {
     return jsonResponse({ ok: false, error: "'message' is required." }, 400);
   }
-  if (consent !== true) {
-    return jsonResponse(
-      { ok: false, error: "Consent (consent: true) is required to submit." },
-      400
-    );
+  if (!consent) {
+    return jsonResponse({ ok: false, error: "Consent is required to submit." }, 400);
   }
 
   const formspreeBody = {
@@ -90,10 +62,10 @@ export async function onRequestPost({ request, env }) {
 
   if (!fsResp.ok) {
     const fsJson = await fsResp.json().catch(() => ({}));
-    const message =
+    const msg =
       (fsJson && (fsJson.error || (fsJson.errors && fsJson.errors[0] && fsJson.errors[0].message))) ||
       "Formspree submission failed.";
-    return jsonResponse({ ok: false, error: message }, 502);
+    return jsonResponse({ ok: false, error: msg }, 502);
   }
 
   return jsonResponse({ ok: true });
