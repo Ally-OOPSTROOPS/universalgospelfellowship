@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>Thank You · Universal Gospel Fellowship Center</title>
+<title>Your Gift · Universal Gospel Fellowship Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -12,10 +12,10 @@
 <style>
   .thanks-wrap {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 6rem 2rem; text-align: center;
+    padding: 5rem 2rem; text-align: center;
   }
   .thanks-card {
-    max-width: 680px; padding: 3.5rem 3rem;
+    max-width: 700px; padding: 3.5rem 3rem;
     background: rgba(11,18,40,0.6); border: 1px solid rgba(201,168,76,0.4);
     border-radius: 6px; box-shadow: 0 30px 60px rgba(0,0,0,0.5);
   }
@@ -28,20 +28,41 @@
     box-shadow: 0 0 30px rgba(242,196,90,0.5);
   }
   .thanks-card h1 {
-    font-family: 'Cinzel Decorative', serif; font-size: 2.4rem;
-    color: var(--gold-bright); margin-bottom: 1rem;
+    font-family: 'Cinzel Decorative', serif; font-size: 2.3rem;
+    color: var(--gold-bright); margin-bottom: 1rem; line-height: 1.2;
   }
   .thanks-card p { font-size: 1.1rem; color: var(--cream); margin-bottom: 1rem; line-height: 1.6; }
   .thanks-card strong { color: var(--gold-bright); }
+
+  .gift-verse {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    color: var(--cream-dim); font-size: 1.02rem; line-height: 1.5;
+    margin: 1.5rem auto; max-width: 560px;
+  }
+  .gift-verse cite { display: block; font-style: normal; color: var(--gold-mid);
+    font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.18em;
+    text-transform: uppercase; margin-top: 0.6rem; }
+
+  .gift-player {
+    margin: 2rem auto 1.5rem; max-width: 560px;
+    padding: 1.25rem; background: rgba(4,8,15,0.55);
+    border: 1px solid rgba(201,168,76,0.3); border-radius: 6px;
+  }
+  .gift-player-label {
+    font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold-bright); margin-bottom: 0.8rem;
+  }
+  .gift-player audio { width: 100%; outline: none; }
+
   .thanks-actions {
     display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
   .thanks-cta {
     padding: 0.85rem 1.6rem; border-radius: 2px;
     font-family: 'Cinzel', serif; font-size: 0.78rem;
     letter-spacing: 0.18em; text-transform: uppercase;
-    text-decoration: none;
+    text-decoration: none; display: inline-block;
   }
   .thanks-cta-primary {
     background: linear-gradient(135deg, var(--gold-mid), var(--gold-bright));
@@ -51,6 +72,11 @@
     background: transparent; border: 1px solid var(--gold-mid);
     color: var(--gold-bright);
   }
+  .gift-divider {
+    width: 90px; height: 1px; margin: 2.5rem auto 1.5rem;
+    background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+  }
+  .gift-keepnote { font-size: 0.95rem; color: var(--cream-dim); font-style: italic; }
 </style>
 </head>
 <body>
@@ -59,11 +85,33 @@
 <div class="thanks-wrap">
   <div class="thanks-card">
     <div class="thanks-mark">✦</div>
-    <h1>Thank You.</h1>
-    <p><strong>Your gift has been received.</strong> A confirmation will arrive in your email within a few minutes.</p>
-    <p>If you registered for a course, your access link will follow shortly. If you applied for the Gauntlet or Ordination, Leslie will personally review your application and respond within 72 hours.</p>
+    <h1>Your First Breath of Freedom</h1>
+    <p><strong>Here it is — your gift.</strong> Find a quiet place, put it on, and let it minister to you. You can listen right here, or download it to keep.</p>
+
+    <div class="gift-player">
+      <div class="gift-player-label">Press play — a guided prayer for the brokenhearted</div>
+      <audio controls preload="metadata" src="first-breath-of-freedom.mp3">
+        Your browser cannot play this audio directly. Please use the download button below.
+      </audio>
+    </div>
+
+    <div class="thanks-actions">
+      <a href="first-breath-of-freedom.mp3" download class="thanks-cta thanks-cta-primary">↓ Download the Prayer</a>
+      <a href="First-Breath-of-Freedom-Companion.pdf" download class="thanks-cta thanks-cta-secondary">↓ Download the Companion</a>
+    </div>
+
+    <p class="gift-verse">
+      &ldquo;The Spirit of the Adon is upon Me, because He has anointed Me to bind up the brokenhearted, to proclaim liberty to the captives, and to set at liberty them that are bruised.&rdquo;
+      <cite>Isaiah 61:1</cite>
+    </p>
+
+    <div class="gift-divider"></div>
+
+    <p class="gift-keepnote">This page is yours. Download the prayer and the companion so you can return to them any time. When you are ready to walk the whole road — with someone beside you — the 66-Day Gauntlet is your next step.</p>
+
     <p>If anything appears amiss, write directly to <a href="mailto:allystoryhorse@pm.me">allystoryhorse@pm.me</a>.</p>
-    <p style="font-style: italic; color: var(--cream-dim); margin-top: 1.5rem;">Glory to AhaYah Alone.</p>
+    <p style="font-style: italic; color: var(--cream-dim); margin-top: 1rem;">Glory to AhaYah Alone.</p>
+
     <div class="thanks-actions">
       <a href="/" class="thanks-cta thanks-cta-primary">Return Home</a>
       <a href="/#contact" class="thanks-cta thanks-cta-secondary">Connect</a>
@@ -72,7 +120,6 @@
 </div>
 
 <script>
-  // Lightweight starfield for this page
   (function(){
     const c = document.getElementById('starfield');
     if (!c) return;
