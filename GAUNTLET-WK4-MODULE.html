@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 66-Day Gauntlet &middot; Session Four &middot; The 16 Strongman Spirits</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0A1026; --deep:#121B3A; --panel:#16224A; --ink:#0E1530;
+  --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--midnight),var(--deep));color:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.65;min-height:100vh}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold-light);font-weight:700}
+header{text-align:center;padding:54px 0 30px;border-bottom:1px solid rgba(212,175,55,.35)}
+header .eyebrow{letter-spacing:.35em;font-size:13px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:clamp(26px,4.5vw,42px);letter-spacing:.08em;margin-bottom:10px}
+header .sub{font-size:18px;color:var(--cream);font-style:italic}
+header .days{margin-top:14px;color:var(--gold);letter-spacing:.2em;font-size:14px}
+.progressbar{margin:26px auto 0;max-width:560px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.4);border-radius:999px;height:14px;overflow:hidden}
+.progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,#8a6d1f,var(--gold),var(--gold-light));transition:width .5s}
+.progresslabel{font-size:14px;color:var(--muted);margin-top:8px}
+section{margin-top:54px}
+.kicker{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:14px;letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+h2{font-size:clamp(22px,3.4vw,30px);text-align:center;margin-bottom:26px}
+.rule{width:200px;height:1.5px;margin:0 auto 30px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px;letter-spacing:.04em}
+.card p{margin-bottom:14px}
+.card p:last-child{margin-bottom:0}
+.scripture{border-left:3px solid var(--gold);padding:10px 18px;margin:14px 0;font-style:italic;color:var(--gold-light);background:rgba(212,175,55,.06);border-radius:0 8px 8px 0}
+.reflist{color:var(--muted);font-size:17px}
+.callout{background:var(--ink);border:1.5px solid var(--gold);border-radius:12px;padding:24px 28px;text-align:center;margin:30px 0}
+.callout strong{color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.08em;display:block;margin-bottom:8px;font-size:17px}
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:6px}
+.name{background:var(--ink);border:1px solid rgba(212,175,55,.5);border-radius:10px;padding:18px;text-align:center}
+.name b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:17px;display:block;margin-bottom:6px}
+.name span{font-size:16px}
+/* days */
+.day{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
+.day-head:hover{background:rgba(212,175,55,.07)}
+.daynum{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:20px;font-weight:700}
+.day.done .daynum{background:var(--gold);color:var(--midnight);border-color:var(--gold)}
+.day-title{flex:1}
+.day-title b{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gold-light);letter-spacing:.04em}
+.day-title span{display:block;color:var(--muted);font-size:15px}
+.chev{color:var(--gold);transition:transform .3s;font-size:20px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:6px 26px 24px;border-top:1px solid rgba(212,175,55,.25)}
+.day.open .day-body{display:block}
+.day-body h4{color:var(--gold);font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:18px 0 8px;font-family:'Cinzel Decorative',serif}
+ul.tasks{list-style:none}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+ul.tasks input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.mark-done{margin-top:18px;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.1em;padding:10px 22px;border-radius:999px;cursor:pointer;font-size:14px}
+.mark-done:hover{background:var(--gold);color:var(--midnight)}
+.day.done .mark-done{background:var(--gold);color:var(--midnight)}
+/* quiz */
+.quiz-gate{text-align:center}
+.q{background:var(--panel);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:22px 26px;margin-bottom:14px}
+.q p.qt{font-weight:600;margin-bottom:12px}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-radius:8px;cursor:pointer}
+.q label:hover{background:rgba(212,175,55,.08)}
+.q input{margin-top:7px;accent-color:var(--gold)}
+.q.correct{border-color:#5fae6e}
+.q.wrong{border-color:#c0564f}
+.btn{background:var(--gold);color:var(--midnight);border:none;font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.1em;padding:15px 36px;border-radius:999px;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--gold-light)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.result{margin:22px auto;max-width:640px;border-radius:12px;padding:24px;border:1.5px solid var(--gold);background:var(--ink);text-align:center;display:none}
+.result h3{font-size:22px;margin-bottom:8px}
+footer{margin-top:70px;text-align:center;color:var(--muted);font-size:15px;border-top:1px solid rgba(212,175,55,.3);padding-top:26px}
+footer .seal{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.25em;font-size:13px;margin-bottom:6px}
+@media (max-width:600px){body{font-size:17px}.card{padding:20px}}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+/* Session 2 additions: inventory + badge */
+.inv-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;border-radius:8px;border:1px solid rgba(212,175,55,.2);margin-bottom:8px;background:rgba(212,175,55,.04)}
+.inv-item:hover{background:rgba(212,175,55,.1)}
+.inv-item input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.inv-cat{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.18em;font-size:14px;text-transform:uppercase;margin:24px 0 10px}
+.inv-count{text-align:center;color:var(--muted);margin-top:14px;font-size:16px}
+textarea.reflect{width:100%;min-height:110px;background:var(--ink);border:1px solid rgba(212,175,55,.45);border-radius:10px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px;margin:8px 0 18px;resize:vertical}
+textarea.reflect:focus{outline:2px solid var(--gold-light)}
+/* badge */
+#badgewrap{display:none;margin-top:30px;text-align:center}
+#badge{max-width:640px;margin:0 auto;background:linear-gradient(180deg,#0E1530,#16224A);border:3px double var(--gold);border-radius:16px;padding:44px 36px;position:relative}
+#badge .seal-ring{width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a2752,#0E1530);box-shadow:0 0 0 6px rgba(212,175,55,.18)}
+#badge .seal-ring span{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:44px}
+#badge h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:24px;letter-spacing:.12em;margin-bottom:6px}
+#badge .b-sub{color:var(--gold);letter-spacing:.25em;font-size:13px;text-transform:uppercase;margin-bottom:18px}
+#badge .b-name{font-size:28px;color:var(--cream);font-style:italic;border-bottom:1px solid rgba(212,175,55,.5);display:inline-block;padding:0 26px 6px;margin-bottom:16px;min-height:38px}
+#badge .b-text{font-size:16px;color:var(--cream);max-width:460px;margin:0 auto 16px}
+#badge .b-date{color:var(--muted);font-size:14px;letter-spacing:.1em}
+#badge .b-min{margin-top:18px;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:.22em}
+#namefield{background:var(--ink);border:1px solid var(--gold);border-radius:8px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:19px;padding:10px 16px;width:min(380px,90%);text-align:center;margin:14px 0}
+@media print{
+  body *{visibility:hidden}
+  #badge,#badge *{visibility:visible}
+  #badge{position:fixed;inset:0;margin:auto;height:fit-content;border:3px double #8a6d1f}
+  body{background:#fff}
+}
+</style>
+<style>
+.spirit h3{line-height:1.4}
+.knot-row{background:var(--ink);border:1px solid rgba(212,175,55,.35);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.knot-top{display:flex;gap:12px;align-items:center;cursor:pointer}
+.knot-top input{width:18px;height:18px;accent-color:var(--gold);flex:0 0 18px}
+.knot-top b{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:15px}
+.knot-top .kr{color:var(--muted);font-style:italic;font-size:14px;margin-left:auto}
+.knot-row textarea{display:none;margin-top:12px;min-height:80px}
+.knot-row.active{border-color:var(--gold)}
+.knot-row.active textarea{display:block}
+.chartbtns{text-align:center;margin:18px 0}
+.chartbtns a{display:inline-block;background:var(--gold);color:var(--midnight);font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.08em;padding:13px 30px;border-radius:999px;text-decoration:none;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Universal Gospel Fellowship Center &middot; The 66-Day Gauntlet</div>
+  <h1>Session Four</h1>
+  <div class="sub">The 16 Strongman Spirits &mdash; Spot the Knot</div>
+  <div class="days">DAYS 28 &ndash; 36 OF 66</div>
+  <div class="progressbar" aria-label="Session progress"><div id="pbar"></div></div>
+  <div class="progresslabel" id="plabel">0 of 9 days completed</div>
+</header>
+
+<section>
+  <div class="kicker">This Module&rsquo;s Purpose</div>
+  <h2>Why This Session Exists</h2>
+  <div class="rule"></div>
+  <div class="callout">
+    <p>This session names the enemy. Sixteen Scripturally referenced strongman spirits, each with its manifestations and its ancient tribe connectors, are laid open so the disciple can spot the knot in their own life &mdash; trace every tangled strand back to the spirit that tied it &mdash; and prepare to bind the strongman and spoil his house. <em>How can one enter into a strong man&rsquo;s house and spoil his goods, except he first bind the strong man? (Matthew 12:29)</em></p>
+  </div>
+  <div class="card">
+    <h3>Review &mdash; Bringing What You Have Learned Back to the Table</h3>
+    <p>Session One gave you NOW authority in Yasha&rsquo;s Name. Session Two proved oppression always works through legal grounds &mdash; and that strongholds are identifiable and removable. Session Three showed your own tongue granting or revoking that access daily. Now comes the identification work itself: a stronghold is a knot &mdash; many strands of manifestation tangled around one strongman spirit. You cannot untie what you cannot see. This week, you learn to see.</p>
+  </div>
+  <div class="card">
+    <h3>Where the Strongmen Come From</h3>
+    <p>These 16 Scripturally referenced, named spirits are what is considered the strongman spirits, and can be traced back to the land dwellers of Joshua&rsquo;s reign in the Old Testament. Since the Israelites failed to eradicate these stronger enemies they were commanded to destroy, our Father told the Israelites they would be fighting their offspring continually and forevermore &mdash; they would be against them and cause them great grief continuously.</p>
+    <p>When Father became flesh and walked the earth as Yasha the Son, He made it clear that demonic oppression and possession would be a thing of the past &mdash; for the Jew first and then the Gentile. Deliverance and healing is for all who have accepted Him as Savior and made Him Adon and Master over themselves.</p>
+    <p>The role of the flesh allows these demonic entities access, and unresolved emotional wounds and trauma provide a foothold for these evil spirits to take people captive at their will, stripping the human of rights to their own flesh and soul. <span class="reflist">2 Timothy 2:26</span></p>
+    <div class="scripture">Remember your assurance: believers cannot be possessed. 1 John 4:4 &middot; 1 Corinthians 3:16 &middot; Ephesians 1:13&ndash;14. You are identifying knots in order to untie them &mdash; not discovering owners. You have one Owner, and He has already paid in full.</div>
+  </div>
+  <div class="card">
+    <h3>How to Spot the Knot &mdash; The Identification Method</h3>
+    <p>For every spirit studied this week, work the same four moves: <strong style="color:var(--gold-light)">SEE the strand</strong> &mdash; recognize a manifestation from the list operating in your life. <strong style="color:var(--gold-light)">TRACE it to the knot</strong> &mdash; name the strongman the strand belongs to. <strong style="color:var(--gold-light)">FIND the door</strong> &mdash; identify the legal ground from Session Two (wound, sin, vow, word, inheritance, occult contact) that let it in. <strong style="color:var(--gold-light)">MARK it for the breaking</strong> &mdash; record it on your Knot Map below; Session Five is where every marked knot is untied through repentance, renunciation, and the filling of Ruach HaKodesh.</p>
+  </div>
+  <div class="chartbtns">
+    <a href="GAUNTLET-STRONGMAN-CHART.html" target="_blank">Open the 16-Spirit Reference Chart &mdash; Print or Download</a>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lesson Four</div>
+  <h2>The Sixteen Strongman Spirits</h2>
+  <div class="rule"></div>
+  <div class="card spirit"><h3>1 &middot; The Spirit of Divination <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Acts 16:16–18</span></h3>
+    <p>Always present where drugs (including addictive or mind-altering prescription medications) and alcohol (“spirits”) have been used. Fortune telling, soothsaying, witchcraft, sorcery, rebellion, stargazing, Zodiac & horoscopes, hypnosis, enchanters, water witching, magic, control, manipulation, confusion, mind binding, occult spiritism, ouija boards, palmistry, automatic writing, ESP, levitation, tarot cards, pendulums, white & black magic, conjuration, incantation, charms, fetishes, seances, possessiveness & dominance — all stemming from forbidden practices Scripture condemns.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Hittites & Perizzites</p>
+  </div>
+  <div class="card spirit"><h3>2 &middot; The Spirit of Familiar Spirit <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Leviticus 19:31</span></h3>
+    <p>Closely associated with divination and works hand in hand, sometimes hiding behind its mask — takes the gift of discernment to locate and unravel. Confusion, charms, fetishes, incantations, conjurations, spirit guides, necromancy, false religions (Buddhism, Taoism, Hinduism, Islam, Shintoism, Kundalini, Confucianism) — always includes possessiveness & dominance on a higher level than divination.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Amorites, Canaanites, Hivites & Perizzites</p>
+  </div>
+  <div class="card spirit"><h3>3 &middot; The Spirit of Jealousy <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Numbers 5:14</span></h3>
+    <p>Revenge, spite, anger, rage, murder, jealousy, hatred, cruelty, strife, contention, extreme competition, envy, suspicion, distrust, confrontation, paranoia, persecution fears, condemnation, destruction, sadism, possessiveness, manipulation, controlling — causes much division.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Amorites, Hittites & Hivites</p>
+  </div>
+  <div class="card spirit"><h3>4 &middot; The Spirit of Lying Spirit <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; 2 Chronicles 18:22</span></h3>
+    <p>Strong deception, delusion, flattery, superstitions, false prophecy, accusations, religious bondages including the religious spirit, gossip, slander, lies, false teachers, fear of authority, affectation, theatrics, play-acting, sophistication, pretension, condemnation, judging, criticism & fault-finding.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Hittites</p>
+  </div>
+  <div class="card spirit"><h3>5 &middot; The Spirit of Perverse Spirit <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Isaiah 19:14</span></h3>
+    <p>Broken spirit, evil actions, atheism, abortion, filthy mind, doctrinal error, sexual perversions, foolishness, twisting the Word, chronic worry, incest, contentiousness, pornography, self-accusation, self-hatred, self-condemnation, guilt, shame, unworthiness, uncleanness, lust & fantasy lust, homosexuality, masturbation, adultery, fornication, rape, exposure, frigidity.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Girgashites</p>
+  </div>
+  <div class="card spirit"><h3>6 &middot; The Spirit of Haughtiness (Pride) <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Proverbs 16:18</span></h3>
+    <p>Arrogance, smugness, pride, idleness, scornfulness, strife, obstinacy, self-deception, self-righteousness, rebellion, rejection of God, fear of accusation & judgment, denial, self-delusion, intellectualism, rationalization, ego, mind idolatry, vanity, perfectionism, frustration, anger, irritability, intolerance, competition, impatience, resentment, criticism.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Canaanites, Amorites & Jebusites</p>
+  </div>
+  <div class="card spirit"><h3>7 &middot; The Spirit of Heaviness <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Isaiah 61:3</span></h3>
+    <p>Excessive mourning, sorrow & grief, self-pity, insomnia, brokenheartedness, despair, hopelessness, dejection, depression, suicidal thoughts, inner hurts, torn spirit, indifference, listlessness, lethargy, gloom, burden, disgust, dread, heartache, crying, sadness, cruelty, tiredness, weariness, laziness.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Canaanites & Perizzites</p>
+  </div>
+  <div class="card spirit"><h3>8 &middot; The Spirit of Whoredoms <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Hosea 5:4</span></h3>
+    <p>Unfaithfulness, adultery, spirit/soul/body prostitution, love of money, chronic dissatisfaction, fornication, idolatry, excessive appetite, worldliness, restlessness, roving & wandering, rebellion, covetousness, stealing, kleptomania, discontent, hyperactivity, driving pressure — never satisfied.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Amorites & Jebusites</p>
+  </div>
+  <div class="card spirit"><h3>9 &middot; The Spirit of Infirmity <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Luke 13:11–13</span></h3>
+    <p>Bent body & spine, impotence, frailty, lameness, asthma, hay fever, allergies, arthritis, weakness, lingering disorders, oppressions, cancers of all forms, diseases of all kinds and their proliferation — ailments of body and mind, biological, physiological or psychological. Strongly tied to inheritance of the physical, emotional & mental curses of Deuteronomy 28.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: All tribes, all nations, all peoples</p>
+  </div>
+  <div class="card spirit"><h3>10 &middot; The Spirit of Deaf & Dumb Spirit <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Mark 9:17–29</span></h3>
+    <p>Dumbness, muteness, crying, drowning, tearing, ear problems, mental illness, blindness, suicide, foaming, seizures, epilepsy, burning, gnashing of teeth, pining away, incoherence, madness, mania, senility, schizophrenia, paranoia, hallucination, unbelief, doubt, skepticism, withdrawal, daydreaming, fantasy, pretension, unreality.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Hittites & Jebusites</p>
+  </div>
+  <div class="card spirit"><h3>11 &middot; The Spirit of Bondage <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Romans 8:15</span></h3>
+    <p>Fears; addictions — drugs, alcohol, cigarettes & nicotine, food, caffeine, prescription medications, shopping, gambling, hoarding; fear of death, captivity to Satan, compulsive sin, servant of corruption, bondage to sin, gluttony, nervousness, frustration, idleness, self-pity, victim mentality, self-reward, sleepiness, passivity, stoicism, indifference.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Amorites, Girgashites & Hittites</p>
+  </div>
+  <div class="card spirit"><h3>12 &middot; The Spirit of Fear <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; 2 Timothy 1:7</span></h3>
+    <p>Fears & phobias of all types, torments, horrors, fear of man, nightmares, terrors, traumas of all types, fear of death, distrust, doubt, worry, dread, apprehension, tension, headache, nervousness, restlessness, insomnia, roving, self-awareness, fear of disapproval, sensitiveness, persecution, fear of judgment & condemnation, hysteria, ineptness, prejudice, shyness, loneliness, self-pity, insecurity.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Amorites & Hittites</p>
+  </div>
+  <div class="card spirit"><h3>13 &middot; The Spirit of Seducing Spirits <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; 1 Timothy 4:1</span></h3>
+    <p>Hypocritical lies, seared conscience, attractions & fascination by false prophets’ signs and wonders, deception, wandering from truth, fascination with evil ways, objects or persons, seducers, enticers, self-seduction, self-delusion, pride, religious spirits, doctrinal error, legalism, formalism, ritualism, unhealthy fear of God & of hell, fear of lost salvation, religiosity, rejection, fear of rejection, self-rejection.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Amorites & Canaanites</p>
+  </div>
+  <div class="card spirit"><h3>14 &middot; The Spirit of Antichrist <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; 1 John 4:3</span></h3>
+    <p>Rooted and grounded in idolatry, hard-heartedness and rejection of truth. Denial of the deity of Christ, denial of the atonement, against Christ and His teachings and all Scriptural foundational teaching; humanism, worldly speech & accusations, teachers of heresies, deniers of truth, deceivers, anti-God, general lawlessness. Origins: the garden (Genesis 3), the rebellion of the watchers (Genesis 6), and the tower of Babel.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: All nations, tribes & languages</p>
+  </div>
+  <div class="card spirit"><h3>15 &middot; The Spirit of Error <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; 1 John 4:6</span></h3>
+    <p>Error, un-submissiveness, false doctrines, unteachable spirit, servants of corruption, defensiveness, argumentativeness, contention, new age movement, deception, mental illness, insanity, madness, mania, senility, schizophrenia, hallucinations, paranoia, unbelief, doubt, skepticism, incoherence, indecision, procrastination, compromise, confusion, forgetfulness, indifference, false burden, false responsibility, false compassion, religion, ritualism, formalism, legalism, doctrinal obsessions.</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: Amorites, Hittites & Jebusites</p>
+  </div>
+  <div class="card spirit"><h3>16 &middot; The Spirit of Death <span style="color:var(--gold);font-size:15px;font-weight:400;font-style:italic">&mdash; Deut. 30:19 · 1 Cor. 15:26 · Rev. 20:13–14</span></h3>
+    <p>Influences and affects all human beings; entered our physical world by one man’s disobedience and was absolutely conquered by One Man’s obedience. Christ defeated death when He was resurrected by the resurrection power of Ruach Hakodesh, the Spirit of Holiness. Death and hell will be cast into the lake of fire — the second death; the last enemy that shall be destroyed is death. “I have set before you life and death, blessing and cursing: therefore choose life.”</p>
+    <p class="reflist" style="margin-top:6px">Ancient tribe connectors: All humanity — conquered in Yasha</p>
+  </div>
+  <div class="callout">
+    <strong>Lesson Summarization &mdash; Three Truths to Carry</strong>
+    <p>Every knot has a name, a Scripture, and a lineage &mdash; nothing about your bondage is mysterious to AhaYah. &nbsp;&middot;&nbsp; The strongman must be bound before the house is spoiled &mdash; identification precedes eviction. &nbsp;&middot;&nbsp; You spot the knot to untie it: every strongman on this list was defeated at the cross.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The Nine-Day Journey</div>
+  <h2>Daily Assignments &amp; Fieldwork &middot; Days 28&ndash;36</h2>
+  <div class="rule"></div>
+
+  <div class="day" data-day="1">
+    <div class="day-head"><div class="daynum">28</div><div class="day-title"><b>INTAKE &amp; THE METHOD</b><span>Receive the chart &middot; learn the four moves</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read the entire Session Four teaching. Open the 16-Spirit Reference Chart, print it or save it as PDF, and keep it beside you all nine days. Memorize the four moves: SEE the strand &mdash; TRACE it to the knot &mdash; FIND the door &mdash; MARK it for the breaking.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Print or download your Reference Chart and place it where you study daily.</span></li>
+        <li><input type="checkbox"><span>Write out Matthew 12:29 by hand &mdash; the strongman must be bound before the house is spoiled.</span></li>
+        <li><input type="checkbox"><span>Read your assurance aloud: 1 John 4:4; 1 Corinthians 3:16; Ephesians 1:13&ndash;14. You identify knots to untie them.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 28 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="2">
+    <div class="day-head"><div class="daynum">29</div><div class="day-title"><b>SPIRITS 1&ndash;3</b><span>Divination &middot; Familiar &middot; Jealousy</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study spirits 1&ndash;3 with their Scriptures: Acts 16:16&ndash;18; Leviticus 19:31; Numbers 5:14. Note how the Familiar spirit hides behind Divination&rsquo;s mask &mdash; it takes discernment to locate and unravel.</p>
+      <h4>Fieldwork &mdash; Spot the Knot</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Work the four moves on all three spirits: scan each manifestation list against your own history &mdash; including past occult contact, drug or alcohol use, false religion exposure, and patterns of envy or division &mdash; and record every strand you SEE on your Knot Map below.</span></li>
+        <li><input type="checkbox"><span>For the strongest strand found today, FIND the door: write when it began and what legal ground opened it.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 29 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="3">
+    <div class="day-head"><div class="daynum">30</div><div class="day-title"><b>SPIRITS 4&ndash;6</b><span>Lying &middot; Perverse &middot; Haughtiness</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study spirits 4&ndash;6: 2 Chronicles 18:22; Isaiah 19:14; Proverbs 16:18. These three guard each other &mdash; deception protects perversion, and pride refuses to admit either one is present.</p>
+      <h4>Fieldwork &mdash; Spot the Knot</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Work the four moves on all three; mark every recognized strand on your Knot Map &mdash; including the respectable ones: judging, fault-finding, self-righteousness, perfectionism, criticism.</span></li>
+        <li><input type="checkbox"><span>Pride test: which manifestation did you almost refuse to write down today? Write it first.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 30 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="4">
+    <div class="day-head"><div class="daynum">31</div><div class="day-title"><b>SPIRITS 7&ndash;9</b><span>Heaviness &middot; Whoredoms &middot; Infirmity</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study spirits 7&ndash;9: Isaiah 61:3; Hosea 5:4; Luke 13:11&ndash;13. Note Infirmity&rsquo;s tie to the inherited curses of Deuteronomy 28 &mdash; connect this to your Session Three generational findings.</p>
+      <h4>Fieldwork &mdash; Spot the Knot</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Work the four moves on all three; mark every strand &mdash; griefs never surrendered, chronic dissatisfaction, restlessness, lingering ailments no physician has resolved.</span></li>
+        <li><input type="checkbox"><span>Cross-reference: pull out your Session 3 family-pattern list and your Session 2 inventory; TRACE each item on them to its strongman on the chart.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 31 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="5">
+    <div class="day-head"><div class="daynum">32</div><div class="day-title"><b>SPIRITS 10&ndash;12</b><span>Deaf &amp; Dumb &middot; Bondage &middot; Fear</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study spirits 10&ndash;12: Mark 9:17&ndash;29; Romans 8:15; 2 Timothy 1:7. Yasha said of the deaf and dumb spirit, &ldquo;this kind can come forth by nothing, but by prayer and fasting&rdquo; &mdash; let that shape your Day 64&ndash;66 expectation.</p>
+      <h4>Fieldwork &mdash; Spot the Knot</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Work the four moves on all three; mark every strand &mdash; every addiction however socially acceptable (food, caffeine, shopping, scrolling), every phobia, every recurring nightmare or trauma response.</span></li>
+        <li><input type="checkbox"><span>For each fear identified, write beside it: &ldquo;AhaYah hath not given me the spirit of fear, but of power, and of love, and of a sound mind&rdquo; (2 Timothy 1:7).</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 32 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="6">
+    <div class="day-head"><div class="daynum">33</div><div class="day-title"><b>SPIRITS 13&ndash;14</b><span>Seducing Spirits &middot; Antichrist</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study spirits 13&ndash;14: 1 Timothy 4:1; 1 John 4:3. These work on the religious mind itself &mdash; legalism, formalism, ritualism, unhealthy fear of God, fascination with false signs &mdash; and trace back to the garden, the watchers, and Babel.</p>
+      <h4>Fieldwork &mdash; Spot the Knot</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Work the four moves on both; mark every strand &mdash; including church-flavored ones: religiosity, fear of lost salvation, self-rejection, doctrines you accepted without searching the Scriptures.</span></li>
+        <li><input type="checkbox"><span>Write a short paragraph: where has a seducing spirit dressed itself in religious clothing in your past &mdash; and how did it wander you from truth?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 33 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="7">
+    <div class="day-head"><div class="daynum">34</div><div class="day-title"><b>SPIRITS 15&ndash;16 &amp; FULL REVIEW</b><span>Error &middot; Death &middot; the whole chart</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study spirits 15&ndash;16: 1 John 4:6; then the spirit of Death &mdash; entered by one man&rsquo;s disobedience, absolutely conquered by One Man&rsquo;s obedience (1 Corinthians 15:26; Revelation 20:13&ndash;14; Deuteronomy 30:19). Then review the entire chart top to bottom with your Knot Map beside it.</p>
+      <h4>Fieldwork &mdash; Spot the Knot</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Work the four moves on both spirits; complete your Knot Map &mdash; all sixteen rows considered, every recognized strand recorded.</span></li>
+        <li><input type="checkbox"><span>Speak Deuteronomy 30:19 aloud over yourself and your seed: &ldquo;I have set before you life and death&hellip; therefore choose life.&rdquo; Then write beneath your Knot Map: I CHOOSE LIFE.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 34 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="8">
+    <div class="day-head"><div class="daynum">35</div><div class="day-title"><b>DEEP REFLECTION</b><span>Five questions &middot; short paragraph answers &middot; submitted to ministry</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Answer each question in short paragraph form and submit them with your Week Four report. Your words save on this device as you type.</p>
+      <h4>The Five Questions</h4>
+      <p><strong style="color:var(--gold-light)">1.</strong> Why must the strongman be bound before the house can be spoiled (Matthew 12:29) &mdash; and what does binding require that casual prayer does not?</p>
+      <textarea class="reflect" data-r="1" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">2.</strong> Which knot on your map surprised you most &mdash; and which door (legal ground) did the tracing reveal?</p>
+      <textarea class="reflect" data-r="2" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">3.</strong> How does knowing the ancient tribe lineage of these spirits &mdash; enemies Israel was commanded to eradicate &mdash; change how seriously you treat what they left behind?</p>
+      <textarea class="reflect" data-r="3" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">4.</strong> 2 Timothy 2:26 says the flesh and unresolved wounds give these spirits their foothold. Which wound in your history has been the widest door &mdash; and what will closing it require in Session Five?</p>
+      <textarea class="reflect" data-r="4" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">5.</strong> Several strands appear under more than one strongman (confusion, condemnation, paranoia, doubt). Why do these spirits cooperate &mdash; and why must identification therefore be thorough rather than quick?</p>
+      <textarea class="reflect" data-r="5" placeholder="Write your short paragraph here..."></textarea>
+      <button class="mark-done">Mark Day 35 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="9">
+    <div class="day-head"><div class="daynum">36</div><div class="day-title"><b>THE GATE &middot; THE SPOT-THE-KNOT SEAL</b><span>Knot Map acceptance &middot; receive your award</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Finalize your Knot Map below, confirm your fieldwork, and make your affirmation. Acceptance releases your printable and downloadable <strong style="color:var(--gold-light)">Spot-the-Knot Seal</strong> and unlocks Session Five &mdash; where every marked knot meets the Steps to Spiritual Freedom.</p>
+      <button class="mark-done">Mark Day 36 Complete (after the affirmation)</button>
+    </div>
+  </div>
+</section>
+
+<section id="knotsec">
+  <div class="kicker">Your Working Document</div>
+  <h2>The Knot Map</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <p>As you study each day, check every strongman whose strands you recognize in your own life, and name the strands in its box &mdash; the manifestation, when it began, and what door opened it. Your entries save on this device. This map is private identification work; it becomes your personal target list for Session Five, where the knots are untied.</p>
+    <div style="margin-top:18px">
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="1"><b>1 &middot; Divination</b><span class="kr">Acts 16:16–18</span></label>
+      <textarea class="strand" data-k="1" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="2"><b>2 &middot; Familiar Spirit</b><span class="kr">Leviticus 19:31</span></label>
+      <textarea class="strand" data-k="2" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="3"><b>3 &middot; Jealousy</b><span class="kr">Numbers 5:14</span></label>
+      <textarea class="strand" data-k="3" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="4"><b>4 &middot; Lying Spirit</b><span class="kr">2 Chronicles 18:22</span></label>
+      <textarea class="strand" data-k="4" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="5"><b>5 &middot; Perverse Spirit</b><span class="kr">Isaiah 19:14</span></label>
+      <textarea class="strand" data-k="5" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="6"><b>6 &middot; Haughtiness (Pride)</b><span class="kr">Proverbs 16:18</span></label>
+      <textarea class="strand" data-k="6" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="7"><b>7 &middot; Heaviness</b><span class="kr">Isaiah 61:3</span></label>
+      <textarea class="strand" data-k="7" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="8"><b>8 &middot; Whoredoms</b><span class="kr">Hosea 5:4</span></label>
+      <textarea class="strand" data-k="8" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="9"><b>9 &middot; Infirmity</b><span class="kr">Luke 13:11–13</span></label>
+      <textarea class="strand" data-k="9" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="10"><b>10 &middot; Deaf & Dumb Spirit</b><span class="kr">Mark 9:17–29</span></label>
+      <textarea class="strand" data-k="10" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="11"><b>11 &middot; Bondage</b><span class="kr">Romans 8:15</span></label>
+      <textarea class="strand" data-k="11" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="12"><b>12 &middot; Fear</b><span class="kr">2 Timothy 1:7</span></label>
+      <textarea class="strand" data-k="12" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="13"><b>13 &middot; Seducing Spirits</b><span class="kr">1 Timothy 4:1</span></label>
+      <textarea class="strand" data-k="13" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="14"><b>14 &middot; Antichrist</b><span class="kr">1 John 4:3</span></label>
+      <textarea class="strand" data-k="14" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="15"><b>15 &middot; Error</b><span class="kr">1 John 4:6</span></label>
+      <textarea class="strand" data-k="15" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    <div class="knot-row">
+      <label class="knot-top"><input type="checkbox" class="knot" data-k="16"><b>16 &middot; Death</b><span class="kr">Deut. 30:19 · 1 Cor. 15:26 · Rev. 20:13–14</span></label>
+      <textarea class="strand" data-k="16" placeholder="Name the strands you recognize in your own life (manifestations, when they began, what door opened them)..."></textarea>
+    </div>
+    </div>
+    <div class="inv-count" id="knotcount">0 knots marked</div>
+  </div>
+</section>
+
+<section id="gatesec">
+  <div class="kicker">Day Thirty-Six &middot; The Gate</div>
+  <h2>Fieldwork Acceptance &amp; The Spot-the-Knot Seal</h2>
+  <div class="rule"></div>
+
+  <div class="callout">
+    <strong>Affirmation Before the Seal</strong>
+    <ul class="tasks">
+      <li><input type="checkbox" id="aff1"><span>I studied all sixteen strongman spirits with their Scriptures and tribe connectors, with the Reference Chart beside me.</span></li>
+      <li><input type="checkbox" id="aff2"><span>I worked the four moves honestly &mdash; SEE, TRACE, FIND, MARK &mdash; and my Knot Map records every strand I recognized, including the ones pride resisted.</span></li>
+      <li><input type="checkbox" id="aff3"><span>I have written my five reflection paragraphs and submitted my Week Four report to the ministry.</span></li>
+      <li><input type="checkbox" id="aff4"><span>I affirm: every knot has a name, a Scripture, and a lineage; the strongman must be bound before the house is spoiled; every strongman on this list was defeated at the cross &mdash; and I have chosen life.</span></li>
+    </ul>
+    <div style="text-align:center;margin-top:16px">
+      <input type="text" id="namefield" placeholder="Type your full name as it should appear on your Seal">
+      <br>
+      <button class="btn" id="sealbtn" disabled>Release My Spot-the-Knot Seal</button>
+      <p id="sealhint" style="color:var(--muted);font-size:15px;margin-top:10px"></p>
+    </div>
+  </div>
+
+  <div id="badgewrap">
+    <div id="badge">
+      <svg viewBox="0 0 120 120" width="130" height="130" style="display:block;margin:0 auto 18px" aria-label="Knot seal">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="3"/>
+        <path d="M 36 60 C 36 38, 84 38, 84 60 C 84 82, 36 82, 36 60" fill="none" stroke="#D4AF37" stroke-width="5" stroke-linecap="round"/>
+        <path d="M 60 36 C 38 36, 38 84, 60 84 C 82 84, 82 36, 60 36" fill="none" stroke="#F0D98C" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+        <circle cx="60" cy="60" r="7" fill="#D4AF37"/>
+      </svg>
+      <h3>THE SPOT-THE-KNOT SEAL</h3>
+      <div class="b-sub">The 66-Day Gauntlet &middot; Session Four Completed &middot; Mastery of Identification</div>
+      <div class="b-name" id="bname">&nbsp;</div>
+      <div class="b-text">has completed Days 28&ndash;36, The 16 Strongman Spirits &mdash; studying every named spirit, its Scripture anchor and its ancient tribe connectors, and working the identification method honestly: seeing every strand, tracing every knot, finding every door, and marking each one for the breaking.</div>
+      <div class="b-date" id="bdate"></div>
+      <div class="b-min">UNIVERSAL GOSPEL FELLOWSHIP CENTER &middot; MATTHEW 12:29 &middot; 2 TIMOTHY 1:7 &middot; DEUTERONOMY 30:19</div>
+    </div>
+    <div style="margin-top:20px">
+      <button class="btn" onclick="window.print()">Print My Seal</button>
+      <button class="btn" id="dlbtn" style="margin-left:10px">Download My Seal</button>
+    </div>
+    <p style="color:var(--muted);font-size:15px;margin-top:10px">Session Five &mdash; Steps to Spiritual Freedom &mdash; is now unlocked. Bring your Knot Map.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="seal">UNIVERSAL GOSPEL FELLOWSHIP CENTER</div>
+  <p>The 66-Day Gauntlet of Deliverance &amp; Inner Healing &middot; Session Four of Seven</p>
+  <p style="font-style:italic;margin-top:6px">&ldquo;How can one enter into a strong man&rsquo;s house, and spoil his goods, except he first bind the strong man?&rdquo; &mdash; Matthew 12:29</p>
+</footer>
+
+</div>
+<script>
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}
+
+var days=document.querySelectorAll('.day');
+days.forEach(function(d){
+  var n=d.getAttribute('data-day');
+  if(sget('ugfc_wk4_day'+n)==='1'){d.classList.add('done');}
+  d.querySelector('.day-head').addEventListener('click',function(){d.classList.toggle('open');});
+  d.querySelector('.mark-done').addEventListener('click',function(){
+    d.classList.add('done'); sset('ugfc_wk4_day'+n,'1'); updateProgress(); checkSeal();
+  });
+});
+function updateProgress(){
+  var done=document.querySelectorAll('.day.done').length;
+  document.getElementById('pbar').style.width=(done/9*100)+'%';
+  document.getElementById('plabel').textContent=done+' of 9 days completed';
+}
+updateProgress();
+
+document.querySelectorAll('textarea.reflect').forEach(function(t){
+  var k='ugfc_wk4_reflect'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+/* knot map */
+document.querySelectorAll('input.knot').forEach(function(c){
+  var k='ugfc_wk4_knot'+c.getAttribute('data-k');
+  if(sget(k)==='1'){c.checked=true;c.closest('.knot-row').classList.add('active');}
+  c.addEventListener('change',function(){
+    c.closest('.knot-row').classList.toggle('active',c.checked);
+    sset(k,c.checked?'1':'0'); knotCount();
+  });
+});
+document.querySelectorAll('textarea.strand').forEach(function(t){
+  var k='ugfc_wk4_strand'+t.getAttribute('data-k');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+function knotCount(){
+  var n=document.querySelectorAll('input.knot:checked').length;
+  document.getElementById('knotcount').textContent=n+' knot'+(n===1?'':'s')+' marked — every one of them was defeated at the cross';
+}
+knotCount();
+
+['aff1','aff2','aff3','aff4'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',checkSeal);
+});
+document.getElementById('namefield').addEventListener('input',checkSeal);
+function checkSeal(){
+  var done=document.querySelectorAll('.day.done').length;
+  var affs=['aff1','aff2','aff3','aff4'].every(function(id){return document.getElementById(id).checked});
+  var named=document.getElementById('namefield').value.trim().length>1;
+  var ok=(done===9)&&affs&&named;
+  document.getElementById('sealbtn').disabled=!ok;
+  var hint=document.getElementById('sealhint');
+  if(ok){hint.textContent='All requirements met — release your Seal.';hint.style.color='#7fc98f';}
+  else{
+    var need=[];
+    if(done<9){need.push((9-done)+' day'+(9-done===1?'':'s')+' not yet marked complete');}
+    if(!affs){need.push('affirmation boxes unchecked');}
+    if(!named){need.push('your name not yet entered');}
+    hint.textContent='Remaining: '+need.join(' · ');
+    hint.style.color='var(--muted)';
+  }
+}
+checkSeal();
+
+document.getElementById('sealbtn').addEventListener('click',function(){
+  var name=document.getElementById('namefield').value.trim();
+  document.getElementById('bname').textContent=name;
+  var d=new Date();
+  document.getElementById('bdate').textContent='Sealed this day: '+d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  sset('ugfc_wk4_passed','1'); sset('ugfc_wk4_name',name);
+  document.getElementById('badgewrap').style.display='block';
+  document.getElementById('badgewrap').scrollIntoView({behavior:'smooth'});
+});
+if(sget('ugfc_wk4_passed')==='1'){
+  document.getElementById('bname').textContent=sget('ugfc_wk4_name')||'';
+  document.getElementById('bdate').textContent='Seal previously earned';
+  document.getElementById('badgewrap').style.display='block';
+}
+
+document.getElementById('dlbtn').addEventListener('click',function(){
+  var name=(document.getElementById('bname').textContent||'').trim()||'Disciple of Yasha';
+  var date=document.getElementById('bdate').textContent;
+  var esc=function(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')};
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Georgia, serif">'
+   +'<rect width="900" height="640" fill="#0E1530"/><rect x="18" y="18" width="864" height="604" fill="none" stroke="#D4AF37" stroke-width="3"/><rect x="28" y="28" width="844" height="584" fill="none" stroke="#D4AF37" stroke-width="1"/>'
+   +'<g transform="translate(450,148)"><circle r="66" fill="none" stroke="#D4AF37" stroke-width="4"/>'
+   +'<path d="M -28 0 C -28 -26, 28 -26, 28 0 C 28 26, -28 26, -28 0" fill="none" stroke="#D4AF37" stroke-width="6" stroke-linecap="round"/>'
+   +'<path d="M 0 -28 C -26 -28, -26 28, 0 28 C 26 28, 26 -28, 0 -28" fill="none" stroke="#F0D98C" stroke-width="6" stroke-linecap="round" opacity="0.85"/>'
+   +'<circle r="8" fill="#D4AF37"/></g>'
+   +'<text x="450" y="300" text-anchor="middle" fill="#F0D98C" font-size="36" letter-spacing="7" font-weight="bold">THE SPOT-THE-KNOT SEAL</text>'
+   +'<text x="450" y="335" text-anchor="middle" fill="#D4AF37" font-size="15" letter-spacing="4">THE 66-DAY GAUNTLET &#183; SESSION FOUR &#183; MASTERY OF IDENTIFICATION</text>'
+   +'<text x="450" y="400" text-anchor="middle" fill="#F2ECD9" font-size="34" font-style="italic">'+esc(name)+'</text>'
+   +'<line x1="250" y1="418" x2="650" y2="418" stroke="#D4AF37" stroke-width="1"/>'
+   +'<text x="450" y="460" text-anchor="middle" fill="#F2ECD9" font-size="16">has studied all sixteen strongman spirits, their Scriptures and tribe connectors,</text>'
+   +'<text x="450" y="484" text-anchor="middle" fill="#F2ECD9" font-size="16">and marked every knot for the breaking &#8212; Days 28&#8211;36</text>'
+   +'<text x="450" y="528" text-anchor="middle" fill="#8A93B8" font-size="14" letter-spacing="2">'+esc(date)+'</text>'
+   +'<text x="450" y="578" text-anchor="middle" fill="#D4AF37" font-size="13" letter-spacing="4">UNIVERSAL GOSPEL FELLOWSHIP CENTER &#183; MATTHEW 12:29 &#183; DEUTERONOMY 30:19</text>'
+   +'</svg>';
+  var blob=new Blob([svg],{type:'image/svg+xml'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Spot-the-Knot-Seal-Session-4.svg';
+  document.body.appendChild(a); a.click(); a.remove();
+});
+</script>
+</body>
+</html>

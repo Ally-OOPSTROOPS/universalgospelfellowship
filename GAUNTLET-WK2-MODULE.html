@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 66-Day Gauntlet &middot; Session Two &middot; The Nature of Demonic Oppression</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0A1026; --deep:#121B3A; --panel:#16224A; --ink:#0E1530;
+  --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--midnight),var(--deep));color:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.65;min-height:100vh}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold-light);font-weight:700}
+header{text-align:center;padding:54px 0 30px;border-bottom:1px solid rgba(212,175,55,.35)}
+header .eyebrow{letter-spacing:.35em;font-size:13px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:clamp(26px,4.5vw,42px);letter-spacing:.08em;margin-bottom:10px}
+header .sub{font-size:18px;color:var(--cream);font-style:italic}
+header .days{margin-top:14px;color:var(--gold);letter-spacing:.2em;font-size:14px}
+.progressbar{margin:26px auto 0;max-width:560px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.4);border-radius:999px;height:14px;overflow:hidden}
+.progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,#8a6d1f,var(--gold),var(--gold-light));transition:width .5s}
+.progresslabel{font-size:14px;color:var(--muted);margin-top:8px}
+section{margin-top:54px}
+.kicker{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:14px;letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+h2{font-size:clamp(22px,3.4vw,30px);text-align:center;margin-bottom:26px}
+.rule{width:200px;height:1.5px;margin:0 auto 30px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px;letter-spacing:.04em}
+.card p{margin-bottom:14px}
+.card p:last-child{margin-bottom:0}
+.scripture{border-left:3px solid var(--gold);padding:10px 18px;margin:14px 0;font-style:italic;color:var(--gold-light);background:rgba(212,175,55,.06);border-radius:0 8px 8px 0}
+.reflist{color:var(--muted);font-size:17px}
+.callout{background:var(--ink);border:1.5px solid var(--gold);border-radius:12px;padding:24px 28px;text-align:center;margin:30px 0}
+.callout strong{color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.08em;display:block;margin-bottom:8px;font-size:17px}
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:6px}
+.name{background:var(--ink);border:1px solid rgba(212,175,55,.5);border-radius:10px;padding:18px;text-align:center}
+.name b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:17px;display:block;margin-bottom:6px}
+.name span{font-size:16px}
+/* days */
+.day{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
+.day-head:hover{background:rgba(212,175,55,.07)}
+.daynum{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:20px;font-weight:700}
+.day.done .daynum{background:var(--gold);color:var(--midnight);border-color:var(--gold)}
+.day-title{flex:1}
+.day-title b{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gold-light);letter-spacing:.04em}
+.day-title span{display:block;color:var(--muted);font-size:15px}
+.chev{color:var(--gold);transition:transform .3s;font-size:20px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:6px 26px 24px;border-top:1px solid rgba(212,175,55,.25)}
+.day.open .day-body{display:block}
+.day-body h4{color:var(--gold);font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:18px 0 8px;font-family:'Cinzel Decorative',serif}
+ul.tasks{list-style:none}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+ul.tasks input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.mark-done{margin-top:18px;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.1em;padding:10px 22px;border-radius:999px;cursor:pointer;font-size:14px}
+.mark-done:hover{background:var(--gold);color:var(--midnight)}
+.day.done .mark-done{background:var(--gold);color:var(--midnight)}
+/* quiz */
+.quiz-gate{text-align:center}
+.q{background:var(--panel);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:22px 26px;margin-bottom:14px}
+.q p.qt{font-weight:600;margin-bottom:12px}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-radius:8px;cursor:pointer}
+.q label:hover{background:rgba(212,175,55,.08)}
+.q input{margin-top:7px;accent-color:var(--gold)}
+.q.correct{border-color:#5fae6e}
+.q.wrong{border-color:#c0564f}
+.btn{background:var(--gold);color:var(--midnight);border:none;font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.1em;padding:15px 36px;border-radius:999px;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--gold-light)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.result{margin:22px auto;max-width:640px;border-radius:12px;padding:24px;border:1.5px solid var(--gold);background:var(--ink);text-align:center;display:none}
+.result h3{font-size:22px;margin-bottom:8px}
+footer{margin-top:70px;text-align:center;color:var(--muted);font-size:15px;border-top:1px solid rgba(212,175,55,.3);padding-top:26px}
+footer .seal{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.25em;font-size:13px;margin-bottom:6px}
+@media (max-width:600px){body{font-size:17px}.card{padding:20px}}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+/* Session 2 additions: inventory + badge */
+.inv-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;border-radius:8px;border:1px solid rgba(212,175,55,.2);margin-bottom:8px;background:rgba(212,175,55,.04)}
+.inv-item:hover{background:rgba(212,175,55,.1)}
+.inv-item input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.inv-cat{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.18em;font-size:14px;text-transform:uppercase;margin:24px 0 10px}
+.inv-count{text-align:center;color:var(--muted);margin-top:14px;font-size:16px}
+textarea.reflect{width:100%;min-height:110px;background:var(--ink);border:1px solid rgba(212,175,55,.45);border-radius:10px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px;margin:8px 0 18px;resize:vertical}
+textarea.reflect:focus{outline:2px solid var(--gold-light)}
+/* badge */
+#badgewrap{display:none;margin-top:30px;text-align:center}
+#badge{max-width:640px;margin:0 auto;background:linear-gradient(180deg,#0E1530,#16224A);border:3px double var(--gold);border-radius:16px;padding:44px 36px;position:relative}
+#badge .seal-ring{width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a2752,#0E1530);box-shadow:0 0 0 6px rgba(212,175,55,.18)}
+#badge .seal-ring span{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:44px}
+#badge h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:24px;letter-spacing:.12em;margin-bottom:6px}
+#badge .b-sub{color:var(--gold);letter-spacing:.25em;font-size:13px;text-transform:uppercase;margin-bottom:18px}
+#badge .b-name{font-size:28px;color:var(--cream);font-style:italic;border-bottom:1px solid rgba(212,175,55,.5);display:inline-block;padding:0 26px 6px;margin-bottom:16px;min-height:38px}
+#badge .b-text{font-size:16px;color:var(--cream);max-width:460px;margin:0 auto 16px}
+#badge .b-date{color:var(--muted);font-size:14px;letter-spacing:.1em}
+#badge .b-min{margin-top:18px;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:.22em}
+#namefield{background:var(--ink);border:1px solid var(--gold);border-radius:8px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:19px;padding:10px 16px;width:min(380px,90%);text-align:center;margin:14px 0}
+@media print{
+  body *{visibility:hidden}
+  #badge,#badge *{visibility:visible}
+  #badge{position:fixed;inset:0;margin:auto;height:fit-content;border:3px double #8a6d1f}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Universal Gospel Fellowship Center &middot; The 66-Day Gauntlet</div>
+  <h1>Session Two</h1>
+  <div class="sub">The Nature of Demonic Oppression &mdash; Legal Grounds, Open Doors &amp; Strongholds</div>
+  <div class="days">DAYS 10 &ndash; 18 OF 66</div>
+  <div class="progressbar" aria-label="Session progress"><div id="pbar"></div></div>
+  <div class="progresslabel" id="plabel">0 of 9 days completed</div>
+</header>
+
+<section>
+  <div class="kicker">This Module&rsquo;s Purpose</div>
+  <h2>Why This Session Exists</h2>
+  <div class="rule"></div>
+  <div class="callout">
+    <p>This session equips disciples of Yasha to recognize, identify, and close legal doors that allow demonic oppression to operate in the body, soul, and spirit. Freedom is sustained not by ignorance, but by truth, discernment, repentance, and authority.</p>
+  </div>
+  <div class="card">
+    <h3>Foundational Understanding</h3>
+    <p>Demonic influence does not occur randomly. It always operates through legal grounds &mdash; agreements, permissions, wounds, sins, vows, and deceptions that grant access.</p>
+    <div class="scripture">&ldquo;My people are destroyed for lack of knowledge. And because you have rejected My Torah, I have rejected you from being kings and priests, and I will forget your children.&rdquo; &mdash; Hosea 4:6</div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lesson Two</div>
+  <h2>The Nature of Demonic Oppression</h2>
+  <div class="rule"></div>
+
+  <div class="card">
+    <h3>A &middot; Legal Grounds &amp; Open Doors</h3>
+    <p>Understand how demonic influence and oppression can occur in a disciple&rsquo;s life through legal grounds and open doors in our body, soul, and spirit. Discover patterns of unresolved mental and emotional issues that stem from division, unusual fears, intrusive thoughts, hopelessness, compulsion toward sin, unconfessed sin, past traumas, and past soul ties that have not been broken &mdash; including open doors such as occult involvement, unforgiveness, idolatry, and many others.</p>
+    <p style="margin-top:10px"><span class="reflist">Matthew 16:23 &mdash; Corruption of thoughts &nbsp;&middot;&nbsp; 2 Corinthians 12:7 &mdash; Mental &amp; physical torment &nbsp;&middot;&nbsp; Acts 5:3 &mdash; Heart &amp; speech &nbsp;&middot;&nbsp; 1 Thessalonians 2:18 &mdash; Thwarting ministry efforts</span></p>
+  </div>
+
+  <div class="card">
+    <h3>B &middot; Strongholds: Common Signs &amp; Manifestations</h3>
+    <p><strong style="color:var(--gold-light)">Soul</strong> &mdash; mental and emotional oppression and depression: intense irrational fear, chronic hopelessness, severe doubts, intrusive and negative thoughts, constant accusations of self and others, extreme restlessness, inability to focus, strong pulling toward forbidden things and/or the occult.</p>
+    <p><strong style="color:var(--gold-light)">Body</strong> &mdash; behavioral mannerisms: compulsion to sin, iniquitous and generational sin, stirring up conflict, gossip, causing division, increased hostility toward God or deliverance ministers, withdrawing from others.</p>
+    <p><strong style="color:var(--gold-light)">Spirit</strong> &mdash; spiritual oppression and torment: procrastination, feeling oppressed and depressed, extreme heaviness, hindered in serving God, a sense of powerlessness, an overall feeling of fatigue and tiredness, physical limitations that cannot be medically diagnosed.</p>
+  </div>
+
+  <div class="card">
+    <h3>C &middot; The Who and Why of It</h3>
+    <p>The adversary &mdash; Satan, the accuser of the brethren &mdash; and his demons seek to destroy, tempt, or hinder humans&rsquo; effectiveness on earth, seeking to sift disciples as wheat according to Luke 22:31&ndash;32. The open doors previously discussed form an extensive list, examined spirit by spirit in Session Four.</p>
+  </div>
+
+  <div class="card">
+    <h3>D &middot; Methodology the Enemy Uses</h3>
+    <p>Mind binding, influencing thoughts, projecting thoughts into you causing you to think it was your own thought, tempting one to commit sin, using fear tactics, mind control, and hindering spiritual growth &mdash; all tactics used to hinder one&rsquo;s spiritual growth. <span class="reflist">1 Timothy 4:1</span></p>
+  </div>
+
+  <div class="card">
+    <h3>E &middot; Oppression vs. Possession &mdash; And Your Assurance</h3>
+    <p>Oppression is ongoing influence and attack, while possession is a more complete control &mdash; both can be addressed and overcome through Christ. <span class="reflist">Romans 8:37</span></p>
+    <p>When Father became flesh and walked the earth as Yasha the Son, He made it clear that demonic oppression and possession would be a thing of the past &mdash; for the Jew first and then the Gentile. Deliverance and healing is for all who have accepted Him as Savior and made Him Adon and Master over themselves.</p>
+    <p>It is Scripturally correct to teach that believers <strong style="color:var(--gold-light)">cannot</strong> be possessed, and that non-believers (unregenerated spirits) can be possessed by these hordes. <span class="reflist">1 John 4:4 &middot; 1 Corinthians 3:16 &middot; Ephesians 1:13&ndash;14</span></p>
+  </div>
+
+  <div class="callout">
+    <strong>Hear This Reassurance</strong>
+    <p>Many of the behaviors and manifestations you will inventory this week were triggered &mdash; defense mechanisms you unknowingly practiced or exhibited, because no one ever taught you the WHO and the WHY behind them. Oppression is the problem; the flesh reacts. But as a true believer you cannot be possessed. You are the temple of AhaYah, sealed by Ruach HaKodesh &mdash; and greater is He that is in you than he that is in the world.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Lesson Summarization &mdash; Three Truths to Carry</strong>
+    <p>Demonic oppression always requires legal access. &nbsp;&middot;&nbsp; Strongholds are always identifiable &mdash; and they are always removable. &nbsp;&middot;&nbsp; Your victory is enforced through truth, repentance, and Yasha&rsquo;s authority.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The Nine-Day Journey</div>
+  <h2>Daily Assignments &amp; Fieldwork &middot; Days 10&ndash;18</h2>
+  <div class="rule"></div>
+
+  <div class="day" data-day="1">
+    <div class="day-head"><div class="daynum">10</div><div class="day-title"><b>FULL INTAKE &amp; PURPOSE</b><span>Read the whole teaching &middot; receive Hosea 4:6</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read the entire Session Two teaching above in one sitting, aloud where possible. Knowledge is your weapon this week &mdash; the enemy&rsquo;s access depends on what you do not know.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write out Hosea 4:6 by hand and begin committing it to memory.</span></li>
+        <li><input type="checkbox"><span>Write the Foundational Understanding in your own words: demonic influence is never random &mdash; it operates through legal grounds.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 10 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="2">
+    <div class="day-head"><div class="daynum">11</div><div class="day-title"><b>LEGAL GROUNDS &amp; OPEN DOORS</b><span>Agreements, permissions, wounds, sins, vows, deceptions</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Re-read Part A. Then study each passage in the access table: Matthew 16:23 (corruption of thoughts); 2 Corinthians 12:7 (mental &amp; physical torment); Acts 5:3 (heart &amp; speech); 1 Thessalonians 2:18 (thwarting ministry efforts).</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Beside each of the four passages, write one sentence describing the kind of access it reveals.</span></li>
+        <li><input type="checkbox"><span>Privately list any open doors from the teaching (occult involvement, unforgiveness, idolatry, unconfessed sin, unbroken soul ties, past traumas) that you recognize in your own history. This list feeds directly into Session Five.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 11 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="3">
+    <div class="day-head"><div class="daynum">12</div><div class="day-title"><b>STRONGHOLDS IN THE SOUL</b><span>Mental &amp; emotional oppression</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study the Soul manifestations in Part B. Then complete the SOUL portion of the Discernment Inventory at the bottom of this page &mdash; honestly, privately, before AhaYah alone.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Complete the Soul section of the Discernment Inventory.</span></li>
+        <li><input type="checkbox"><span>Journal in a short paragraph: which soul manifestation has operated longest in your life &mdash; and did you ever suspect it was spiritual in nature before today?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 12 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="4">
+    <div class="day-head"><div class="daynum">13</div><div class="day-title"><b>STRONGHOLDS IN BODY &amp; SPIRIT</b><span>Behavioral mannerisms &amp; spiritual torment</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study the Body and Spirit manifestations in Part B, then complete the BODY and SPIRIT portions of the Discernment Inventory.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Complete the Body and Spirit sections of the Discernment Inventory.</span></li>
+        <li><input type="checkbox"><span>Write a short paragraph: which behaviors have you exhibited as defense mechanisms without knowing it &mdash; reactions of the flesh under oppression rather than your true identity in Yasha?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 13 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="5">
+    <div class="day-head"><div class="daynum">14</div><div class="day-title"><b>THE WHO AND WHY</b><span>The accuser seeks to sift you as wheat</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Luke 22:31&ndash;32 slowly, twice. The adversary and his demons seek to destroy, tempt, or hinder your effectiveness on earth. Behind every manifestation you inventoried stands a WHO with a WHY &mdash; and Yasha stands praying for you, that your faith fail not.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write a short paragraph answering: knowing now that there is a WHO and a WHY behind the behaviors, how does that change the way you see your own past reactions?</span></li>
+        <li><input type="checkbox"><span>Speak aloud: &ldquo;Oppression is the problem. My flesh reacted. But I cannot be possessed &mdash; I belong to Yasha.&rdquo;</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 14 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="6">
+    <div class="day-head"><div class="daynum">15</div><div class="day-title"><b>THE ENEMY&rsquo;S METHODOLOGY</b><span>Mind binding &middot; projected thoughts &middot; fear tactics</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Re-read Part D with 1 Timothy 4:1. The enemy projects thoughts into you, causing you to think they were your own. Discernment begins by testing the origin of every thought.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>For one full day, when an accusing, fearful, or compulsive thought rises, ask aloud: &ldquo;Whose voice is this &mdash; does it agree with the Word of AhaYah?&rdquo; Record what you notice.</span></li>
+        <li><input type="checkbox"><span>Write a short paragraph: identify one recurring thought you have always assumed was your own that you now recognize may have been projected.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 15 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="7">
+    <div class="day-head"><div class="daynum">16</div><div class="day-title"><b>YOUR ASSURANCE</b><span>Oppressed &mdash; never possessed</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Romans 8:37; 1 John 4:4; 1 Corinthians 3:16; Ephesians 1:13&ndash;14. You are the temple of AhaYah, sealed by Ruach HaKodesh. The believer can be oppressed and attacked &mdash; never possessed.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write your own Declaration of Assurance using all four passages, in your own words, and speak it aloud in prayer.</span></li>
+        <li><input type="checkbox"><span>Copy the three Lesson Summarization truths by hand: legal access &middot; identifiable &middot; removable.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 16 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="8">
+    <div class="day-head"><div class="daynum">17</div><div class="day-title"><b>DEEP REFLECTION</b><span>Five questions &middot; short paragraph answers &middot; submitted to ministry</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Answer each of the five questions below in short paragraph form. Write them out and submit them to the ministry with your Week Two report. You may also draft them here &mdash; your words save on this device as you type.</p>
+      <h4>The Five Questions</h4>
+      <p><strong style="color:var(--gold-light)">1.</strong> Of the open doors named in this lesson &mdash; occult involvement, unforgiveness, idolatry, unconfessed sin, past traumas, and unbroken soul ties &mdash; which have been normalized in modern culture, and how does that normalization keep believers from recognizing them as legal access?</p>
+      <textarea class="reflect" data-r="1" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">2.</strong> This lesson teaches that demonic influence is never random &mdash; it always operates through legal grounds. How do unresolved wounds and past traumas become legal grounds the enemy can claim, even in a believer&rsquo;s life?</p>
+      <textarea class="reflect" data-r="2" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">3.</strong> Review the soul, body, and spirit manifestations in this lesson. Which of them have you lived with as &ldquo;just my personality&rdquo; or &ldquo;just how I am&rdquo; &mdash; and what changes now that you know there is a WHO and a WHY behind them?</p>
+      <textarea class="reflect" data-r="3" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">4.</strong> The enemy&rsquo;s methodology includes projecting thoughts into you, causing you to think they were your own (1 Timothy 4:1). How can a disciple test the origin of a thought &mdash; and what gives a projected thought its power if it is received as your own?</p>
+      <textarea class="reflect" data-r="4" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">5.</strong> Hosea 4:6 says My people are destroyed for lack of knowledge. Why does knowing that a believer can be oppressed but never possessed (1 John 4:4; 1 Corinthians 3:16; Ephesians 1:13&ndash;14) change the way you stand against the accuser &mdash; and what was the cost of not knowing it sooner?</p>
+      <textarea class="reflect" data-r="5" placeholder="Write your short paragraph here..."></textarea>
+      <button class="mark-done">Mark Day 17 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="9">
+    <div class="day-head"><div class="daynum">18</div><div class="day-title"><b>THE GATE &middot; DISCERNMENT INVENTORY</b><span>Complete the inventory &middot; receive your Seal</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Finalize the Discernment Inventory below, confirm your five reflections are written and submitted, and make your affirmation. There is no graded quiz this week &mdash; the gate is honest discernment. Completion releases your printable <strong style="color:var(--gold-light)">Seal of Discernment</strong> and unlocks Session Three.</p>
+      <button class="mark-done">Mark Day 18 Complete (after the inventory)</button>
+    </div>
+  </div>
+</section>
+
+<section id="invsec">
+  <div class="kicker">Day Eighteen &middot; The Gate</div>
+  <h2>The Discernment Inventory</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <p>Check every sign or manifestation you recognize as having experienced yourself &mdash; perhaps without ever knowing it was spiritual in nature, because no one taught you the WHO and the WHY behind it. This inventory is not graded and carries no shame. It is a map of targets for the sessions ahead: every stronghold is identifiable, and every stronghold is removable.</p>
+
+    <div class="inv-cat">Soul &mdash; Mental &amp; Emotional</div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Intense, irrational fear</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Chronic hopelessness</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Severe doubts</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Intrusive, negative thoughts</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Constant accusations of self &amp; others</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Extreme restlessness</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Inability to focus</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Strong pulling toward forbidden things and/or the occult</span></div>
+
+    <div class="inv-cat">Body &mdash; Behavioral Mannerisms</div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Compulsion to sin</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Iniquitous &amp; generational sin patterns</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Stirring up conflict</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Gossip</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Causing division</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Increased hostility toward God or deliverance ministers</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Withdrawing from others</span></div>
+
+    <div class="inv-cat">Spirit &mdash; Oppression &amp; Torment</div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Procrastination</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Feeling oppressed &amp; depressed</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Extreme heaviness</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Hindered in serving God</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>A sense of powerlessness</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Overall fatigue &amp; tiredness</span></div>
+    <div class="inv-item"><input type="checkbox" class="inv"><span>Physical limitations that cannot be medically diagnosed</span></div>
+
+    <div class="inv-count" id="invcount">0 areas identified</div>
+  </div>
+
+  <div class="callout">
+    <strong>Affirmation Before the Seal</strong>
+    <ul class="tasks">
+      <li><input type="checkbox" id="aff1"><span>I have completed the Discernment Inventory honestly before AhaYah.</span></li>
+      <li><input type="checkbox" id="aff2"><span>I have written my five reflection paragraphs and submitted them to the ministry.</span></li>
+      <li><input type="checkbox" id="aff3"><span>I affirm: oppression is the problem, my flesh reacted &mdash; but as a true believer I cannot be possessed. Demonic oppression always requires legal access; strongholds are identifiable and removable; my victory is enforced through truth, repentance, and Yasha&rsquo;s authority.</span></li>
+    </ul>
+    <div style="text-align:center;margin-top:16px">
+      <input type="text" id="namefield" placeholder="Type your full name as it should appear on your Seal">
+      <br>
+      <button class="btn" id="sealbtn" disabled>Release My Seal of Discernment</button>
+      <p id="sealhint" style="color:var(--muted);font-size:15px;margin-top:10px">Complete all 9 days, the inventory affirmations, and your name to release the Seal.</p>
+    </div>
+  </div>
+
+  <div id="badgewrap">
+    <div id="badge">
+      <div class="seal-ring"><span>II</span></div>
+      <h3>SEAL OF DISCERNMENT</h3>
+      <div class="b-sub">The 66-Day Gauntlet &middot; Session Two Completed</div>
+      <div class="b-name" id="bname">&nbsp;</div>
+      <div class="b-text">has completed Days 10&ndash;18, The Nature of Demonic Oppression, with honest self-examination before AhaYah &mdash; and now walks in the knowledge that every stronghold is identifiable, every stronghold is removable, and victory is enforced through truth, repentance, and Yasha&rsquo;s authority.</div>
+      <div class="b-date" id="bdate"></div>
+      <div class="b-min">UNIVERSAL GOSPEL FELLOWSHIP CENTER &middot; HOSEA 4:6 &middot; ROMANS 8:37</div>
+    </div>
+    <button class="btn" style="margin-top:20px" onclick="window.print()">Print My Seal</button>
+    <p style="color:var(--muted);font-size:15px;margin-top:10px">Session Three &mdash; Curses &amp; the Power of Words &mdash; is now unlocked.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="seal">UNIVERSAL GOSPEL FELLOWSHIP CENTER</div>
+  <p>The 66-Day Gauntlet of Deliverance &amp; Inner Healing &middot; Session Two of Seven</p>
+  <p style="font-style:italic;margin-top:6px">&ldquo;My people are destroyed for lack of knowledge.&rdquo; &mdash; Hosea 4:6</p>
+</footer>
+
+</div>
+<script>
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}
+
+/* days */
+var days=document.querySelectorAll('.day');
+days.forEach(function(d){
+  var n=d.getAttribute('data-day');
+  if(sget('ugfc_wk2_day'+n)==='1'){d.classList.add('done');}
+  d.querySelector('.day-head').addEventListener('click',function(){d.classList.toggle('open');});
+  d.querySelector('.mark-done').addEventListener('click',function(){
+    d.classList.add('done'); sset('ugfc_wk2_day'+n,'1'); updateProgress(); checkSeal();
+  });
+});
+function updateProgress(){
+  var done=document.querySelectorAll('.day.done').length;
+  document.getElementById('pbar').style.width=(done/9*100)+'%';
+  document.getElementById('plabel').textContent=done+' of 9 days completed';
+}
+updateProgress();
+
+/* reflections persist */
+document.querySelectorAll('textarea.reflect').forEach(function(t){
+  var k='ugfc_wk2_reflect'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+/* inventory persist + count */
+var invs=document.querySelectorAll('input.inv');
+invs.forEach(function(c,i){
+  if(sget('ugfc_wk2_inv'+i)==='1'){c.checked=true;}
+  c.addEventListener('change',function(){sset('ugfc_wk2_inv'+i,c.checked?'1':'0');invCount();});
+});
+function invCount(){
+  var n=document.querySelectorAll('input.inv:checked').length;
+  document.getElementById('invcount').textContent=n+' area'+(n===1?'':'s')+' identified — targets for the sessions ahead, not verdicts over your life';
+}
+invCount();
+
+/* seal gating */
+['aff1','aff2','aff3'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',checkSeal);
+});
+document.getElementById('namefield').addEventListener('input',checkSeal);
+function checkSeal(){
+  var done=document.querySelectorAll('.day.done').length;
+  var affs=document.getElementById('aff1').checked&&document.getElementById('aff2').checked&&document.getElementById('aff3').checked;
+  var named=document.getElementById('namefield').value.trim().length>1;
+  var ok=(done===9)&&affs&&named;
+  document.getElementById('sealbtn').disabled=!ok;
+  var hint=document.getElementById('sealhint');
+  if(ok){hint.textContent='All requirements met — release your Seal.';hint.style.color='#7fc98f';}
+  else{
+    var need=[];
+    if(done<9){need.push((9-done)+' day'+(9-done===1?'':'s')+' not yet marked complete');}
+    if(!affs){need.push('affirmation boxes unchecked');}
+    if(!named){need.push('your name not yet entered');}
+    hint.textContent='Remaining: '+need.join(' · ');
+    hint.style.color='var(--muted)';
+  }
+}
+checkSeal();
+document.getElementById('sealbtn').addEventListener('click',function(){
+  var name=document.getElementById('namefield').value.trim();
+  document.getElementById('bname').textContent=name;
+  var d=new Date();
+  document.getElementById('bdate').textContent='Sealed this day: '+d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  sset('ugfc_wk2_passed','1'); sset('ugfc_wk2_name',name);
+  document.getElementById('badgewrap').style.display='block';
+  document.getElementById('badgewrap').scrollIntoView({behavior:'smooth'});
+});
+/* restore seal if previously earned */
+if(sget('ugfc_wk2_passed')==='1'){
+  document.getElementById('bname').textContent=sget('ugfc_wk2_name')||'';
+  document.getElementById('bdate').textContent='Seal previously earned';
+  document.getElementById('badgewrap').style.display='block';
+}
+</script>
+</body>
+</html>

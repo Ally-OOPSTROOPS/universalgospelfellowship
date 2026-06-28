@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 66-Day Gauntlet &middot; Session Three &middot; Curses &amp; the Power of Words</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0A1026; --deep:#121B3A; --panel:#16224A; --ink:#0E1530;
+  --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--midnight),var(--deep));color:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.65;min-height:100vh}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold-light);font-weight:700}
+header{text-align:center;padding:54px 0 30px;border-bottom:1px solid rgba(212,175,55,.35)}
+header .eyebrow{letter-spacing:.35em;font-size:13px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:clamp(26px,4.5vw,42px);letter-spacing:.08em;margin-bottom:10px}
+header .sub{font-size:18px;color:var(--cream);font-style:italic}
+header .days{margin-top:14px;color:var(--gold);letter-spacing:.2em;font-size:14px}
+.progressbar{margin:26px auto 0;max-width:560px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.4);border-radius:999px;height:14px;overflow:hidden}
+.progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,#8a6d1f,var(--gold),var(--gold-light));transition:width .5s}
+.progresslabel{font-size:14px;color:var(--muted);margin-top:8px}
+section{margin-top:54px}
+.kicker{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:14px;letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+h2{font-size:clamp(22px,3.4vw,30px);text-align:center;margin-bottom:26px}
+.rule{width:200px;height:1.5px;margin:0 auto 30px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px;letter-spacing:.04em}
+.card p{margin-bottom:14px}
+.card p:last-child{margin-bottom:0}
+.scripture{border-left:3px solid var(--gold);padding:10px 18px;margin:14px 0;font-style:italic;color:var(--gold-light);background:rgba(212,175,55,.06);border-radius:0 8px 8px 0}
+.reflist{color:var(--muted);font-size:17px}
+.callout{background:var(--ink);border:1.5px solid var(--gold);border-radius:12px;padding:24px 28px;text-align:center;margin:30px 0}
+.callout strong{color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.08em;display:block;margin-bottom:8px;font-size:17px}
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:6px}
+.name{background:var(--ink);border:1px solid rgba(212,175,55,.5);border-radius:10px;padding:18px;text-align:center}
+.name b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:17px;display:block;margin-bottom:6px}
+.name span{font-size:16px}
+/* days */
+.day{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
+.day-head:hover{background:rgba(212,175,55,.07)}
+.daynum{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:20px;font-weight:700}
+.day.done .daynum{background:var(--gold);color:var(--midnight);border-color:var(--gold)}
+.day-title{flex:1}
+.day-title b{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gold-light);letter-spacing:.04em}
+.day-title span{display:block;color:var(--muted);font-size:15px}
+.chev{color:var(--gold);transition:transform .3s;font-size:20px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:6px 26px 24px;border-top:1px solid rgba(212,175,55,.25)}
+.day.open .day-body{display:block}
+.day-body h4{color:var(--gold);font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:18px 0 8px;font-family:'Cinzel Decorative',serif}
+ul.tasks{list-style:none}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+ul.tasks input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.mark-done{margin-top:18px;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.1em;padding:10px 22px;border-radius:999px;cursor:pointer;font-size:14px}
+.mark-done:hover{background:var(--gold);color:var(--midnight)}
+.day.done .mark-done{background:var(--gold);color:var(--midnight)}
+/* quiz */
+.quiz-gate{text-align:center}
+.q{background:var(--panel);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:22px 26px;margin-bottom:14px}
+.q p.qt{font-weight:600;margin-bottom:12px}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-radius:8px;cursor:pointer}
+.q label:hover{background:rgba(212,175,55,.08)}
+.q input{margin-top:7px;accent-color:var(--gold)}
+.q.correct{border-color:#5fae6e}
+.q.wrong{border-color:#c0564f}
+.btn{background:var(--gold);color:var(--midnight);border:none;font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.1em;padding:15px 36px;border-radius:999px;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--gold-light)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.result{margin:22px auto;max-width:640px;border-radius:12px;padding:24px;border:1.5px solid var(--gold);background:var(--ink);text-align:center;display:none}
+.result h3{font-size:22px;margin-bottom:8px}
+footer{margin-top:70px;text-align:center;color:var(--muted);font-size:15px;border-top:1px solid rgba(212,175,55,.3);padding-top:26px}
+footer .seal{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.25em;font-size:13px;margin-bottom:6px}
+@media (max-width:600px){body{font-size:17px}.card{padding:20px}}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+/* Session 2 additions: inventory + badge */
+.inv-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;border-radius:8px;border:1px solid rgba(212,175,55,.2);margin-bottom:8px;background:rgba(212,175,55,.04)}
+.inv-item:hover{background:rgba(212,175,55,.1)}
+.inv-item input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.inv-cat{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.18em;font-size:14px;text-transform:uppercase;margin:24px 0 10px}
+.inv-count{text-align:center;color:var(--muted);margin-top:14px;font-size:16px}
+textarea.reflect{width:100%;min-height:110px;background:var(--ink);border:1px solid rgba(212,175,55,.45);border-radius:10px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px;margin:8px 0 18px;resize:vertical}
+textarea.reflect:focus{outline:2px solid var(--gold-light)}
+/* badge */
+#badgewrap{display:none;margin-top:30px;text-align:center}
+#badge{max-width:640px;margin:0 auto;background:linear-gradient(180deg,#0E1530,#16224A);border:3px double var(--gold);border-radius:16px;padding:44px 36px;position:relative}
+#badge .seal-ring{width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a2752,#0E1530);box-shadow:0 0 0 6px rgba(212,175,55,.18)}
+#badge .seal-ring span{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:44px}
+#badge h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:24px;letter-spacing:.12em;margin-bottom:6px}
+#badge .b-sub{color:var(--gold);letter-spacing:.25em;font-size:13px;text-transform:uppercase;margin-bottom:18px}
+#badge .b-name{font-size:28px;color:var(--cream);font-style:italic;border-bottom:1px solid rgba(212,175,55,.5);display:inline-block;padding:0 26px 6px;margin-bottom:16px;min-height:38px}
+#badge .b-text{font-size:16px;color:var(--cream);max-width:460px;margin:0 auto 16px}
+#badge .b-date{color:var(--muted);font-size:14px;letter-spacing:.1em}
+#badge .b-min{margin-top:18px;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:.22em}
+#namefield{background:var(--ink);border:1px solid var(--gold);border-radius:8px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:19px;padding:10px 16px;width:min(380px,90%);text-align:center;margin:14px 0}
+@media print{
+  body *{visibility:hidden}
+  #badge,#badge *{visibility:visible}
+  #badge{position:fixed;inset:0;margin:auto;height:fit-content;border:3px double #8a6d1f}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Universal Gospel Fellowship Center &middot; The 66-Day Gauntlet</div>
+  <h1>Session Three</h1>
+  <div class="sub">Curses &amp; the Power of Words &mdash; The Tongue That Steers the Ship</div>
+  <div class="days">DAYS 19 &ndash; 27 OF 66</div>
+  <div class="progressbar" aria-label="Session progress"><div id="pbar"></div></div>
+  <div class="progresslabel" id="plabel">0 of 9 days completed</div>
+</header>
+
+<section>
+  <div class="kicker">This Module&rsquo;s Purpose</div>
+  <h2>Why This Session Exists</h2>
+  <div class="rule"></div>
+  <div class="callout">
+    <p>This session opens the participant&rsquo;s eyes to the creative and destructive power of the tongue. Death and life are in the power of the tongue, and they that love it shall eat the fruit thereof (Proverbs 18:21). Here the disciple learns to recognize curses &mdash; generational, spoken, self-imposed, occult, and sin-linked &mdash; to discern the hidden symbolism and everyday snares buried in modern language, and to take the helm of their own ship by setting a watch over their mouth.</p>
+  </div>
+  <div class="card">
+    <h3>Review &mdash; Bringing What You Have Learned Back to the Table</h3>
+    <p>In Session One you learned that your authority is a NOW authority, working through Ruach Hakodesh, the Word, and prayer &mdash; and that authority is exercised by what you <em>speak</em> in Yasha&rsquo;s Name. In Session Two you learned that demonic influence is never random: it always operates through legal grounds &mdash; agreements, permissions, wounds, sins, vows, and deceptions. Now join the two truths and see what they reveal together: <strong style="color:var(--gold-light)">your mouth is the most frequently used door in the house.</strong> Every word is either an exercise of your authority or a granting of legal access. Your own thoughts &mdash; including the projected thoughts you learned to test in Session Two &mdash; become your conversations, and your conversations shape your world. Out of the abundance of the heart, the mouth speaketh (Matthew 12:34).</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lesson Three</div>
+  <h2>Curses &amp; the Power of Words</h2>
+  <div class="rule"></div>
+
+  <div class="card">
+    <h3>A &middot; The Five Families of Curses</h3>
+    <p><strong style="color:var(--gold-light)">Generational curses</strong> &mdash; iniquity visiting down family lines. <span class="reflist">Exodus 20:5 &middot; Numbers 14:18 &middot; Lamentations 5:7</span></p>
+    <p><strong style="color:var(--gold-light)">Spoken / word curses</strong> &mdash; words spoken over you in general conversation, and vows and inner vows spoken over you by others, such as authority figures in your life. These can be used for spiritual manipulation and cause spiritual stagnation.</p>
+    <p><strong style="color:var(--gold-light)">Self-imposed curses</strong> &mdash; words you speak over yourself, including rash vows and oaths. Jacob unknowingly spoke over Rachel &mdash; &ldquo;with whomsoever thou findest thy gods, let him not live&rdquo; &mdash; and Rachel died on the journey. <span class="reflist">Genesis 31:32 &amp; 35:19 &middot; Leviticus 20:9 &middot; Proverbs 18:21 &middot; Matthew 12:37 &middot; Matthew 27:25 &middot; Acts 23:14</span></p>
+    <p><strong style="color:var(--gold-light)">Witchcraft / occult curses</strong> &mdash; curses arising from forbidden practices. <span class="reflist">Deuteronomy 18:10&ndash;12 &middot; Galatians 5:19&ndash;21</span></p>
+    <p><strong style="color:var(--gold-light)">Curses linked to sin or broken vows</strong> &mdash; the whole catalogue of Deuteronomy 28 stands as witness, and Scripture warns: better not to vow, than to vow and not pay. <span class="reflist">Deuteronomy 28 &middot; Ecclesiastes 5:4&ndash;6</span></p>
+    <div class="scripture">&ldquo;For by thy words thou shalt be justified, and by thy words thou shalt be condemned.&rdquo; &mdash; Matthew 12:37</div>
+  </div>
+
+  <div class="card">
+    <h3>B &middot; Death and Life Are in the Power of the Tongue &mdash; and the Fruits Thereof</h3>
+    <p>Proverbs 18:21 does not say the tongue <em>describes</em> life and death &mdash; it says death and life are in its <em>power</em>. And they that love it shall eat the fruit thereof: your mouth plants orchards, and you will eat from whichever orchard you planted.</p>
+    <p><strong style="color:var(--gold-light)">The fruits of death-speech</strong> &mdash; condemnation by your own words (Matthew 12:37); being snared and taken by the words of your mouth (Proverbs 6:2); piercings of a sword in relationships (Proverbs 12:18); spiritual stagnation under inner vows; destruction of the home and reputation; a fire that defiles the whole body and sets the course of nature ablaze (James 3:6); and heaven&rsquo;s record of every idle word (Matthew 12:36). AhaYah told Israel plainly: &ldquo;As ye have spoken in mine ears, so will I do to you&rdquo; &mdash; Numbers 14:28. They said &ldquo;we shall die in this wilderness,&rdquo; and they did.</p>
+    <p><strong style="color:var(--gold-light)">The fruits of life-speech</strong> &mdash; a wholesome tongue is a tree of life (Proverbs 15:4); pleasant words are health to the bones (Proverbs 16:24); the mouth that keeps itself keeps its soul from troubles (Proverbs 21:23); the one who would love life and see good days refrains the tongue from evil (1 Peter 3:10); grace ministered to every hearer (Ephesians 4:29); mountains moved by the believer who says and doubts not (Mark 11:23); and the decreed thing established (Job 22:28).</p>
+  </div>
+
+  <div class="card">
+    <h3>C &middot; Hidden Symbolism &amp; the Snares in Everyday Language</h3>
+    <p>Thou art snared with the words of thy mouth (Proverbs 6:2). Modern language is full of snares the believer repeats without ever being taught what stands behind them:</p>
+    <p><strong style="color:var(--gold-light)">&ldquo;Luck&rdquo; and &ldquo;fortune&rdquo;</strong> &mdash; Isaiah 65:11 rebukes those who prepare a table for Gad (the god of fortune, &ldquo;luck&rdquo;) and furnish the drink offering unto Meni (the god of destiny). Every &ldquo;good luck,&rdquo; &ldquo;lucky charm,&rdquo; and &ldquo;fortune favors me&rdquo; tips the hat to idols Scripture names.</p>
+    <p><strong style="color:var(--gold-light)">Occult-rooted habits of speech and gesture</strong> &mdash; &ldquo;knock on wood&rdquo; (appealing to spirits in trees), &ldquo;cross your fingers,&rdquo; horoscope and zodiac talk (&ldquo;that&rsquo;s such a Gemini thing&rdquo;), &ldquo;the universe will provide,&rdquo; &ldquo;karma will get them&rdquo; &mdash; each one borrows the vocabulary of divination and false religion examined in Deuteronomy 18:10&ndash;12.</p>
+    <p><strong style="color:var(--gold-light)">Casual death-speech</strong> &mdash; &ldquo;I&rsquo;m dying to see it,&rdquo; &ldquo;that&rsquo;s to die for,&rdquo; &ldquo;I&rsquo;m sick to death of this,&rdquo; &ldquo;scared to death,&rdquo; &ldquo;this job is killing me,&rdquo; &ldquo;I could just die.&rdquo; The mouth invites what the heart never intended.</p>
+    <p><strong style="color:var(--gold-light)">Self-curses dressed as humility or humor</strong> &mdash; &ldquo;I&rsquo;m so stupid,&rdquo; &ldquo;I never get anything right,&rdquo; &ldquo;nothing good ever happens to me,&rdquo; &ldquo;I&rsquo;ll always be broke,&rdquo; &ldquo;sickness runs in my family so I&rsquo;ll get it too.&rdquo; These are agreements &mdash; legal grounds granted by your own testimony against yourself.</p>
+    <p><strong style="color:var(--gold-light)">Oaths and idle vows</strong> &mdash; &ldquo;I swear,&rdquo; &ldquo;cross my heart and hope to die,&rdquo; &ldquo;on my mother&rsquo;s grave.&rdquo; Yasha said: let your communication be Yea, yea; Nay, nay &mdash; for whatsoever is more than these cometh of evil. <span class="reflist">Matthew 5:37</span></p>
+  </div>
+
+  <div class="card">
+    <h3>D &middot; The Tiny Member That Steers the Ship</h3>
+    <p>Behold also the ships: though they are so great and driven of fierce winds, yet they are turned about with a very small helm, whithersoever the governor listeth. Even so the tongue is a little member &mdash; and it boasts great things. The same tiny rudder that wrecks a vessel on the rocks can steer it through the waters of life into harbor. No man can tame the tongue &mdash; but Ruach HaKodesh can, when the disciple sets the watch: &ldquo;Set a watch, O AhaYah, before my mouth; keep the door of my lips.&rdquo; <span class="reflist">James 3:2&ndash;12 &middot; Psalm 141:3</span></p>
+  </div>
+
+  <div class="card">
+    <h3>E &middot; Scripture Review &mdash; The Tongue</h3>
+    <p class="reflist">Psalm 34:13 &middot; Proverbs 12:18 &middot; Proverbs 18:21 &middot; Proverbs 23:7 &middot; Proverbs 26:2 &middot; Matthew 5:37 &middot; Matthew 12:34 &middot; Ephesians 4:29 &middot; Ephesians 5:4, 12 &middot; Colossians 3:8 &middot; 2 Timothy 2:16 &middot; James 3:6&ndash;10</p>
+    <p style="margin-top:8px">Expanded study set for this session: <span class="reflist">Proverbs 6:2 &middot; Proverbs 15:4 &middot; Proverbs 16:24 &middot; Proverbs 21:23 &middot; Matthew 12:36 &middot; Mark 11:23 &middot; Numbers 14:28 &middot; Job 22:28 &middot; 1 Peter 3:10 &middot; Ecclesiastes 5:4&ndash;6 &middot; Isaiah 65:11 &middot; Joshua 6:26 with 1 Kings 16:34 &middot; Judges 11:30&ndash;40</span></p>
+    <div class="scripture">&ldquo;The curse causeless shall not come.&rdquo; &mdash; Proverbs 26:2. Every curse needs legal grounds &mdash; and every legal ground can be removed in Yasha.</div>
+  </div>
+
+  <div class="callout">
+    <strong>Lesson Summarization &mdash; Three Truths to Carry</strong>
+    <p>Words are never neutral &mdash; every word exercises authority or grants access. &nbsp;&middot;&nbsp; The curse causeless cannot land &mdash; and its legal grounds can always be removed. &nbsp;&middot;&nbsp; The tongue is the helm: whoever governs it steers the whole ship.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The Nine-Day Journey</div>
+  <h2>Daily Assignments &amp; Fieldwork &middot; Days 19&ndash;27</h2>
+  <div class="rule"></div>
+
+  <div class="day" data-day="1">
+    <div class="day-head"><div class="daynum">19</div><div class="day-title"><b>REVIEW &amp; RECONNECTION</b><span>Authority + legal grounds = the power of your mouth</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read the entire Session Three teaching in one sitting, aloud where possible. Then re-read the Review card: Session One&rsquo;s NOW authority and Session Two&rsquo;s legal grounds meet in your mouth.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write out Proverbs 18:21 by hand and begin committing it to memory &mdash; you will carry it the rest of the Gauntlet.</span></li>
+        <li><input type="checkbox"><span>Write a short paragraph tracing the chain in your own life: a thought you entertained &rarr; the words it became &rarr; the world it produced.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 19 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="2">
+    <div class="day-head"><div class="daynum">20</div><div class="day-title"><b>THE FIVE FAMILIES OF CURSES</b><span>Generational &middot; spoken &middot; self-imposed &middot; occult &middot; sin-linked</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Part A. Read Exodus 20:5; Numbers 14:18; Lamentations 5:7; Genesis 31:32 with 35:19; Leviticus 20:9; Matthew 27:25; Acts 23:14; Deuteronomy 18:10&ndash;12; Galatians 5:19&ndash;21; and survey Deuteronomy 28.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Beside each of the five families, write one sentence describing how that curse gains its legal grounds.</span></li>
+        <li><input type="checkbox"><span>Privately note any family patterns &mdash; sickness, poverty, broken marriages, early deaths, addictions &mdash; that have repeated across generations. This list joins your Session Five worksheet.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 20 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="3">
+    <div class="day-head"><div class="daynum">21</div><div class="day-title"><b>THE FRUITS THEREOF</b><span>What your orchard is producing</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Part B. Read Matthew 12:34&ndash;37; Numbers 14:28; Proverbs 6:2; 12:18; 15:4; 16:24; 21:23; 1 Peter 3:10. Israel spoke &ldquo;we shall die in this wilderness&rdquo; &mdash; and AhaYah answered, &ldquo;as ye have spoken in mine ears, so will I do to you.&rdquo;</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Make a two-column fruit inspection: death-fruits you are presently eating (strained relationships, stagnation, self-condemnation, dread) and life-fruits (health, grace, favor, peace). Beside each, write the kind of speech that planted it.</span></li>
+        <li><input type="checkbox"><span>Speak aloud one life-declaration over the area showing the most death-fruit, anchored to one of today&rsquo;s passages.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 21 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="4">
+    <div class="day-head"><div class="daynum">22</div><div class="day-title"><b>SNARES &amp; HIDDEN SYMBOLISM</b><span>Luck, charms, zodiac talk &amp; casual death-speech</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Part C. Read Proverbs 6:2; Isaiah 65:11; Deuteronomy 18:10&ndash;12; Matthew 5:37. The vocabulary of Gad and Meni, of divination and idle oath, hides in plain sight in everyday conversation.</p>
+      <h4>Fieldwork &mdash; Snare-Spotting Day</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>For one full day, catch every snare-phrase you hear around you &mdash; television, coworkers, family, music &mdash; and record it: luck-talk, zodiac-talk, death-speech, oath-speech, universe-and-karma talk.</span></li>
+        <li><input type="checkbox"><span>Beside each phrase recorded, write what stands behind it and which Scripture exposes it.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 22 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="5">
+    <div class="day-head"><div class="daynum">23</div><div class="day-title"><b>THE SPEECH AUDIT</b><span>A full day&rsquo;s watch over your own mouth</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Today the watch turns inward. Pray Psalm 141:3 at sunrise &mdash; &ldquo;Set a watch, O AhaYah, before my mouth; keep the door of my lips&rdquo; &mdash; then log your own speech through the whole day.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Record every self-curse, idle word, complaint, oath, luck-phrase, or death-speech that leaves your own mouth today. No editing, no excusing &mdash; the log is between you and AhaYah.</span></li>
+        <li><input type="checkbox"><span>That evening, sort your log into the five families and the snare categories. Write one sentence: what is my mouth scripturally bringing to me?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 23 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="6">
+    <div class="day-head"><div class="daynum">24</div><div class="day-title"><b>BREAKING &amp; REPLACING</b><span>Renounce the word curses &middot; plant the blessing</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Case studies: Joshua spoke a curse over Jericho&rsquo;s rebuilder (Joshua 6:26) and centuries later it landed to the letter (1 Kings 16:34). Jephthah&rsquo;s rash vow cost him his daughter (Judges 11:30&ndash;40). Words outlive the moment they are spoken &mdash; including words spoken over you by authority figures, and inner vows you made in pain (&ldquo;I will never trust again&rdquo;, &ldquo;I will never be like them&rdquo;).</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write out every word curse you can identify spoken over you by others, every inner vow you have made, and every self-curse from your Day 23 audit.</span></li>
+        <li><input type="checkbox"><span>Aloud, renounce each one in Yasha&rsquo;s Name &mdash; the curse causeless shall not come (Proverbs 26:2) &mdash; and replace each with a written blessing-declaration, decreed per Job 22:28 and spoken per Mark 11:23.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 24 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="7">
+    <div class="day-head"><div class="daynum">25</div><div class="day-title"><b>THE HELM</b><span>James 3 &mdash; the tiny member that steers the ship</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read all of James 3:2&ndash;12 slowly, twice, then Psalm 34:13; Proverbs 21:23; Ephesians 4:29; Colossians 3:8; 2 Timothy 2:16; Ephesians 5:4, 12. The ship is great and the winds are fierce &mdash; but the helm is small, and the governor decides the heading.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write your five Helm Orders: five standing declarations you will steer your speech by from this day &mdash; each anchored to one Scripture from this session.</span></li>
+        <li><input type="checkbox"><span>Post them where you will see them daily, and speak them aloud each morning for the remainder of the Gauntlet.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 25 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="8">
+    <div class="day-head"><div class="daynum">26</div><div class="day-title"><b>DEEP REFLECTION</b><span>Five questions &middot; short paragraph answers &middot; submitted to ministry</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Answer each question in short paragraph form, submit them with your Week Three report. Your words save on this device as you type.</p>
+      <h4>The Five Questions</h4>
+      <p><strong style="color:var(--gold-light)">1.</strong> How does speech establish legal rights?</p>
+      <textarea class="reflect" data-r="1" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">2.</strong> Proverbs 26:2 says the curse causeless shall not come. What gives a curse its cause &mdash; and what removes it?</p>
+      <textarea class="reflect" data-r="2" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">3.</strong> What did your Day 23 speech audit reveal that you were planting &mdash; and which fruits of it have you already been eating?</p>
+      <textarea class="reflect" data-r="3" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">4.</strong> Which snare-phrases and hidden symbols had been normalized in your own vocabulary before this week &mdash; and what stands behind them?</p>
+      <textarea class="reflect" data-r="4" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">5.</strong> James 3 says no man can tame the tongue. How then does the disciple govern the helm &mdash; and what is Ruach HaKodesh&rsquo;s part in it?</p>
+      <textarea class="reflect" data-r="5" placeholder="Write your short paragraph here..."></textarea>
+      <button class="mark-done">Mark Day 26 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="9">
+    <div class="day-head"><div class="daynum">27</div><div class="day-title"><b>THE GATE &middot; THE HELMSMAN&rsquo;S SEAL</b><span>Fieldwork acceptance &middot; receive your award</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Confirm your fieldwork below and make your affirmation. Acceptance of the week&rsquo;s fieldwork releases your downloadable and printable <strong style="color:var(--gold-light)">Helmsman&rsquo;s Seal</strong> &mdash; the award of the disciple who has taken the helm of the tiny member that steers the whole ship &mdash; and unlocks Session Four.</p>
+      <button class="mark-done">Mark Day 27 Complete (after the affirmation)</button>
+    </div>
+  </div>
+</section>
+
+<section id="gatesec">
+  <div class="kicker">Day Twenty-Seven &middot; The Gate</div>
+  <h2>Fieldwork Acceptance &amp; The Helmsman&rsquo;s Seal</h2>
+  <div class="rule"></div>
+
+  <div class="callout">
+    <strong>Affirmation Before the Seal</strong>
+    <ul class="tasks">
+      <li><input type="checkbox" id="aff1"><span>I completed the Snare-Spotting Day and the full Speech Audit honestly, without editing or excusing.</span></li>
+      <li><input type="checkbox" id="aff2"><span>I have renounced, aloud and in Yasha&rsquo;s Name, the word curses, inner vows, and self-curses identified this week, and replaced each with a written blessing-declaration.</span></li>
+      <li><input type="checkbox" id="aff3"><span>I have written my five Helm Orders and my five reflection paragraphs, and submitted my Week Three report to the ministry.</span></li>
+      <li><input type="checkbox" id="aff4"><span>I affirm: death and life are in the power of the tongue, and they that love it shall eat the fruit thereof. The tongue is a little member, but it steers the whole ship &mdash; and by Ruach HaKodesh, I now govern the helm.</span></li>
+    </ul>
+    <div style="text-align:center;margin-top:16px">
+      <input type="text" id="namefield" placeholder="Type your full name as it should appear on your Seal">
+      <br>
+      <button class="btn" id="sealbtn" disabled>Release My Helmsman&rsquo;s Seal</button>
+      <p id="sealhint" style="color:var(--muted);font-size:15px;margin-top:10px"></p>
+    </div>
+  </div>
+
+  <div id="badgewrap">
+    <div id="badge">
+      <svg viewBox="0 0 120 120" width="130" height="130" style="display:block;margin:0 auto 18px" aria-label="Ship's wheel seal">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="3"/>
+        <circle cx="60" cy="60" r="34" fill="none" stroke="#D4AF37" stroke-width="3"/>
+        <circle cx="60" cy="60" r="9" fill="#D4AF37"/>
+        <g stroke="#D4AF37" stroke-width="4" stroke-linecap="round">
+          <line x1="60" y1="4" x2="60" y2="26"/><line x1="60" y1="94" x2="60" y2="116"/>
+          <line x1="4" y1="60" x2="26" y2="60"/><line x1="94" y1="60" x2="116" y2="60"/>
+          <line x1="20.4" y1="20.4" x2="36" y2="36"/><line x1="84" y1="84" x2="99.6" y2="99.6"/>
+          <line x1="99.6" y1="20.4" x2="84" y2="36"/><line x1="36" y1="84" x2="20.4" y2="99.6"/>
+        </g>
+        <circle cx="60" cy="60" r="22" fill="none" stroke="#F0D98C" stroke-width="1.5"/>
+      </svg>
+      <h3>THE HELMSMAN&rsquo;S SEAL</h3>
+      <div class="b-sub">The 66-Day Gauntlet &middot; Session Three Completed</div>
+      <div class="b-name" id="bname">&nbsp;</div>
+      <div class="b-text">has completed Days 19&ndash;27, Curses &amp; the Power of Words &mdash; auditing their own speech before AhaYah, renouncing and replacing every identified curse, and taking the helm of the tiny member that steers the whole ship through the waters of life.</div>
+      <div class="b-date" id="bdate"></div>
+      <div class="b-min">UNIVERSAL GOSPEL FELLOWSHIP CENTER &middot; PROVERBS 18:21 &middot; JAMES 3:4&ndash;5 &middot; PSALM 141:3</div>
+    </div>
+    <div style="margin-top:20px">
+      <button class="btn" onclick="window.print()">Print My Seal</button>
+      <button class="btn" id="dlbtn" style="margin-left:10px">Download My Seal</button>
+    </div>
+    <p style="color:var(--muted);font-size:15px;margin-top:10px">Session Four &mdash; The 16 Strongman Spirits &mdash; is now unlocked.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="seal">UNIVERSAL GOSPEL FELLOWSHIP CENTER</div>
+  <p>The 66-Day Gauntlet of Deliverance &amp; Inner Healing &middot; Session Three of Seven</p>
+  <p style="font-style:italic;margin-top:6px">&ldquo;Death and life are in the power of the tongue: and they that love it shall eat the fruit thereof.&rdquo; &mdash; Proverbs 18:21</p>
+</footer>
+
+</div>
+<script>
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}
+
+var days=document.querySelectorAll('.day');
+days.forEach(function(d){
+  var n=d.getAttribute('data-day');
+  if(sget('ugfc_wk3_day'+n)==='1'){d.classList.add('done');}
+  d.querySelector('.day-head').addEventListener('click',function(){d.classList.toggle('open');});
+  d.querySelector('.mark-done').addEventListener('click',function(){
+    d.classList.add('done'); sset('ugfc_wk3_day'+n,'1'); updateProgress(); checkSeal();
+  });
+});
+function updateProgress(){
+  var done=document.querySelectorAll('.day.done').length;
+  document.getElementById('pbar').style.width=(done/9*100)+'%';
+  document.getElementById('plabel').textContent=done+' of 9 days completed';
+}
+updateProgress();
+
+document.querySelectorAll('textarea.reflect').forEach(function(t){
+  var k='ugfc_wk3_reflect'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+['aff1','aff2','aff3','aff4'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',checkSeal);
+});
+document.getElementById('namefield').addEventListener('input',checkSeal);
+function checkSeal(){
+  var done=document.querySelectorAll('.day.done').length;
+  var affs=['aff1','aff2','aff3','aff4'].every(function(id){return document.getElementById(id).checked});
+  var named=document.getElementById('namefield').value.trim().length>1;
+  var ok=(done===9)&&affs&&named;
+  document.getElementById('sealbtn').disabled=!ok;
+  var hint=document.getElementById('sealhint');
+  if(ok){hint.textContent='All requirements met — release your Seal.';hint.style.color='#7fc98f';}
+  else{
+    var need=[];
+    if(done<9){need.push((9-done)+' day'+(9-done===1?'':'s')+' not yet marked complete');}
+    if(!affs){need.push('affirmation boxes unchecked');}
+    if(!named){need.push('your name not yet entered');}
+    hint.textContent='Remaining: '+need.join(' · ');
+    hint.style.color='var(--muted)';
+  }
+}
+checkSeal();
+
+document.getElementById('sealbtn').addEventListener('click',function(){
+  var name=document.getElementById('namefield').value.trim();
+  document.getElementById('bname').textContent=name;
+  var d=new Date();
+  document.getElementById('bdate').textContent='Sealed this day: '+d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  sset('ugfc_wk3_passed','1'); sset('ugfc_wk3_name',name);
+  document.getElementById('badgewrap').style.display='block';
+  document.getElementById('badgewrap').scrollIntoView({behavior:'smooth'});
+});
+if(sget('ugfc_wk3_passed')==='1'){
+  document.getElementById('bname').textContent=sget('ugfc_wk3_name')||'';
+  document.getElementById('bdate').textContent='Seal previously earned';
+  document.getElementById('badgewrap').style.display='block';
+}
+
+/* downloadable SVG award */
+document.getElementById('dlbtn').addEventListener('click',function(){
+  var name=(document.getElementById('bname').textContent||'').trim()||'Disciple of Yasha';
+  var date=document.getElementById('bdate').textContent;
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Georgia, serif">'
+   +'<rect width="900" height="640" fill="#0E1530"/><rect x="18" y="18" width="864" height="604" fill="none" stroke="#D4AF37" stroke-width="3"/><rect x="28" y="28" width="844" height="584" fill="none" stroke="#D4AF37" stroke-width="1"/>'
+   +'<g transform="translate(450,150)"><circle r="70" fill="none" stroke="#D4AF37" stroke-width="4"/><circle r="42" fill="none" stroke="#D4AF37" stroke-width="4"/><circle r="11" fill="#D4AF37"/>'
+   +'<g stroke="#D4AF37" stroke-width="5" stroke-linecap="round"><line y1="-70" y2="-98"/><line y1="70" y2="98"/><line x1="-70" x2="-98"/><line x1="70" x2="98"/><line x1="-49.5" y1="-49.5" x2="-69.3" y2="-69.3"/><line x1="49.5" y1="49.5" x2="69.3" y2="69.3"/><line x1="49.5" y1="-49.5" x2="69.3" y2="-69.3"/><line x1="-49.5" y1="49.5" x2="-69.3" y2="69.3"/></g>'
+   +'<circle r="27" fill="none" stroke="#F0D98C" stroke-width="2"/></g>'
+   +'<text x="450" y="310" text-anchor="middle" fill="#F0D98C" font-size="38" letter-spacing="8" font-weight="bold">THE HELMSMAN&#8217;S SEAL</text>'
+   +'<text x="450" y="345" text-anchor="middle" fill="#D4AF37" font-size="16" letter-spacing="5">THE 66-DAY GAUNTLET &#183; SESSION THREE COMPLETED</text>'
+   +'<text x="450" y="410" text-anchor="middle" fill="#F2ECD9" font-size="34" font-style="italic">'+name.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</text>'
+   +'<line x1="250" y1="428" x2="650" y2="428" stroke="#D4AF37" stroke-width="1"/>'
+   +'<text x="450" y="470" text-anchor="middle" fill="#F2ECD9" font-size="16">has taken the helm of the tiny member that steers the whole ship</text>'
+   +'<text x="450" y="494" text-anchor="middle" fill="#F2ECD9" font-size="16">through the waters of life &#8212; Curses &amp; the Power of Words, Days 19&#8211;27</text>'
+   +'<text x="450" y="535" text-anchor="middle" fill="#8A93B8" font-size="14" letter-spacing="2">'+date.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</text>'
+   +'<text x="450" y="580" text-anchor="middle" fill="#D4AF37" font-size="13" letter-spacing="4">UNIVERSAL GOSPEL FELLOWSHIP CENTER &#183; PROVERBS 18:21 &#183; JAMES 3:4&#8211;5 &#183; PSALM 141:3</text>'
+   +'</svg>';
+  var blob=new Blob([svg],{type:'image/svg+xml'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Helmsmans-Seal-Session-3.svg';
+  document.body.appendChild(a); a.click(); a.remove();
+});
+</script>
+</body>
+</html>

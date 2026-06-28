@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 66-Day Gauntlet &middot; Session Seven &middot; Maintaining Freedom &amp; the Tomb</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0A1026; --deep:#121B3A; --panel:#16224A; --ink:#0E1530;
+  --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--midnight),var(--deep));color:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.65;min-height:100vh}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold-light);font-weight:700}
+header{text-align:center;padding:54px 0 30px;border-bottom:1px solid rgba(212,175,55,.35)}
+header .eyebrow{letter-spacing:.35em;font-size:13px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:clamp(26px,4.5vw,42px);letter-spacing:.08em;margin-bottom:10px}
+header .sub{font-size:18px;color:var(--cream);font-style:italic}
+header .days{margin-top:14px;color:var(--gold);letter-spacing:.2em;font-size:14px}
+.progressbar{margin:26px auto 0;max-width:560px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.4);border-radius:999px;height:14px;overflow:hidden}
+.progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,#8a6d1f,var(--gold),var(--gold-light));transition:width .5s}
+.progresslabel{font-size:14px;color:var(--muted);margin-top:8px}
+section{margin-top:54px}
+.kicker{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:14px;letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+h2{font-size:clamp(22px,3.4vw,30px);text-align:center;margin-bottom:26px}
+.rule{width:200px;height:1.5px;margin:0 auto 30px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px;letter-spacing:.04em}
+.card p{margin-bottom:14px}
+.card p:last-child{margin-bottom:0}
+.scripture{border-left:3px solid var(--gold);padding:10px 18px;margin:14px 0;font-style:italic;color:var(--gold-light);background:rgba(212,175,55,.06);border-radius:0 8px 8px 0}
+.reflist{color:var(--muted);font-size:17px}
+.callout{background:var(--ink);border:1.5px solid var(--gold);border-radius:12px;padding:24px 28px;text-align:center;margin:30px 0}
+.callout strong{color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.08em;display:block;margin-bottom:8px;font-size:17px}
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:6px}
+.name{background:var(--ink);border:1px solid rgba(212,175,55,.5);border-radius:10px;padding:18px;text-align:center}
+.name b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:17px;display:block;margin-bottom:6px}
+.name span{font-size:16px}
+/* days */
+.day{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
+.day-head:hover{background:rgba(212,175,55,.07)}
+.daynum{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:20px;font-weight:700}
+.day.done .daynum{background:var(--gold);color:var(--midnight);border-color:var(--gold)}
+.day-title{flex:1}
+.day-title b{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gold-light);letter-spacing:.04em}
+.day-title span{display:block;color:var(--muted);font-size:15px}
+.chev{color:var(--gold);transition:transform .3s;font-size:20px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:6px 26px 24px;border-top:1px solid rgba(212,175,55,.25)}
+.day.open .day-body{display:block}
+.day-body h4{color:var(--gold);font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:18px 0 8px;font-family:'Cinzel Decorative',serif}
+ul.tasks{list-style:none}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+ul.tasks input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.mark-done{margin-top:18px;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.1em;padding:10px 22px;border-radius:999px;cursor:pointer;font-size:14px}
+.mark-done:hover{background:var(--gold);color:var(--midnight)}
+.day.done .mark-done{background:var(--gold);color:var(--midnight)}
+/* quiz */
+.quiz-gate{text-align:center}
+.q{background:var(--panel);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:22px 26px;margin-bottom:14px}
+.q p.qt{font-weight:600;margin-bottom:12px}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-radius:8px;cursor:pointer}
+.q label:hover{background:rgba(212,175,55,.08)}
+.q input{margin-top:7px;accent-color:var(--gold)}
+.q.correct{border-color:#5fae6e}
+.q.wrong{border-color:#c0564f}
+.btn{background:var(--gold);color:var(--midnight);border:none;font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.1em;padding:15px 36px;border-radius:999px;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--gold-light)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.result{margin:22px auto;max-width:640px;border-radius:12px;padding:24px;border:1.5px solid var(--gold);background:var(--ink);text-align:center;display:none}
+.result h3{font-size:22px;margin-bottom:8px}
+footer{margin-top:70px;text-align:center;color:var(--muted);font-size:15px;border-top:1px solid rgba(212,175,55,.3);padding-top:26px}
+footer .seal{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.25em;font-size:13px;margin-bottom:6px}
+@media (max-width:600px){body{font-size:17px}.card{padding:20px}}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+/* Session 2 additions: inventory + badge */
+.inv-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;border-radius:8px;border:1px solid rgba(212,175,55,.2);margin-bottom:8px;background:rgba(212,175,55,.04)}
+.inv-item:hover{background:rgba(212,175,55,.1)}
+.inv-item input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.inv-cat{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.18em;font-size:14px;text-transform:uppercase;margin:24px 0 10px}
+.inv-count{text-align:center;color:var(--muted);margin-top:14px;font-size:16px}
+textarea.reflect{width:100%;min-height:110px;background:var(--ink);border:1px solid rgba(212,175,55,.45);border-radius:10px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px;margin:8px 0 18px;resize:vertical}
+textarea.reflect:focus{outline:2px solid var(--gold-light)}
+/* badge */
+#badgewrap{display:none;margin-top:30px;text-align:center}
+#badge{max-width:640px;margin:0 auto;background:linear-gradient(180deg,#0E1530,#16224A);border:3px double var(--gold);border-radius:16px;padding:44px 36px;position:relative}
+#badge .seal-ring{width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a2752,#0E1530);box-shadow:0 0 0 6px rgba(212,175,55,.18)}
+#badge .seal-ring span{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:44px}
+#badge h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:24px;letter-spacing:.12em;margin-bottom:6px}
+#badge .b-sub{color:var(--gold);letter-spacing:.25em;font-size:13px;text-transform:uppercase;margin-bottom:18px}
+#badge .b-name{font-size:28px;color:var(--cream);font-style:italic;border-bottom:1px solid rgba(212,175,55,.5);display:inline-block;padding:0 26px 6px;margin-bottom:16px;min-height:38px}
+#badge .b-text{font-size:16px;color:var(--cream);max-width:460px;margin:0 auto 16px}
+#badge .b-date{color:var(--muted);font-size:14px;letter-spacing:.1em}
+#badge .b-min{margin-top:18px;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:.22em}
+#namefield{background:var(--ink);border:1px solid var(--gold);border-radius:8px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:19px;padding:10px 16px;width:min(380px,90%);text-align:center;margin:14px 0}
+@media print{
+  body *{visibility:hidden}
+  #badge,#badge *{visibility:visible}
+  #badge{position:fixed;inset:0;margin:auto;height:fit-content;border:3px double #8a6d1f}
+  body{background:#fff}
+}
+</style>
+<style>
+.tomb{background:#0B0F22;border:2px solid var(--gold);border-radius:14px;padding:30px;margin:18px 0;position:relative;overflow:hidden}
+.tomb::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(240,217,140,.18),transparent 70%)}
+.tomb h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);letter-spacing:.15em;font-size:18px;margin-bottom:10px;text-align:center}
+.tomb p{margin-bottom:12px}
+.dp{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:30px;text-align:center;letter-spacing:.2em;margin:8px 0}
+.exch{background:var(--ink);border:1px solid rgba(212,175,55,.35);border-radius:10px;padding:16px;margin-bottom:14px}
+.exch b{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:14px;letter-spacing:.08em}
+.choice{border:2px solid var(--gold);background:var(--ink);border-radius:12px;padding:22px 26px;margin-top:18px}
+.choice label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.choice input{margin-top:6px;width:20px;height:20px;accent-color:var(--gold);flex:0 0 20px}
+#dpwrap{display:none;text-align:center;margin-top:26px}
+#dppanel{max-width:640px;margin:0 auto;background:linear-gradient(180deg,#0E1530,#1a2752);border:3px double var(--gold);border-radius:16px;padding:40px 34px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Universal Gospel Fellowship Center &middot; The 66-Day Gauntlet</div>
+  <h1>Session Seven</h1>
+  <div class="sub">How to Maintain Freedom in Yasha &mdash; Keys for Success, the Tomb &amp; the Testimony</div>
+  <div class="days">DAYS 55 &ndash; 67 OF 66 + 1</div>
+  <div class="progressbar" aria-label="Session progress"><div id="pbar"></div></div>
+  <div class="progresslabel" id="plabel">0 of 9 days completed</div>
+</header>
+
+<section>
+  <div class="kicker">This Module&rsquo;s Purpose</div>
+  <h2>Why This Final Session Exists</h2>
+  <div class="rule"></div>
+  <div class="callout">
+    <p>Everything in this Gauntlet was preparation for what no nine-day week can give you: a lifetime. This final session sets the keys of maintained freedom in your hands &mdash; the daily walk, the closed doors, the armor, the continual refilling &mdash; then leads you down to the tomb for three days and nights, and up out of it on Day 67 with a testimony in your mouth and a double portion in your hands.</p>
+    <div class="dp">6 + 6 = 12</div>
+    <p style="text-align:center">Sixty-six days &mdash; one for every book of Scripture. And to the one who finishes, a double portion: no longer merely believing, but KNOWING. Transformed by the renewing of the mind &mdash; the renewed habit, mastered for life. Romans 12:2</p>
+  </div>
+  <div class="card">
+    <h3>Review &mdash; The Whole Gauntlet on One Table</h3>
+    <p>Session One: your authority is NOW, in Yasha&rsquo;s Name alone. Session Two: oppression needs legal access &mdash; and strongholds are identifiable and removable. Session Three: your tongue is the helm; you govern it. Session Four: every knot has a name, a Scripture, and a lineage &mdash; you spotted them all. Session Five: examined, repented to the irrevocable, every name forgiven, every knot renounced, every room filled. Session Six: bruises surrendered, soul ties severed, the lies of a lifetime exchanged for memorized truth. One question remains, and it is the question of the rest of your life: <strong style="color:var(--gold-light)">how do you KEEP it?</strong></p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lesson Seven</div>
+  <h2>How to Maintain Freedom in Yasha: Keys for Success</h2>
+  <div class="rule"></div>
+
+  <div class="card">
+    <h3>Key 1 &middot; It Is Yasha IN You &mdash; Not Your Merit</h3>
+    <p>Focus on Yasha and the Word of AhaYah, and know that deliverance is Yasha living IN you &mdash; it cannot be earned, provided, nor maintained on your own merit. Developing a close personal relationship with your Creator is the main key to maintaining deliverance for the rest of your life. Deliverance is not a one-time occurrence, but a daily dying to selfishness and a daily surrender to the leading of the Master of your soul, Yasha.</p>
+    <p class="reflist">Ephesians 2:8&ndash;10 &mdash; by grace through faith, not of works; His workmanship, created unto good works He ordained beforehand &middot; Acts 17:24&ndash;28 &mdash; He is not far from every one of us: in Him we live, and move, and have our being.</p>
+  </div>
+
+  <div class="card">
+    <h3>Key 2 &middot; The Daily Walk</h3>
+    <p>Daily Scripture reading and study, fellowship with mature followers of Yasha, daily prayer time, fastings, worship, financial support for others and ministry outreaches along with freewill offerings, and an active faith-filled life is necessary &mdash; until you leave this realm and graduate to the next.</p>
+    <div class="scripture">&ldquo;But seek ye first the Kingdom of AhaYah and his righteousness, and all these things shall be added unto you. Take therefore no thought for the morrow&hellip; sufficient unto the day is the evil thereof.&rdquo; &mdash; Matthew 6:33&ndash;34</div>
+  </div>
+
+  <div class="card">
+    <h3>Key 3 &middot; Close the Doors on Old Habits</h3>
+    <p>Closing the door on old habits must be a priority. New godly habits, based on Scriptural instructions and teachings, will eventually replace the bad ones. Habits develop over time, and it takes time to change them. Healthy habits will eventually replace bad habits, and our lifestyles will start to reflect Christ living in us and through us &mdash; if we truly desire to change and follow Yasha &mdash; thereby preventing re-entry of evil spiritual influencers, strongholds, and strongmen.</p>
+  </div>
+
+  <div class="card">
+    <h3>Key 4 &middot; Walk as Children of Light</h3>
+    <p>Have no fellowship with the unfruitful works of darkness, but rather reprove them &mdash; for whatsoever doth make manifest is light. &ldquo;Awake thou that sleepest, and arise from the dead, and Yasha shall give you light.&rdquo; Walk circumspectly, not as fools but as wise, redeeming the time, because the days are evil. Be not drunk with wine, wherein is excess &mdash; but be filled with the Spirit: speaking to yourselves in psalms and hymns and spiritual songs, singing and making melody in your heart to the Adon, giving thanks always for all things, submitting yourselves one to another in the fear of AhaYah. <span class="reflist">Ephesians 5:11&ndash;21</span></p>
+  </div>
+
+  <div class="card">
+    <h3>Key 5 &middot; The Armor, the Refilling &amp; the Long Obedience</h3>
+    <p>Daily put on the Armor of AhaYah, and be refilled continuously with Ruach Hakodesh. Daily cultivating a close personal relationship with your Creator is the secret to maintaining Freedom in Yasha. Do not give up if deliverance is not immediate. Continue in the Word and be diligent, setting your heart on things above &mdash; and your reward will be eternal.</p>
+    <div class="scripture">&ldquo;If ye then be risen with Yasha, seek those things which are above, where Yasha sitteth on the right hand of AHAYAH. Set your affection on things above, not on things on the earth. For ye are dead, and your life is hid with Yasha in AHAYAH.&rdquo; &mdash; Colossians 3:1&ndash;3</div>
+    <p class="reflist">Ephesians 5:18 &middot; Ephesians 6:10&ndash;19 &middot; Matthew 12:43&ndash;45 &mdash; the swept house must stay filled.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Lesson Summarization &mdash; Three Truths to Carry Forever</strong>
+    <p>Freedom is maintained by relationship, not merit &mdash; Yasha IN you, daily. &nbsp;&middot;&nbsp; Closed doors and new godly habits keep the strongmen from re-entry. &nbsp;&middot;&nbsp; The armor goes on daily, the refilling never stops, and the reward is eternal.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The Nine-Day Journey</div>
+  <h2>Daily Assignments &amp; Fieldwork &middot; Days 55&ndash;63</h2>
+  <div class="rule"></div>
+
+  <div class="day" data-day="1">
+    <div class="day-head"><div class="daynum">55</div><div class="day-title"><b>INTAKE &amp; THE QUESTION</b><span>How do you KEEP it?</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read the entire Session Seven teaching in one sitting. Then read the whole-Gauntlet review card slowly and let the sixty-three days behind you come back to the table.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write out by hand: &ldquo;Deliverance is Yasha living IN me. It cannot be earned, provided, nor maintained on my own merit.&rdquo;</span></li>
+        <li><input type="checkbox"><span>Recite Romans 12:2 and Proverbs 18:21 from memory &mdash; carried since Days 1 and 19.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 55 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="2">
+    <div class="day-head"><div class="daynum">56</div><div class="day-title"><b>THE DAILY FREEDOM PLAN</b><span>Build the walk you will keep for life</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Key 2 with Matthew 6:33&ndash;34. The list is not a menu: Scripture, fellowship, prayer, fastings, worship, giving, active faith &mdash; until you graduate to the next realm.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Build your Daily Freedom Plan in the working document below: when you will be in the Word, when you will pray, where your fellowship is, your fasting rhythm, your worship, your giving. Specific times, specific places &mdash; vagueness is how doors creep open.</span></li>
+        <li><input type="checkbox"><span>Begin living the plan TODAY, not after Day 67.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 56 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="3">
+    <div class="day-head"><div class="daynum">57</div><div class="day-title"><b>GRACE, NOT MERIT</b><span>In Him we live and move and have our being</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Acts 17:24&ndash;28 and Ephesians 2:8&ndash;10 slowly, twice. He is not far from every one of us. You are His workmanship &mdash; the good works were ordained before you walked them.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Grace audit: write one paragraph identifying any place this Gauntlet has quietly become performance &mdash; checkmarks earning standing &mdash; and surrender it. The work was obedience; the freedom was always gift.</span></li>
+        <li><input type="checkbox"><span>Pray Acts 17:28 back to AhaYah: &ldquo;In You I live, and move, and have my being.&rdquo;</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 57 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="4">
+    <div class="day-head"><div class="daynum">58</div><div class="day-title"><b>CLOSING THE DOORS</b><span>New godly habits replace the old</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Key 3. Habits develop over time and take time to change &mdash; and the renewing of the mind is exactly how AhaYah designed you; the science has finally caught up to Romans 12:2. Sixty-some days of daily work has been laying the track. Now make the replacements permanent.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Name your three most dangerous old doors &mdash; the habits, places, media, and company through which the strongmen once entered. Write each one&rsquo;s replacement: the new godly habit, its trigger time, and its anchor Scripture.</span></li>
+        <li><input type="checkbox"><span>Physically close one door today &mdash; delete it, cancel it, remove it, or have the conversation.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 58 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="5">
+    <div class="day-head"><div class="daynum">59</div><div class="day-title"><b>CHILDREN OF LIGHT</b><span>Psalms, hymns, melody &amp; thanksgiving</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Ephesians 5:11&ndash;21 in full. Walk circumspectly; redeem the time; be filled with the Spirit &mdash; the filled life sings and gives thanks always.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Spend today&rsquo;s prayer time entirely in worship and thanksgiving &mdash; psalms, hymns, spiritual songs, melody in your heart. Petition nothing; thank for everything.</span></li>
+        <li><input type="checkbox"><span>Write a gratitude record of the Gauntlet: every change AhaYah has worked in you since Day 1. You will need this list in two days.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 59 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="6">
+    <div class="day-head"><div class="daynum">60</div><div class="day-title"><b>THE LONG OBEDIENCE</b><span>Do not give up &middot; the reward is eternal</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Key 5 with Colossians 3:1&ndash;3 and Matthew 12:43&ndash;45 one final time. Do not give up if deliverance is not immediate &mdash; continue in the Word, be diligent, set your affection on things above. The swept house stays filled.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write a letter to your future self &mdash; the one who, some month from now, feels the old pull at a closed door. Tell them what you know now, which Scriptures to draw, and why they must not give up. Seal it. Keep it.</span></li>
+        <li><input type="checkbox"><span>Dress in the full armor aloud and pray for a continual refilling of Ruach Hakodesh.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 60 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="7">
+    <div class="day-head"><div class="daynum">61</div><div class="day-title"><b>PREPARING THE TESTIMONY</b><span>Before &middot; during &middot; after &middot; the future &middot; the call</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>On Day 67 you will give your testimony by voice recording and/or video: the BEFORE, the DURING, and the AFTER of your journey into transformation &mdash; along with the future of maintaining your deliverance, and the possibility of becoming a deliverer yourself, and how that will look. Draft it now in the working document below; the tomb will refine it.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Draft all five parts of your testimony below, drawing on your gratitude record, your Knot Map, your Exchange Work, and your seals.</span></li>
+        <li><input type="checkbox"><span>Read Revelation 12:11 aloud: they overcame by the blood of the Lamb, and by the word of their testimony.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 61 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="8">
+    <div class="day-head"><div class="daynum">62</div><div class="day-title"><b>FINAL REFLECTION</b><span>Five questions &middot; submitted to ministry</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Answer each question in short paragraph form and submit them with your final weekly report. Your words save on this device as you type.</p>
+      <h4>The Five Questions</h4>
+      <p><strong style="color:var(--gold-light)">1.</strong> Deliverance is Yasha living IN you and cannot be maintained on your own merit. How is daily discipline different from earning &mdash; and how will you keep the two from blurring?</p>
+      <textarea class="reflect" data-r="1" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">2.</strong> Which old door will be the most patient enemy of your freedom &mdash; and what specifically now stands between it and re-entry?</p>
+      <textarea class="reflect" data-r="2" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">3.</strong> Sixty-six days &mdash; one for every book of Scripture &mdash; and 6 + 6 became 12. What does the double portion mean to you now that you KNOW rather than merely believe?</p>
+      <textarea class="reflect" data-r="3" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">4.</strong> All disciples are called to be reconcilers and deliverers in the Great Commission. What would becoming a deliverer look like in your life &mdash; and what training would it require?</p>
+      <textarea class="reflect" data-r="4" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">5.</strong> You are about to enter the tomb for three days and nights, having died to self. What are you leaving in it &mdash; and what do you intend to carry out?</p>
+      <textarea class="reflect" data-r="5" placeholder="Write your short paragraph here..."></textarea>
+      <button class="mark-done">Mark Day 62 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="9">
+    <div class="day-head"><div class="daynum">63</div><div class="day-title"><b>THE FINAL GATE &middot; THE OVERCOMER&rsquo;S SEAL</b><span>Receive your seal &middot; commit to the tomb</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Sixty-three days of teaching are complete. Confirm your fieldwork, make your affirmations, and commit to the tomb. The <strong style="color:var(--gold-light)">Overcomer&rsquo;s Seal</strong> releases at this gate &mdash; and then the coursework falls silent, and the tomb receives you.</p>
+      <button class="mark-done">Mark Day 63 Complete (after the affirmation)</button>
+    </div>
+  </div>
+</section>
+
+<section id="plansec">
+  <div class="kicker">Working Documents</div>
+  <h2>The Daily Freedom Plan &amp; The Testimony Draft</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <h3>The Daily Freedom Plan &mdash; Day 56</h3>
+    <div id="planlist"></div>
+  </div>
+  <div class="card">
+    <h3>The Testimony Draft &mdash; Day 61, refined in the tomb, delivered Day 67</h3>
+    <div id="testlist"></div>
+  </div>
+</section>
+
+<section id="gatesec">
+  <div class="kicker">Day Sixty-Three &middot; The Final Gate</div>
+  <h2>The Overcomer&rsquo;s Seal &amp; The Tomb Commitment</h2>
+  <div class="rule"></div>
+
+  <div class="callout">
+    <strong>Affirmation Before the Seal</strong>
+    <ul class="tasks">
+      <li><input type="checkbox" id="aff1"><span>My Daily Freedom Plan is written with specific times and places, and I began living it on Day 56 &mdash; not waiting for Day 67.</span></li>
+      <li><input type="checkbox" id="aff2"><span>My three most dangerous doors are named, their replacements written, and at least one door is physically closed already.</span></li>
+      <li><input type="checkbox" id="aff3"><span>My testimony is drafted in all five parts &mdash; before, during, after, the future of my maintenance, and the call to become a deliverer.</span></li>
+      <li><input type="checkbox" id="aff4"><span>I have written my five final reflections and submitted my last weekly report to the ministry &mdash; and I affirm: freedom is maintained by relationship, not merit; the doors stay closed; the armor goes on daily; the refilling never stops.</span></li>
+    </ul>
+    <div class="choice" id="tombchoice">
+      <label><input type="checkbox" id="tombbox"><span><strong style="color:var(--gold-light)">THE TOMB COMMITMENT (REQUIRED):</strong> Having died to self, I now enter the tomb for three days and nights &mdash; Days 64, 65, and 66 &mdash; in fasting (as the Adon leads and my health permits), prayer, and reflection, meditating on holy Scripture and preparing my testimony. The coursework is finished; what remains is between me and AhaYah.</span></label>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <input type="text" id="namefield" placeholder="Type your full name as it should appear on your Seal">
+      <br>
+      <button class="btn" id="sealbtn" disabled>Release My Overcomer&rsquo;s Seal &amp; Enter the Tomb</button>
+      <p id="sealhint" style="color:var(--muted);font-size:15px;margin-top:10px"></p>
+    </div>
+  </div>
+
+  <div id="badgewrap">
+    <div id="badge">
+      <svg viewBox="0 0 120 120" width="130" height="130" style="display:block;margin:0 auto 18px" aria-label="Overcomer's crown seal">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="3"/>
+        <path d="M 30 76 L 34 46 L 46 60 L 60 38 L 74 60 L 86 46 L 90 76 Z" fill="none" stroke="#D4AF37" stroke-width="4" stroke-linejoin="round"/>
+        <line x1="30" y1="84" x2="90" y2="84" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="60" cy="38" r="3.5" fill="#F0D98C"/><circle cx="34" cy="46" r="3" fill="#F0D98C"/><circle cx="86" cy="46" r="3" fill="#F0D98C"/>
+      </svg>
+      <h3>THE OVERCOMER&rsquo;S SEAL</h3>
+      <div class="b-sub">The 66-Day Gauntlet &middot; Session Seven Completed &middot; All Seven Sessions Finished</div>
+      <div class="b-name" id="bname">&nbsp;</div>
+      <div class="b-text">has completed all sixty-three days of teaching in the 66-Day Gauntlet of Deliverance &amp; Inner Healing &mdash; authority received, knots spotted and untied, every name forgiven, every room filled, every lie exchanged, and the keys of maintained freedom in hand &mdash; and now enters the tomb to die to self for three days and nights, preparing the testimony of an overcomer.</div>
+      <div class="b-date" id="bdate"></div>
+      <div class="b-min">UNIVERSAL GOSPEL FELLOWSHIP CENTER &middot; REVELATION 12:11 &middot; COLOSSIANS 3:1&ndash;3 &middot; ROMANS 12:2</div>
+    </div>
+    <div style="margin-top:20px">
+      <button class="btn" onclick="window.print()">Print My Seal</button>
+      <button class="btn" id="dlbtn" style="margin-left:10px">Download My Seal</button>
+    </div>
+  </div>
+</section>
+
+<section id="tombsec">
+  <div class="kicker">The Coursework Falls Silent</div>
+  <h2>Days 64 &ndash; 66 &middot; The Tomb</h2>
+  <div class="rule"></div>
+  <div class="tomb">
+    <h3>DAY 64</h3>
+    <p>Fasting, prayer, and reflection. Enter the silence as one who has died to self. Meditate on holy Scripture &mdash; no coursework, no checklists, no screens beyond what Scripture requires. Begin reviewing the before, during, and after of your journey.</p>
+    <ul class="tasks"><li><input type="checkbox" class="tombday" data-t="64"><span>I kept Day 64 in the tomb.</span></li></ul>
+  </div>
+  <div class="tomb">
+    <h3>DAY 65</h3>
+    <p>Prayer and/or fasting, and reflection. The second day and night. Stay buried with Him &mdash; let AhaYah search the sixty-four days behind you and settle the testimony in your heart.</p>
+    <ul class="tasks"><li><input type="checkbox" class="tombday" data-t="65"><span>I kept Day 65 in the tomb.</span></li></ul>
+  </div>
+  <div class="tomb">
+    <h3>DAY 66</h3>
+    <p>Prayer and/or fasting, and reflection &mdash; as though you have entered the tomb for three days and nights after dying to self. Meditate on holy Scripture and prepare to give the testimony of your journey into transformation: the before, the during, the after, the future of maintaining your deliverance, and the possibility of becoming a deliverer yourself &mdash; and how that will look.</p>
+    <ul class="tasks"><li><input type="checkbox" class="tombday" data-t="66"><span>I kept Day 66 in the tomb. The third night is finished.</span></li></ul>
+  </div>
+</section>
+
+<section id="day67sec">
+  <div class="kicker">The Stone Rolls Away</div>
+  <h2>Day 67 &middot; The Testimony, the Certificate &amp; the Call</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <h3>Your Testimony</h3>
+    <p>Record your testimony by <strong style="color:var(--gold-light)">voice recording and/or video</strong>: the BEFORE, the DURING, and the AFTER of your journey into transformation &mdash; along with the future of maintaining your deliverance, and the possibility of becoming a deliverer yourself and how that will look. Submit it to the ministry through the contact information provided with your enrollment.</p>
+    <p>Upon the ministry&rsquo;s receipt of your Day 67 testimony, your earned <strong style="color:var(--gold-light)">Certificate of Completion of the 66-Day Gauntlet</strong> will be released to you by Universal Gospel Fellowship Center.</p>
+  </div>
+  <div class="card">
+    <h3>The Call &mdash; From Delivered to Deliverer</h3>
+    <p>All disciples are called to be reconcilers and deliverers in the Great Commission. If the tomb has settled that call in you, the ministry&rsquo;s offer stands open: further training, discipleship, one-on-one mentoring and coaching, and the ordination and licensing track under Universal Gospel Fellowship Center. Ask the ministry about the next step when you submit your testimony &mdash; the harvest truly is plenteous, and the laborers are few.</p>
+  </div>
+  <div class="choice">
+    <label><input type="checkbox" id="testbox"><span><strong style="color:var(--gold-light)">I HAVE SUBMITTED MY DAY 67 TESTIMONY</strong> by voice and/or video to the ministry, and I await my Certificate of Completion.</span></label>
+  </div>
+  <div id="dpwrap">
+    <div id="dppanel">
+      <div class="dp">6 + 6 = 12</div>
+      <h3 style="font-family:'Cinzel Decorative',serif;color:var(--gold-light);letter-spacing:.12em;font-size:22px;margin:10px 0">THE DOUBLE PORTION IS YOURS</h3>
+      <p style="margin-top:10px">Sixty-six days &mdash; one for every book of Scripture &mdash; finished. Three days and nights in the tomb &mdash; kept. The testimony &mdash; given. You no longer merely believe; you KNOW. Walk in your double portion all the days of your life, maintain what was won daily, and watch for your Certificate of Completion from Universal Gospel Fellowship Center.</p>
+      <p style="margin-top:14px;color:var(--gold);font-style:italic">&ldquo;And they overcame him by the blood of the Lamb, and by the word of their testimony.&rdquo; &mdash; Revelation 12:11</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="seal">UNIVERSAL GOSPEL FELLOWSHIP CENTER</div>
+  <p>The 66-Day Gauntlet of Deliverance &amp; Inner Healing &middot; Session Seven of Seven &middot; The Finish</p>
+  <p style="font-style:italic;margin-top:6px">&ldquo;Be transformed by the renewing of your mind.&rdquo; &mdash; Romans 12:2 &middot; Day 1 to Day 67</p>
+</footer>
+
+</div>
+<script>
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}
+
+var days=document.querySelectorAll('.day');
+days.forEach(function(d){
+  var n=d.getAttribute('data-day');
+  if(sget('ugfc_wk7_day'+n)==='1'){d.classList.add('done');}
+  d.querySelector('.day-head').addEventListener('click',function(){d.classList.toggle('open');});
+  d.querySelector('.mark-done').addEventListener('click',function(){
+    d.classList.add('done'); sset('ugfc_wk7_day'+n,'1'); updateProgress(); checkSeal();
+  });
+});
+function updateProgress(){
+  var done=document.querySelectorAll('.day.done').length;
+  document.getElementById('pbar').style.width=(done/9*100)+'%';
+  document.getElementById('plabel').textContent=done+' of 9 days completed';
+}
+updateProgress();
+
+document.querySelectorAll('textarea.reflect').forEach(function(t){
+  var k='ugfc_wk7_reflect'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+/* Daily Freedom Plan */
+var plan=[["word","Daily Scripture reading & study — when, where, what plan"],["prayer","Daily prayer time — when and where"],["fellowship","Fellowship with mature followers of Yasha — who and how often"],["fasting","Fastings — your rhythm as the Adon leads"],["worship","Worship — daily melody and weekly gathering"],["giving","Financial support, outreach & freewill offerings — your commitment"],["faith","The active faith-filled life — where you will labor in the harvest"]];
+var ph='';
+plan.forEach(function(p){
+  ph+='<div class="exch"><b>'+p[1].split(' — ')[0].toUpperCase()+'</b><p style="color:var(--muted);font-size:15px;margin:6px 0 4px;font-style:italic">'+p[1]+'</p><textarea class="reflect planwork" data-r="plan_'+p[0]+'" placeholder="Be specific — times, places, names..."></textarea></div>';
+});
+document.getElementById('planlist').innerHTML=ph;
+
+/* Testimony draft */
+var tparts=[["before","THE BEFORE — who you were when you entered Day 1"],["during","THE DURING — what AhaYah did through the sixty-six days"],["after","THE AFTER — who stands here now"],["future","THE FUTURE — how you will maintain your deliverance"],["call","THE CALL — the possibility of becoming a deliverer, and how that will look"]];
+var th='';
+tparts.forEach(function(p){
+  th+='<div class="exch"><b>'+p[1].split(' — ')[0]+'</b><p style="color:var(--muted);font-size:15px;margin:6px 0 4px;font-style:italic">'+p[1]+'</p><textarea class="reflect testwork" data-r="test_'+p[0]+'" placeholder="Draft this part of your testimony..."></textarea></div>';
+});
+document.getElementById('testlist').innerHTML=th;
+
+document.querySelectorAll('textarea.planwork, textarea.testwork').forEach(function(t){
+  var k='ugfc_wk7_'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+/* tomb day checkboxes */
+document.querySelectorAll('input.tombday').forEach(function(c){
+  var k='ugfc_tomb'+c.getAttribute('data-t');
+  if(sget(k)==='1'){c.checked=true;}
+  c.addEventListener('change',function(){sset(k,c.checked?'1':'0');});
+});
+
+/* Day 67 testimony -> double portion panel */
+var tb=document.getElementById('testbox');
+if(sget('ugfc_day67')==='1'){tb.checked=true;document.getElementById('dpwrap').style.display='block';}
+tb.addEventListener('change',function(){
+  sset('ugfc_day67',tb.checked?'1':'0');
+  document.getElementById('dpwrap').style.display=tb.checked?'block':'none';
+  if(tb.checked){document.getElementById('dpwrap').scrollIntoView({behavior:'smooth'});}
+});
+
+['aff1','aff2','aff3','aff4'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',checkSeal);
+});
+document.getElementById('tombbox').addEventListener('change',checkSeal);
+document.getElementById('namefield').addEventListener('input',checkSeal);
+function checkSeal(){
+  var done=document.querySelectorAll('.day.done').length;
+  var affs=['aff1','aff2','aff3','aff4'].every(function(id){return document.getElementById(id).checked});
+  var tomb=document.getElementById('tombbox').checked;
+  var named=document.getElementById('namefield').value.trim().length>1;
+  var ok=(done===9)&&affs&&tomb&&named;
+  document.getElementById('sealbtn').disabled=!ok;
+  var hint=document.getElementById('sealhint');
+  if(ok){hint.textContent='All requirements met — receive your Seal, and enter the tomb.';hint.style.color='#7fc98f';}
+  else{
+    var need=[];
+    if(done<9){need.push((9-done)+' day'+(9-done===1?'':'s')+' not yet marked complete');}
+    if(!affs){need.push('affirmation boxes unchecked');}
+    if(!tomb){need.push('THE TOMB COMMITMENT is not made — the Gauntlet cannot finish without the three days and nights');}
+    if(!named){need.push('your name not yet entered');}
+    hint.textContent='Remaining: '+need.join(' · ');
+    hint.style.color='var(--muted)';
+  }
+}
+checkSeal();
+
+document.getElementById('sealbtn').addEventListener('click',function(){
+  var name=document.getElementById('namefield').value.trim();
+  document.getElementById('bname').textContent=name;
+  var d=new Date();
+  document.getElementById('bdate').textContent='Sealed this day: '+d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  sset('ugfc_wk7_passed','1'); sset('ugfc_wk7_name',name);
+  document.getElementById('badgewrap').style.display='block';
+  document.getElementById('badgewrap').scrollIntoView({behavior:'smooth'});
+});
+if(sget('ugfc_wk7_passed')==='1'){
+  document.getElementById('bname').textContent=sget('ugfc_wk7_name')||'';
+  document.getElementById('bdate').textContent='Seal previously earned';
+  document.getElementById('badgewrap').style.display='block';
+}
+
+document.getElementById('dlbtn').addEventListener('click',function(){
+  var name=(document.getElementById('bname').textContent||'').trim()||'Disciple of Yasha';
+  var date=document.getElementById('bdate').textContent;
+  var esc=function(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')};
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Georgia, serif">'
+   +'<rect width="900" height="640" fill="#0E1530"/><rect x="18" y="18" width="864" height="604" fill="none" stroke="#D4AF37" stroke-width="3"/><rect x="28" y="28" width="844" height="584" fill="none" stroke="#D4AF37" stroke-width="1"/>'
+   +'<g transform="translate(450,140)"><circle r="62" fill="none" stroke="#D4AF37" stroke-width="4"/>'
+   +'<path d="M -32 18 L -28 -14 L -15 1 L 0 -24 L 15 1 L 28 -14 L 32 18 Z" fill="none" stroke="#D4AF37" stroke-width="4.5" stroke-linejoin="round"/>'
+   +'<line x1="-32" y1="27" x2="32" y2="27" stroke="#D4AF37" stroke-width="4.5" stroke-linecap="round"/>'
+   +'<circle cx="0" cy="-24" r="4" fill="#F0D98C"/><circle cx="-28" cy="-14" r="3.2" fill="#F0D98C"/><circle cx="28" cy="-14" r="3.2" fill="#F0D98C"/></g>'
+   +'<text x="450" y="288" text-anchor="middle" fill="#F0D98C" font-size="37" letter-spacing="7" font-weight="bold">THE OVERCOMER&#8217;S SEAL</text>'
+   +'<text x="450" y="323" text-anchor="middle" fill="#D4AF37" font-size="15" letter-spacing="4">THE 66-DAY GAUNTLET &#183; ALL SEVEN SESSIONS COMPLETED</text>'
+   +'<text x="450" y="388" text-anchor="middle" fill="#F2ECD9" font-size="34" font-style="italic">'+esc(name)+'</text>'
+   +'<line x1="250" y1="406" x2="650" y2="406" stroke="#D4AF37" stroke-width="1"/>'
+   +'<text x="450" y="448" text-anchor="middle" fill="#F2ECD9" font-size="16">has finished all sixty-three days of teaching and now enters the tomb &#8212;</text>'
+   +'<text x="450" y="472" text-anchor="middle" fill="#F2ECD9" font-size="16">the testimony of an overcomer prepared, the double portion at hand. 6 + 6 = 12</text>'
+   +'<text x="450" y="516" text-anchor="middle" fill="#8A93B8" font-size="14" letter-spacing="2">'+esc(date)+'</text>'
+   +'<text x="450" y="572" text-anchor="middle" fill="#D4AF37" font-size="13" letter-spacing="4">UNIVERSAL GOSPEL FELLOWSHIP CENTER &#183; REVELATION 12:11 &#183; ROMANS 12:2</text>'
+   +'</svg>';
+  var blob=new Blob([svg],{type:'image/svg+xml'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Overcomers-Seal-Session-7.svg';
+  document.body.appendChild(a); a.click(); a.remove();
+});
+</script>
+</body>
+</html>

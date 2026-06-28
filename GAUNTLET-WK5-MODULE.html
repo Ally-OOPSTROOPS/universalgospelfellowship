@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 66-Day Gauntlet &middot; Session Five &middot; Steps to Spiritual Freedom</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0A1026; --deep:#121B3A; --panel:#16224A; --ink:#0E1530;
+  --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--midnight),var(--deep));color:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.65;min-height:100vh}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold-light);font-weight:700}
+header{text-align:center;padding:54px 0 30px;border-bottom:1px solid rgba(212,175,55,.35)}
+header .eyebrow{letter-spacing:.35em;font-size:13px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:clamp(26px,4.5vw,42px);letter-spacing:.08em;margin-bottom:10px}
+header .sub{font-size:18px;color:var(--cream);font-style:italic}
+header .days{margin-top:14px;color:var(--gold);letter-spacing:.2em;font-size:14px}
+.progressbar{margin:26px auto 0;max-width:560px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.4);border-radius:999px;height:14px;overflow:hidden}
+.progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,#8a6d1f,var(--gold),var(--gold-light));transition:width .5s}
+.progresslabel{font-size:14px;color:var(--muted);margin-top:8px}
+section{margin-top:54px}
+.kicker{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:14px;letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+h2{font-size:clamp(22px,3.4vw,30px);text-align:center;margin-bottom:26px}
+.rule{width:200px;height:1.5px;margin:0 auto 30px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px;letter-spacing:.04em}
+.card p{margin-bottom:14px}
+.card p:last-child{margin-bottom:0}
+.scripture{border-left:3px solid var(--gold);padding:10px 18px;margin:14px 0;font-style:italic;color:var(--gold-light);background:rgba(212,175,55,.06);border-radius:0 8px 8px 0}
+.reflist{color:var(--muted);font-size:17px}
+.callout{background:var(--ink);border:1.5px solid var(--gold);border-radius:12px;padding:24px 28px;text-align:center;margin:30px 0}
+.callout strong{color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.08em;display:block;margin-bottom:8px;font-size:17px}
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:6px}
+.name{background:var(--ink);border:1px solid rgba(212,175,55,.5);border-radius:10px;padding:18px;text-align:center}
+.name b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:17px;display:block;margin-bottom:6px}
+.name span{font-size:16px}
+/* days */
+.day{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
+.day-head:hover{background:rgba(212,175,55,.07)}
+.daynum{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:20px;font-weight:700}
+.day.done .daynum{background:var(--gold);color:var(--midnight);border-color:var(--gold)}
+.day-title{flex:1}
+.day-title b{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gold-light);letter-spacing:.04em}
+.day-title span{display:block;color:var(--muted);font-size:15px}
+.chev{color:var(--gold);transition:transform .3s;font-size:20px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:6px 26px 24px;border-top:1px solid rgba(212,175,55,.25)}
+.day.open .day-body{display:block}
+.day-body h4{color:var(--gold);font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:18px 0 8px;font-family:'Cinzel Decorative',serif}
+ul.tasks{list-style:none}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+ul.tasks input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.mark-done{margin-top:18px;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.1em;padding:10px 22px;border-radius:999px;cursor:pointer;font-size:14px}
+.mark-done:hover{background:var(--gold);color:var(--midnight)}
+.day.done .mark-done{background:var(--gold);color:var(--midnight)}
+/* quiz */
+.quiz-gate{text-align:center}
+.q{background:var(--panel);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:22px 26px;margin-bottom:14px}
+.q p.qt{font-weight:600;margin-bottom:12px}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-radius:8px;cursor:pointer}
+.q label:hover{background:rgba(212,175,55,.08)}
+.q input{margin-top:7px;accent-color:var(--gold)}
+.q.correct{border-color:#5fae6e}
+.q.wrong{border-color:#c0564f}
+.btn{background:var(--gold);color:var(--midnight);border:none;font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.1em;padding:15px 36px;border-radius:999px;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--gold-light)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.result{margin:22px auto;max-width:640px;border-radius:12px;padding:24px;border:1.5px solid var(--gold);background:var(--ink);text-align:center;display:none}
+.result h3{font-size:22px;margin-bottom:8px}
+footer{margin-top:70px;text-align:center;color:var(--muted);font-size:15px;border-top:1px solid rgba(212,175,55,.3);padding-top:26px}
+footer .seal{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.25em;font-size:13px;margin-bottom:6px}
+@media (max-width:600px){body{font-size:17px}.card{padding:20px}}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+/* Session 2 additions: inventory + badge */
+.inv-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;border-radius:8px;border:1px solid rgba(212,175,55,.2);margin-bottom:8px;background:rgba(212,175,55,.04)}
+.inv-item:hover{background:rgba(212,175,55,.1)}
+.inv-item input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.inv-cat{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.18em;font-size:14px;text-transform:uppercase;margin:24px 0 10px}
+.inv-count{text-align:center;color:var(--muted);margin-top:14px;font-size:16px}
+textarea.reflect{width:100%;min-height:110px;background:var(--ink);border:1px solid rgba(212,175,55,.45);border-radius:10px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px;margin:8px 0 18px;resize:vertical}
+textarea.reflect:focus{outline:2px solid var(--gold-light)}
+/* badge */
+#badgewrap{display:none;margin-top:30px;text-align:center}
+#badge{max-width:640px;margin:0 auto;background:linear-gradient(180deg,#0E1530,#16224A);border:3px double var(--gold);border-radius:16px;padding:44px 36px;position:relative}
+#badge .seal-ring{width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a2752,#0E1530);box-shadow:0 0 0 6px rgba(212,175,55,.18)}
+#badge .seal-ring span{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:44px}
+#badge h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:24px;letter-spacing:.12em;margin-bottom:6px}
+#badge .b-sub{color:var(--gold);letter-spacing:.25em;font-size:13px;text-transform:uppercase;margin-bottom:18px}
+#badge .b-name{font-size:28px;color:var(--cream);font-style:italic;border-bottom:1px solid rgba(212,175,55,.5);display:inline-block;padding:0 26px 6px;margin-bottom:16px;min-height:38px}
+#badge .b-text{font-size:16px;color:var(--cream);max-width:460px;margin:0 auto 16px}
+#badge .b-date{color:var(--muted);font-size:14px;letter-spacing:.1em}
+#badge .b-min{margin-top:18px;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:.22em}
+#namefield{background:var(--ink);border:1px solid var(--gold);border-radius:8px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:19px;padding:10px 16px;width:min(380px,90%);text-align:center;margin:14px 0}
+@media print{
+  body *{visibility:hidden}
+  #badge,#badge *{visibility:visible}
+  #badge{position:fixed;inset:0;margin:auto;height:fit-content;border:3px double #8a6d1f}
+  body{background:#fff}
+}
+</style>
+<style>
+.warn{background:#2a1216;border:2px solid #c0564f;border-radius:12px;padding:26px 30px;margin:30px 0}
+.warn strong{color:#ff9d94;font-family:'Cinzel Decorative',serif;letter-spacing:.1em;display:block;margin-bottom:10px;font-size:18px;text-align:center}
+.warn p{margin-bottom:12px}
+.warn p:last-child{margin-bottom:0}
+.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:10px}
+.level{background:var(--ink);border:1px solid rgba(212,175,55,.45);border-radius:10px;padding:16px 18px}
+.level b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:15px}
+.level .lr{color:var(--muted);font-size:14px;font-style:italic}
+.choice{border:2px solid var(--gold);background:var(--ink);border-radius:12px;padding:22px 26px;margin-top:18px}
+.choice label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.choice input{margin-top:6px;width:20px;height:20px;accent-color:var(--gold);flex:0 0 20px}
+.choice.unmet{border-color:#c0564f}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Universal Gospel Fellowship Center &middot; The 66-Day Gauntlet</div>
+  <h1>Session Five</h1>
+  <div class="sub">Steps to Spiritual Freedom &mdash; Where Every Marked Knot Is Untied</div>
+  <div class="days">DAYS 37 &ndash; 45 OF 66</div>
+  <div class="progressbar" aria-label="Session progress"><div id="pbar"></div></div>
+  <div class="progresslabel" id="plabel">0 of 9 days completed</div>
+</header>
+
+<section>
+  <div class="kicker">This Module&rsquo;s Purpose</div>
+  <h2>Why This Session Exists</h2>
+  <div class="rule"></div>
+  <div class="callout">
+    <p>This session walks the disciple through the Steps to Spiritual Freedom: self-examination, repentance through every level until it is irrevocable, forgiveness, renunciation, the commanding of spirits in Yasha&rsquo;s Name, and the mandatory filling with Ruach HaKodesh. Bring your Knot Map from Session Four &mdash; this is the week the knots are untied.</p>
+  </div>
+  <div class="card">
+    <h3>Review &mdash; Bringing What You Have Learned Back to the Table</h3>
+    <p>You carry NOW authority (Session One). You know oppression operates only through legal grounds (Session Two). You have revoked the access your own mouth granted (Session Three). You have seen every strand, traced every knot, found every door, and marked each one for the breaking (Session Four). Now the breaking comes &mdash; in order. The steps have a sequence, and the sequence is not optional.</p>
+  </div>
+
+  <div class="warn">
+    <strong>READ THIS BEFORE YOU TAKE ONE MORE STEP &mdash; THE FORGIVENESS GATE</strong>
+    <p>Forgiveness is the act of forgiving others and being forgiven &mdash; and forgiving others immediately releases you from the tormentors. If you desire to be forgiven, you must be willing to forgive ALL who have harmed you &mdash; whether the offense was perceived, imagined, or experienced. No matter the offense, you must be willing to truly forgive.</p>
+    <p><strong style="display:inline;font-size:16px;color:#ff9d94">If you are not willing to forgive, do not continue this course of action &mdash; or you could become worse.</strong> And hear the words of Yasha Himself, with no softening: &ldquo;For if ye forgive men their trespasses, your heavenly Father will also forgive you: but if ye forgive not men their trespasses, NEITHER WILL YOUR FATHER FORGIVE YOUR TRESPASSES.&rdquo; &mdash; Matthew 6:14&ndash;15.</p>
+    <p>This truth divides every class that has ever heard it, and it will divide this one. Some will stop the work here. Some will be offended and walk away from the faith altogether. And some will do the most dangerous thing of all: <em>double down</em> &mdash; insisting they are truly saved and converted while flatly refusing to forgive. To that third road Scripture speaks plainly: the unmerciful servant who received forgiveness of ten thousand talents and would not release his fellow servant&rsquo;s hundred pence was delivered to the tormentors &mdash; &ldquo;So likewise shall my heavenly Father do also unto you, if ye from your hearts forgive not every one his brother their trespasses&rdquo; (Matthew 18:21&ndash;35). If any man say, I love God, and hateth his brother, he is a liar (1 John 4:20). Unforgiveness is not a personality trait to manage. It is a legal ground the tormentors hold &mdash; and no deliverance proceeds over an offense you are still gripping.</p>
+    <p>There is good news in the hard word: forgiveness is a decision of the will, not a feeling. You do not have to feel it to choose it &mdash; and the moment you choose it, the tormentors lose their claim. The gate is narrow, but it opens.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lesson Five</div>
+  <h2>The Steps to Spiritual Freedom</h2>
+  <div class="rule"></div>
+
+  <div class="card">
+    <h3>Step 1 &middot; Self-Examination &amp; Personal Accountability</h3>
+    <p>Self-examination and personal accountability is the first step on the journey to finding freedom in Yasha. This means humbling yourself before your Creator, AhaYah, confessing all known, unknown, and hidden sin with genuine heartfelt repentance. Not just going through the motions; not one trip down the aisle to the altar, crying and getting all emotional; not being sorry you got caught; not being concerned about what other people think &mdash; but a true godly repentance which causes one to admit they have offended their Creator and are deeply grieved by it. Godly sorrow leads to repentance. <span class="reflist">2 Corinthians 7:10</span></p>
+    <p>The turning away from the behaviors, the sins, and the lifestyle you have been living, and turning back to AhaYah after acknowledging that you have sinned against Him and Him only, is the start of a life-long journey &mdash; not a quick fix, not a one-time occurrence. Each day is a new opportunity to grow in holiness and continue the deliverance and healing journey. <span class="reflist">Matthew 3:2&ndash;12 &middot; John 16:7&ndash;11 &middot; Romans 10:9 &middot; Romans 12:1&ndash;3 &middot; Ephesians 4:22&ndash;24</span></p>
+  </div>
+
+  <div class="card">
+    <h3>Step 2 &middot; Repentance &mdash; Through Every Level, Until Irrevocable</h3>
+    <p>Repentance is the next key to opening the path to your freedom in Yasha. These Hebrew and Greek words take you on a journey through repentance that few people ever take. Many believers are unaware there are different levels of repentance &mdash; and that we should strive to reach each level until our repentance is irrevocable.</p>
+    <div class="levels">
+      <div class="level"><b>Hebrew &middot; Nacham</b><br>To sigh, breathe strongly, to be sorry.<br><span class="lr">Genesis 6:6 &middot; Exodus 13:17 &middot; Job 42:6 &middot; Jonah 3:10</span></div>
+      <div class="level"><b>Hebrew &middot; Shuwb</b><br>To turn back.<br><span class="lr">1 Kings 8:47 &middot; Ezekiel 14:6</span></div>
+      <div class="level"><b>Hebrew &middot; Nocham</b><br>Regret.<br><span class="lr">Hosea 13:14</span></div>
+      <div class="level"><b>Hebrew &middot; Nichum</b><br>Compassion.<br><span class="lr">Hosea 11:8</span></div>
+      <div class="level"><b>Greek &middot; Metanoeo</b><br>To change the mind for the better morally; to change the attitude toward sin &mdash; not merely to forsake sin but to stop loving it. Demanded by AhaYah as the condition of forgiveness and grace.<br><span class="lr">Luke 13:3,5 &middot; Luke 15 &amp; 24:47 &middot; Acts 2:38; 3:19; 17:30 &middot; Matthew 4:17</span></div>
+      <div class="level"><b>Greek &middot; Metamellomai</b><br>To regret the consequences of sin &mdash; not the cause. (The counterfeit level: Judas reached it and went no further.)<br><span class="lr">Matthew 27:3 &middot; 2 Corinthians 7:8</span></div>
+      <div class="level"><b>Greek &middot; Metanoia</b><br>A real change of mind and attitude toward sin and its cause &mdash; not merely its consequences.<br><span class="lr">Matthew 3:8,11; 9:13 &middot; Luke 24:47</span></div>
+      <div class="level"><b>Greek &middot; Ametameletos</b><br>IRREVOCABLE.<br><span class="lr">Romans 11:29 &middot; 2 Corinthians 7:10</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Step 3 &middot; Forgiveness &mdash; The Gate That Cannot Be Bypassed</h3>
+    <p>Forgiving others immediately releases you from the tormentors. If you desire to be forgiven, you must be willing to forgive all who have harmed you &mdash; perceived, imagined, or experienced. No matter the offense, you must be willing to truly forgive. If you do not forgive, your Father in heaven WILL NOT forgive you. <span class="reflist">Matthew 6:14&ndash;15</span></p>
+  </div>
+
+  <div class="card">
+    <h3>Step 4 &middot; Renunciation &amp; Commanding &mdash; Then the Mandatory Filling</h3>
+    <p>The next steps to freedom include renouncing evil; breaking all vows, pacts, partnerships, and associations with the enemy; and commanding spirits to leave in Yasha&rsquo;s Name. Once a thorough renunciation and destruction of all yokes is completed, the filling of these areas with Ruach HaKodesh and AhaYah&rsquo;s TRUTH is mandatory. If one does not fill these spiritual voids with Ruach HaKodesh, the enemy will return, claim legal rights to the space, and bring more evil spirits with it when it returns to afflict the person again. <span class="reflist">Matthew 12:43&ndash;45</span></p>
+  </div>
+
+  <div class="card">
+    <h3>Step 5 &middot; Prayer, Fasting &amp; What to Expect &mdash; Manifestations and Ministry Protocols</h3>
+    <p>Prayer, fasting, and a strong foundation in the Word of AhaYah are essential on the road to recovering spiritual freedom. Be prepared to experience resistance to this ministry from these evil spirits, and be prepared for the physical manifestations that can occur during deliverance ministry &mdash; coughing, gagging, throwing up, sighing, crying, shaking, convulsions, sexual stimulation, passing gas &mdash; as well as the spiritual manifestations which can only be discerned by the leading of Ruach HaKodesh.</p>
+    <p>During the prayer ministry of deliverance, stay calm with an even tone and a soft voice. Spirits come out in the Name of Yasha, by those with authority &mdash; and they are not deaf. Theatrics do not impress demons. Deliverance should be kept private &mdash; not done for show on Sunday mornings during fellowship &mdash; and administered with safety in mind for those being delivered, protecting others, especially children and new converts who have not yet been delivered themselves.</p>
+    <p>Deliverance ministers must be taught proper procedure so they and those around them are protected from backlash and retaliation. Under no circumstances should anyone ever agree to allow evil spirits to enter themselves in order to protect someone else &mdash; that is tempting AhaYah. The authority in Yasha&rsquo;s Name, ministered in Yasha&rsquo;s Name, is effective, thorough, and complete; pride and presumption should not be in the minister&rsquo;s vocabulary. Ministers should be filled with Ruach haKodesh and prepared through prayer and fasting as led by the Adon prior to all sessions &mdash; and after every session, each person involved should pray, seek to be re-filled, and keep the habit of cleansing and protection prayers.</p>
+  </div>
+
+  <div class="card">
+    <h3>Step 6 &middot; Deliverance Is the Beginning &mdash; Not the End Game</h3>
+    <p>Deliverance is not the end game, but the beginning of sustained freedom for each person who seeks to truly follow the ancient path as a disciple of Yasha. Walking in lasting freedom requires crucifying the flesh and aligning with AhaYah&rsquo;s principles. Inner healing and maintaining peace in Yasha require daily effort, and the Word of AhaYah and fellowship with the brethren must be ongoing parts of each believer&rsquo;s lifestyle. And one step more: those who have been delivered must learn to share their own story and journey through deliverance, becoming laborers in Yasha&rsquo;s harvest &mdash; for all disciples are called to be reconcilers and deliverers in the Great Commission.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Lesson Summarization &mdash; Three Truths to Carry</strong>
+    <p>The steps have a sequence: examination, repentance, forgiveness, renunciation, filling &mdash; and the sequence is not optional. &nbsp;&middot;&nbsp; Forgiveness is the gate no deliverance bypasses: forgive, or you will not be forgiven. &nbsp;&middot;&nbsp; Every emptied room must be filled with Ruach HaKodesh, or the enemy returns with reinforcements.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The Nine-Day Journey</div>
+  <h2>Daily Assignments &amp; Fieldwork &middot; Days 37&ndash;45</h2>
+  <div class="rule"></div>
+
+  <div class="day" data-day="1">
+    <div class="day-head"><div class="daynum">37</div><div class="day-title"><b>INTAKE &amp; THE SEQUENCE</b><span>Bring your Knot Map &middot; read the Forgiveness Gate</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read the entire Session Five teaching in one sitting &mdash; including the Forgiveness Gate warning, slowly, twice. Set your Knot Map from Session Four beside you; it is your target list for this entire week.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write out the sequence by hand: examination &rarr; repentance &rarr; forgiveness &rarr; renunciation &rarr; filling &mdash; and beneath it: &ldquo;the sequence is not optional.&rdquo;</span></li>
+        <li><input type="checkbox"><span>Write out Matthew 6:14&ndash;15 by hand, word for word, with nothing softened.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 37 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="2">
+    <div class="day-head"><div class="daynum">38</div><div class="day-title"><b>SELF-EXAMINATION</b><span>Known, unknown &amp; hidden sin &middot; godly sorrow</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Step 1 with 2 Corinthians 7:10; Matthew 3:2&ndash;12; John 16:7&ndash;11; Romans 10:9; 12:1&ndash;3; Ephesians 4:22&ndash;24. This is not emotion at an altar, not sorrow at being caught &mdash; it is grief at having offended your Creator.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>In private prayer, humble yourself before AhaYah and confess all known sin by name; then ask Ruach HaKodesh to reveal the unknown and hidden &mdash; and write what He shows you.</span></li>
+        <li><input type="checkbox"><span>Test your sorrow against 2 Corinthians 7:10: write one paragraph on the difference between the sorrow of the world and godly sorrow in your own confession today.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 38 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="3">
+    <div class="day-head"><div class="daynum">39</div><div class="day-title"><b>REPENTANCE &middot; THE HEBREW LEVELS</b><span>Nacham &middot; Shuwb &middot; Nocham &middot; Nichum</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Word study: Nacham (Genesis 6:6; Exodus 13:17; Job 42:6; Jonah 3:10), Shuwb (1 Kings 8:47; Ezekiel 14:6), Nocham (Hosea 13:14), Nichum (Hosea 11:8). Read each passage and watch the word work.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>For each of the four Hebrew words, write one sentence of definition and one sentence of how it has &mdash; or has not yet &mdash; appeared in your own repentance.</span></li>
+        <li><input type="checkbox"><span>Take the top knot on your Knot Map through Nacham and Shuwb tonight: sigh over it before AhaYah, and turn back.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 39 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="4">
+    <div class="day-head"><div class="daynum">40</div><div class="day-title"><b>REPENTANCE &middot; THE GREEK LEVELS</b><span>Until it is irrevocable</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Word study: Metanoeo, Metamellomai, Metanoia, Ametameletos with their passages. Mark the counterfeit: Metamellomai &mdash; regretting consequences, not cause &mdash; is the level Judas reached (Matthew 27:3). The goal is Ametameletos: irrevocable.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Examine each knot on your map and write beside it which level your repentance has actually reached &mdash; honestly. Consequences-regret does not count.</span></li>
+        <li><input type="checkbox"><span>Write one paragraph: what would it mean for your repentance over the chief knot to become irrevocable &mdash; never to be taken back, regardless of feeling or circumstance?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 40 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="5">
+    <div class="day-head"><div class="daynum">41</div><div class="day-title"><b>THE FORGIVENESS GATE</b><span>Forgive &mdash; or you will not be forgiven</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Matthew 6:14&ndash;15 and the whole parable of Matthew 18:21&ndash;35 aloud. Then read 1 John 4:20. There are three roads people take at this gate: stop the work, abandon the faith, or double down &mdash; claiming salvation while refusing to forgive. Only one road continues: choosing, as an act of the will, to forgive all who have harmed you &mdash; perceived, imagined, or experienced &mdash; no matter the offense.</p>
+      <h4>Fieldwork &mdash; The Forgiveness List</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write the complete list: every person who has harmed you &mdash; perceived, imagined, or experienced &mdash; including those who are deceased, including authority figures, including yourself where you have held yourself hostage.</span></li>
+        <li><input type="checkbox"><span>One name at a time, aloud: &ldquo;In the Name of Yasha, I choose to forgive ____ for ____. I release them, and I release myself from the tormentors.&rdquo; Do not stop until the list is finished.</span></li>
+      </ul>
+      <div class="choice" id="forgivechoice">
+        <label><input type="checkbox" id="forgivebox"><span><strong style="color:var(--gold-light)">The Declaration:</strong> I am willing to truly forgive ALL who have harmed me &mdash; perceived, imagined, or experienced &mdash; no matter the offense. I understand plainly that if I do not forgive, my Father in heaven will not forgive me (Matthew 6:14&ndash;15), and that to continue this course unwilling to forgive could make me worse. I choose to forgive as an act of my will.</span></label>
+        <p style="color:var(--muted);font-size:15px;margin-top:12px">If you cannot check this box today, STOP HERE. Do not proceed to Day 42. Contact the ministry &mdash; this gate is not walked alone, and there is no shame in asking for help to open your hands. But it cannot be skipped, and it cannot be faked.</p>
+      </div>
+      <button class="mark-done">Mark Day 41 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="6">
+    <div class="day-head"><div class="daynum">42</div><div class="day-title"><b>RENUNCIATION &amp; THE FILLING</b><span>Break every yoke &middot; fill every room</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Step 4 with Matthew 12:43&ndash;45. Renounce evil, break all vows, pacts, partnerships, and associations with the enemy, and command spirits to leave in Yasha&rsquo;s Name. Then the mandatory part too many skip: fill every emptied area with Ruach HaKodesh and AhaYah&rsquo;s TRUTH &mdash; or the enemy returns with reinforcements and legal claim.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Work your entire Knot Map: knot by knot, aloud &mdash; renounce it, break every vow and association tied to it, and command it to leave in Yasha&rsquo;s Name.</span></li>
+        <li><input type="checkbox"><span>For every knot renounced, write the TRUTH that now fills that room &mdash; one Scripture per knot &mdash; and pray to be filled afresh with Ruach HaKodesh before you sleep.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 42 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="7">
+    <div class="day-head"><div class="daynum">43</div><div class="day-title"><b>PRAYER, FASTING &amp; PROTOCOLS</b><span>What to expect &middot; how ministry is kept safe</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Step 5 in full: resistance and manifestations (physical and spiritual), the calm even tone, why spirits are not deaf and theatrics impress no one, why sessions are kept private for the safety of all &mdash; especially children and new converts &mdash; and the minister&rsquo;s protocols: never agree to allow spirits in to protect another; prepare by prayer and fasting; re-fill and pray cleansing and protection prayers after every session.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Fast one meal today as led by the Adon, giving that time to prayer over your renounced knots.</span></li>
+        <li><input type="checkbox"><span>Write a one-page summary of the ministry protocols in your own words &mdash; you are being prepared not only to be delivered, but one day to deliver.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 43 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="8">
+    <div class="day-head"><div class="daynum">44</div><div class="day-title"><b>DEEP REFLECTION</b><span>Five questions &middot; short paragraph answers &middot; submitted to ministry</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Answer each question in short paragraph form and submit them with your Week Five report. Your words save on this device as you type.</p>
+      <h4>The Five Questions</h4>
+      <p><strong style="color:var(--gold-light)">1.</strong> Why must repentance precede deliverance?</p>
+      <textarea class="reflect" data-r="1" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">2.</strong> What separates Metamellomai &mdash; the level Judas reached &mdash; from Metanoia, and where have you mistaken one for the other in your own past?</p>
+      <textarea class="reflect" data-r="2" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">3.</strong> Matthew 6:14&ndash;15 is plain: forgive, or you will not be forgiven. Why is &ldquo;doubling down&rdquo; &mdash; claiming salvation while refusing to forgive &mdash; the most dangerous of the three roads at the gate?</p>
+      <textarea class="reflect" data-r="3" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">4.</strong> Per Matthew 12:43&ndash;45, why is renunciation without the filling of Ruach HaKodesh worse than no renunciation at all?</p>
+      <textarea class="reflect" data-r="4" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">5.</strong> Deliverance is the beginning, not the end game. What did walking your own Knot Map through the steps this week teach you about the daily walk that must follow?</p>
+      <textarea class="reflect" data-r="5" placeholder="Write your short paragraph here..."></textarea>
+      <button class="mark-done">Mark Day 44 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="9">
+    <div class="day-head"><div class="daynum">45</div><div class="day-title"><b>THE GATE &middot; THE FREEDMAN&rsquo;S SEAL</b><span>The Forgiveness Declaration is required</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Confirm your fieldwork and make your affirmations below. Hear it plainly one final time: the Seal of this session <strong style="color:var(--gold-light)">cannot and will not release without the Forgiveness Declaration</strong>. If you cannot yet make it, stop and contact the ministry &mdash; that is obedience, not failure. When the gate opens, your printable and downloadable <strong style="color:var(--gold-light)">Freedman&rsquo;s Seal</strong> is released and Session Six is unlocked.</p>
+      <button class="mark-done">Mark Day 45 Complete (after the affirmation)</button>
+    </div>
+  </div>
+</section>
+
+<section id="gatesec">
+  <div class="kicker">Day Forty-Five &middot; The Gate</div>
+  <h2>Fieldwork Acceptance &amp; The Freedman&rsquo;s Seal</h2>
+  <div class="rule"></div>
+
+  <div class="callout">
+    <strong>Affirmation Before the Seal</strong>
+    <ul class="tasks">
+      <li><input type="checkbox" id="aff1"><span>I walked Step 1 honestly: confessing known, unknown, and hidden sin before AhaYah with godly sorrow &mdash; not the sorrow of the world.</span></li>
+      <li><input type="checkbox" id="aff2"><span>I worked the levels of repentance over every knot on my map, refusing to stop at consequences-regret, pressing toward the irrevocable.</span></li>
+      <li><input type="checkbox" id="aff3"><span>I renounced every marked knot aloud, broke every vow and association, commanded in Yasha&rsquo;s Name &mdash; and filled every emptied room with Ruach HaKodesh and the TRUTH of AhaYah.</span></li>
+      <li><input type="checkbox" id="aff4"><span>I have written my five reflection paragraphs and submitted my Week Five report to the ministry.</span></li>
+    </ul>
+    <div class="choice" id="gatechoice">
+      <label><input type="checkbox" id="gforgive"><span><strong style="color:var(--gold-light)">THE FORGIVENESS DECLARATION (REQUIRED):</strong> I have made my forgiveness list complete &mdash; perceived, imagined, and experienced &mdash; and I have forgiven every name on it aloud, in the Name of Yasha, as an act of my will. I hold nothing back and no one hostage. I understand plainly: if I do not forgive, my Father in heaven will not forgive me.</span></label>
+    </div>
+    <div style="text-align:center;margin-top:16px">
+      <input type="text" id="namefield" placeholder="Type your full name as it should appear on your Seal">
+      <br>
+      <button class="btn" id="sealbtn" disabled>Release My Freedman&rsquo;s Seal</button>
+      <p id="sealhint" style="color:var(--muted);font-size:15px;margin-top:10px"></p>
+    </div>
+  </div>
+
+  <div id="badgewrap">
+    <div id="badge">
+      <svg viewBox="0 0 120 120" width="130" height="130" style="display:block;margin:0 auto 18px" aria-label="Broken chain seal">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="3"/>
+        <g fill="none" stroke="#D4AF37" stroke-width="6" stroke-linecap="round">
+          <ellipse cx="38" cy="44" rx="13" ry="9" transform="rotate(-35 38 44)"/>
+          <ellipse cx="56" cy="58" rx="13" ry="9" transform="rotate(-35 56 58)"/>
+        </g>
+        <g fill="none" stroke="#F0D98C" stroke-width="6" stroke-linecap="round">
+          <path d="M 72 70 A 13 9 -35 1 1 86 84" />
+          <path d="M 92 88 A 13 9 -35 0 1 98 96" opacity="0.6"/>
+        </g>
+        <g stroke="#F0D98C" stroke-width="3" stroke-linecap="round">
+          <line x1="68" y1="58" x2="63" y2="50"/><line x1="76" y1="54" x2="74" y2="45"/><line x1="82" y1="60" x2="89" y2="55"/>
+        </g>
+      </svg>
+      <h3>THE FREEDMAN&rsquo;S SEAL</h3>
+      <div class="b-sub">The 66-Day Gauntlet &middot; Session Five Completed &middot; The Chain Is Broken</div>
+      <div class="b-name" id="bname">&nbsp;</div>
+      <div class="b-text">has walked the Steps to Spiritual Freedom, Days 37&ndash;45 &mdash; examining the heart before AhaYah, pressing repentance toward the irrevocable, forgiving every name on the list as an act of the will, renouncing and commanding in Yasha&rsquo;s Name, and filling every emptied room with Ruach HaKodesh and the TRUTH.</div>
+      <div class="b-date" id="bdate"></div>
+      <div class="b-min">UNIVERSAL GOSPEL FELLOWSHIP CENTER &middot; 2 CORINTHIANS 7:10 &middot; MATTHEW 6:14&ndash;15 &middot; MATTHEW 12:43&ndash;45</div>
+    </div>
+    <div style="margin-top:20px">
+      <button class="btn" onclick="window.print()">Print My Seal</button>
+      <button class="btn" id="dlbtn" style="margin-left:10px">Download My Seal</button>
+    </div>
+    <p style="color:var(--muted);font-size:15px;margin-top:10px">Session Six &mdash; Inner Healing, Broken Hearts &amp; Soul Ties &mdash; is now unlocked.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="seal">UNIVERSAL GOSPEL FELLOWSHIP CENTER</div>
+  <p>The 66-Day Gauntlet of Deliverance &amp; Inner Healing &middot; Session Five of Seven</p>
+  <p style="font-style:italic;margin-top:6px">&ldquo;If ye forgive not men their trespasses, neither will your Father forgive your trespasses.&rdquo; &mdash; Matthew 6:15</p>
+</footer>
+
+</div>
+<script>
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}
+
+var days=document.querySelectorAll('.day');
+days.forEach(function(d){
+  var n=d.getAttribute('data-day');
+  if(sget('ugfc_wk5_day'+n)==='1'){d.classList.add('done');}
+  d.querySelector('.day-head').addEventListener('click',function(){d.classList.toggle('open');});
+  d.querySelector('.mark-done').addEventListener('click',function(){
+    d.classList.add('done'); sset('ugfc_wk5_day'+n,'1'); updateProgress(); checkSeal();
+  });
+});
+function updateProgress(){
+  var done=document.querySelectorAll('.day.done').length;
+  document.getElementById('pbar').style.width=(done/9*100)+'%';
+  document.getElementById('plabel').textContent=done+' of 9 days completed';
+}
+updateProgress();
+
+document.querySelectorAll('textarea.reflect').forEach(function(t){
+  var k='ugfc_wk5_reflect'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+/* Day 41 declaration persists and mirrors to gate */
+var fbox=document.getElementById('forgivebox');
+if(sget('ugfc_wk5_forgive')==='1'){fbox.checked=true;}
+fbox.addEventListener('change',function(){
+  sset('ugfc_wk5_forgive',fbox.checked?'1':'0');
+  document.getElementById('forgivechoice').classList.toggle('unmet',!fbox.checked);
+  checkSeal();
+});
+
+var gf=document.getElementById('gforgive');
+gf.addEventListener('change',function(){checkSeal();});
+
+['aff1','aff2','aff3','aff4'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',checkSeal);
+});
+document.getElementById('namefield').addEventListener('input',checkSeal);
+function checkSeal(){
+  var done=document.querySelectorAll('.day.done').length;
+  var affs=['aff1','aff2','aff3','aff4'].every(function(id){return document.getElementById(id).checked});
+  var forgiven=document.getElementById('gforgive').checked;
+  var named=document.getElementById('namefield').value.trim().length>1;
+  var ok=(done===9)&&affs&&forgiven&&named;
+  document.getElementById('sealbtn').disabled=!ok;
+  document.getElementById('gatechoice').classList.toggle('unmet',!forgiven);
+  var hint=document.getElementById('sealhint');
+  if(ok){hint.textContent='All requirements met — the gate is open. Release your Seal.';hint.style.color='#7fc98f';}
+  else{
+    var need=[];
+    if(done<9){need.push((9-done)+' day'+(9-done===1?'':'s')+' not yet marked complete');}
+    if(!affs){need.push('affirmation boxes unchecked');}
+    if(!forgiven){need.push('THE FORGIVENESS DECLARATION is not made — without it this Seal cannot release (Matthew 6:14–15)');}
+    if(!named){need.push('your name not yet entered');}
+    hint.textContent='Remaining: '+need.join(' · ');
+    hint.style.color='var(--muted)';
+  }
+}
+checkSeal();
+
+document.getElementById('sealbtn').addEventListener('click',function(){
+  var name=document.getElementById('namefield').value.trim();
+  document.getElementById('bname').textContent=name;
+  var d=new Date();
+  document.getElementById('bdate').textContent='Sealed this day: '+d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  sset('ugfc_wk5_passed','1'); sset('ugfc_wk5_name',name);
+  document.getElementById('badgewrap').style.display='block';
+  document.getElementById('badgewrap').scrollIntoView({behavior:'smooth'});
+});
+if(sget('ugfc_wk5_passed')==='1'){
+  document.getElementById('bname').textContent=sget('ugfc_wk5_name')||'';
+  document.getElementById('bdate').textContent='Seal previously earned';
+  document.getElementById('badgewrap').style.display='block';
+}
+
+document.getElementById('dlbtn').addEventListener('click',function(){
+  var name=(document.getElementById('bname').textContent||'').trim()||'Disciple of Yasha';
+  var date=document.getElementById('bdate').textContent;
+  var esc=function(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')};
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Georgia, serif">'
+   +'<rect width="900" height="640" fill="#0E1530"/><rect x="18" y="18" width="864" height="604" fill="none" stroke="#D4AF37" stroke-width="3"/><rect x="28" y="28" width="844" height="584" fill="none" stroke="#D4AF37" stroke-width="1"/>'
+   +'<g transform="translate(450,145)"><circle r="64" fill="none" stroke="#D4AF37" stroke-width="4"/>'
+   +'<g fill="none" stroke="#D4AF37" stroke-width="7" stroke-linecap="round"><ellipse cx="-22" cy="-14" rx="15" ry="10" transform="rotate(-35 -22 -14)"/><ellipse cx="-2" cy="2" rx="15" ry="10" transform="rotate(-35 -2 2)"/></g>'
+   +'<g fill="none" stroke="#F0D98C" stroke-width="7" stroke-linecap="round"><path d="M 16 16 A 15 10 -35 1 1 32 32"/></g>'
+   +'<g stroke="#F0D98C" stroke-width="3.5" stroke-linecap="round"><line x1="12" y1="2" x2="7" y2="-7"/><line x1="22" y1="-2" x2="20" y2="-12"/><line x1="28" y1="6" x2="36" y2="1"/></g></g>'
+   +'<text x="450" y="296" text-anchor="middle" fill="#F0D98C" font-size="38" letter-spacing="8" font-weight="bold">THE FREEDMAN&#8217;S SEAL</text>'
+   +'<text x="450" y="331" text-anchor="middle" fill="#D4AF37" font-size="15" letter-spacing="4">THE 66-DAY GAUNTLET &#183; SESSION FIVE &#183; THE CHAIN IS BROKEN</text>'
+   +'<text x="450" y="396" text-anchor="middle" fill="#F2ECD9" font-size="34" font-style="italic">'+esc(name)+'</text>'
+   +'<line x1="250" y1="414" x2="650" y2="414" stroke="#D4AF37" stroke-width="1"/>'
+   +'<text x="450" y="456" text-anchor="middle" fill="#F2ECD9" font-size="16">has walked the Steps to Spiritual Freedom &#8212; repentance pressed to the irrevocable,</text>'
+   +'<text x="450" y="480" text-anchor="middle" fill="#F2ECD9" font-size="16">every name forgiven, every knot renounced, every room filled &#8212; Days 37&#8211;45</text>'
+   +'<text x="450" y="524" text-anchor="middle" fill="#8A93B8" font-size="14" letter-spacing="2">'+esc(date)+'</text>'
+   +'<text x="450" y="576" text-anchor="middle" fill="#D4AF37" font-size="13" letter-spacing="4">UNIVERSAL GOSPEL FELLOWSHIP CENTER &#183; MATTHEW 6:14&#8211;15 &#183; MATTHEW 12:43&#8211;45</text>'
+   +'</svg>';
+  var blob=new Blob([svg],{type:'image/svg+xml'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Freedmans-Seal-Session-5.svg';
+  document.body.appendChild(a); a.click(); a.remove();
+});
+</script>
+</body>
+</html>

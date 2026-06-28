@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 66-Day Gauntlet &middot; Session One &middot; Foundations &amp; Authority</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0A1026; --deep:#121B3A; --panel:#16224A; --ink:#0E1530;
+  --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--midnight),var(--deep));color:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.65;min-height:100vh}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold-light);font-weight:700}
+header{text-align:center;padding:54px 0 30px;border-bottom:1px solid rgba(212,175,55,.35)}
+header .eyebrow{letter-spacing:.35em;font-size:13px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:clamp(26px,4.5vw,42px);letter-spacing:.08em;margin-bottom:10px}
+header .sub{font-size:18px;color:var(--cream);font-style:italic}
+header .days{margin-top:14px;color:var(--gold);letter-spacing:.2em;font-size:14px}
+.progressbar{margin:26px auto 0;max-width:560px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.4);border-radius:999px;height:14px;overflow:hidden}
+.progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,#8a6d1f,var(--gold),var(--gold-light));transition:width .5s}
+.progresslabel{font-size:14px;color:var(--muted);margin-top:8px}
+section{margin-top:54px}
+.kicker{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:14px;letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+h2{font-size:clamp(22px,3.4vw,30px);text-align:center;margin-bottom:26px}
+.rule{width:200px;height:1.5px;margin:0 auto 30px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px;letter-spacing:.04em}
+.card p{margin-bottom:14px}
+.card p:last-child{margin-bottom:0}
+.scripture{border-left:3px solid var(--gold);padding:10px 18px;margin:14px 0;font-style:italic;color:var(--gold-light);background:rgba(212,175,55,.06);border-radius:0 8px 8px 0}
+.reflist{color:var(--muted);font-size:17px}
+.callout{background:var(--ink);border:1.5px solid var(--gold);border-radius:12px;padding:24px 28px;text-align:center;margin:30px 0}
+.callout strong{color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.08em;display:block;margin-bottom:8px;font-size:17px}
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:6px}
+.name{background:var(--ink);border:1px solid rgba(212,175,55,.5);border-radius:10px;padding:18px;text-align:center}
+.name b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:17px;display:block;margin-bottom:6px}
+.name span{font-size:16px}
+/* days */
+.day{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
+.day-head:hover{background:rgba(212,175,55,.07)}
+.daynum{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:20px;font-weight:700}
+.day.done .daynum{background:var(--gold);color:var(--midnight);border-color:var(--gold)}
+.day-title{flex:1}
+.day-title b{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gold-light);letter-spacing:.04em}
+.day-title span{display:block;color:var(--muted);font-size:15px}
+.chev{color:var(--gold);transition:transform .3s;font-size:20px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:6px 26px 24px;border-top:1px solid rgba(212,175,55,.25)}
+.day.open .day-body{display:block}
+.day-body h4{color:var(--gold);font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:18px 0 8px;font-family:'Cinzel Decorative',serif}
+ul.tasks{list-style:none}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+ul.tasks input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.mark-done{margin-top:18px;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.1em;padding:10px 22px;border-radius:999px;cursor:pointer;font-size:14px}
+.mark-done:hover{background:var(--gold);color:var(--midnight)}
+.day.done .mark-done{background:var(--gold);color:var(--midnight)}
+/* quiz */
+.quiz-gate{text-align:center}
+.q{background:var(--panel);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:22px 26px;margin-bottom:14px}
+.q p.qt{font-weight:600;margin-bottom:12px}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-radius:8px;cursor:pointer}
+.q label:hover{background:rgba(212,175,55,.08)}
+.q input{margin-top:7px;accent-color:var(--gold)}
+.q.correct{border-color:#5fae6e}
+.q.wrong{border-color:#c0564f}
+.btn{background:var(--gold);color:var(--midnight);border:none;font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.1em;padding:15px 36px;border-radius:999px;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--gold-light)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.result{margin:22px auto;max-width:640px;border-radius:12px;padding:24px;border:1.5px solid var(--gold);background:var(--ink);text-align:center;display:none}
+.result h3{font-size:22px;margin-bottom:8px}
+footer{margin-top:70px;text-align:center;color:var(--muted);font-size:15px;border-top:1px solid rgba(212,175,55,.3);padding-top:26px}
+footer .seal{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.25em;font-size:13px;margin-bottom:6px}
+@media (max-width:600px){body{font-size:17px}.card{padding:20px}}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Universal Gospel Fellowship Center &middot; The 66-Day Gauntlet</div>
+  <h1>Session One</h1>
+  <div class="sub">Scriptural Foundations for Spiritual Warfare &amp; Deliverance &mdash; Foundations &amp; Authority</div>
+  <div class="days">DAYS 1 &ndash; 9 OF 66</div>
+  <div class="progressbar" aria-label="Session progress"><div id="pbar"></div></div>
+  <div class="progresslabel" id="plabel">0 of 9 days completed</div>
+</header>
+
+<section>
+  <div class="kicker">Before You Begin</div>
+  <h2>The Names You Will Walk With</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <div class="names">
+      <div class="name"><b>AhaYah</b><span>Father God, our Creator</span></div>
+      <div class="name"><b>Yasha</b><span>The Anointed One, our Savior &mdash; AhaYah, God in the flesh; the Son, Christ Jesus</span></div>
+      <div class="name"><b>Ruach haKodesh</b><span>Holy Spirit</span></div>
+      <div class="name"><b>Adon</b><span>Lord</span></div>
+    </div>
+  </div>
+  <div class="callout">
+    <strong>The Double Portion</strong>
+    <p>Sixty-six days &mdash; one day for every book of Scripture. And when a person receives a double portion of the anointing, deliverance, and blessing, 6 + 6 becomes 12. By the end of this Gauntlet you will not merely believe &mdash; you will <em>know</em> that you have received a double portion, mastered for life, as it becomes your renewed habit. You will be transformed by the renewing of your mind &mdash; and neuroscience has finally caught up to Scripture and proves it emphatically. <em>Romans 12:2</em></p>
+  </div>
+  <div class="callout">
+    <strong>Daily Work Is Not Optional</strong>
+    <p>Daily work must be completed in order to truly break a habit and learn a new way of living &mdash; or you risk reverting back to old ways and old lifestyles. Each day below must be completed in order. Day 9 is the gate: a 50-question quiz, 80% to pass, three attempts. Passing unlocks Session Two.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lesson One</div>
+  <h2>Scriptural Basis for Spiritual Warfare &amp; Deliverance</h2>
+  <div class="rule"></div>
+
+  <div class="card">
+    <p>Learning about spiritual warfare, what spiritual deliverance is, the Kingdoms involved in the war, and the spiritual authority Yasha&mdash;Christ gave His disciples throughout all ages within the context of self-deliverance is an integral part of, and a continuation of, Yasha&rsquo;s ministry for His disciples of today &mdash; and is a core part of the gospel.</p>
+    <p class="reflist">Matthew 12:29 &middot; Matthew 15:21&ndash;28 &middot; Mark 7:24&ndash;30 &middot; Revelation 1:18</p>
+  </div>
+
+  <div class="card">
+    <h3>A &middot; What Is Spiritual Deliverance?</h3>
+    <p>Spiritual deliverance is for all disciples of Yasha&mdash;Christ who have believed the gospel and confessed with their own voice that Yasha&mdash;Christ is the Adon and Master over their lives. Deliverance encompasses body, soul, and spirit cleansing and inner healing. Deliverance from evil spirits, emotional and mental illnesses, along with physical illnesses and diseases, are easily obtained and maintained by believers who are committed to a lifestyle of holiness and service unto the Adon &mdash; while still living in a fallen, broken, dark world.</p>
+    <p class="reflist">Isaiah 61:1 &middot; Luke 4:14&ndash;21</p>
+  </div>
+
+  <div class="card">
+    <h3>B &middot; The Two Opposing Kingdoms: AhaYah Our Creator&rsquo;s vs. Satan Our Adversary&rsquo;s</h3>
+    <p>Discover, explore, and understand the operation of the Kingdom of Light &mdash; our AhaYah, our Creator&rsquo;s legal realm &mdash; that brings faith, love, joy, peace, and hope, compared to the realm that our adversary Satan presents and tempts humans into embracing, causing untold suffering, shame, guilt, and condemnation.</p>
+    <p>The Kingdom of Light is our Creator&rsquo;s Kingdom and the realm we should all want to live in for eternity:</p>
+    <p class="reflist">Daniel 7:13&ndash;14 &middot; Matthew 6:33 &middot; Mark 1:14&ndash;15 &middot; Luke 6:20 &middot; Luke 13:18&ndash;21 &middot; Luke 17:20&ndash;21 &middot; John 8:1 &middot; Colossians 1:13 &middot; 1 John 1:5 &middot; 1 Peter 2:9</p>
+    <p>Realize the stark difference of Satan&rsquo;s <em>illegal</em> realm that has kept human beings in bondage from the beginning:</p>
+    <p class="reflist">Luke 22:31&ndash;34 &middot; John 3:19&ndash;20 &middot; Ephesians 6:12 &middot; Colossians 1:13 &middot; 1 John 5:19</p>
+  </div>
+
+  <div class="card">
+    <h3>C &middot; The Authority of the Disciple of Christ, Using His Name</h3>
+    <p>Learn about the spiritual authority given to all believers by examining Yasha&rsquo;s ministry in detail &mdash; and you will find your authority and identity are in Yasha&mdash;Christ and in His Name alone.</p>
+    <p class="reflist">Psalm 8:4&ndash;6 &middot; Matthew 18:18 &middot; Matthew 28:18&ndash;20 (the Great Commission for ALL believers) &middot; Mark 16:15&ndash;20 &middot; Luke 10:18&ndash;24 &middot; John 16:33 &middot; John 17:26 &middot; 2 Corinthians 10:4&ndash;5 &middot; Ephesians 1:19&ndash;24 &middot; Ephesians 2:4&ndash;6</p>
+    <div class="scripture">This is a NOW something &mdash; not a later something! This NOW authority is in Yasha&rsquo;s Name, and it was won by Him through defeating the Kingdom of darkness through His death on the cross and subsequently His resurrection from the dead by the power of Ruach Hakodesh.</div>
+    <p>Although the rebellion will continue until Yasha returns, all disciples of Christ&mdash;Yasha can live in victory over the evil hordes of Satan as they walk in the light and expose the deeds of darkness. <span class="reflist">Ephesians 5:8</span></p>
+    <p>Our authority works through Ruach Hakodesh &mdash; not through the flesh. <span class="reflist">Romans 8:5&ndash;7</span></p>
+    <p>Our authority works through the Word of AhaYah, including His Torah. His Torah &mdash; the first five books of Scripture &mdash; provides spiritual understanding. The Old Testament and the New Testament must be read and understood from the culture they were written from.</p>
+    <p>Our authority works through prayer, and empowers disciples to live in victory.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The Nine-Day Journey</div>
+  <h2>Daily Assignments &amp; Fieldwork</h2>
+  <div class="rule"></div>
+
+  <div class="day" data-day="1">
+    <div class="day-head"><div class="daynum">1</div><div class="day-title"><b>FULL INTAKE</b><span>Read the whole teaching &middot; receive the Names</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read the entire Session One teaching above, start to finish, in one sitting &mdash; aloud where possible. The spoken Word trains both heart and mind.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write the four Names by hand &mdash; AhaYah, Yasha, Ruach haKodesh, Adon &mdash; with their meanings.</span></li>
+        <li><input type="checkbox"><span>Begin committing Romans 12:2 to memory. You will carry this verse all 66 days.</span></li>
+        <li><input type="checkbox"><span>Set your daily appointment time for this course and write it down. Same time, every day.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 1 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="2">
+    <div class="day-head"><div class="daynum">2</div><div class="day-title"><b>THE NAMES</b><span>AhaYah &middot; Yasha &middot; Ruach haKodesh &middot; Adon</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study the Names section. Yasha is AhaYah &mdash; God in the flesh; the Son. Ruach haKodesh is Holy Spirit. Adon is Lord. Your confession that Yasha is Adon and Master over your life is the doorway into deliverance.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write a personal declaration using each of the four Names, confessing with your own voice that Yasha is Adon and Master over your life.</span></li>
+        <li><input type="checkbox"><span>Speak that declaration aloud in prayer.</span></li>
+        <li><input type="checkbox"><span>Journal: who has AhaYah been to you until today &mdash; and who do you need Him to be through these 66 days?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 2 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="3">
+    <div class="day-head"><div class="daynum">3</div><div class="day-title"><b>WHAT DELIVERANCE IS</b><span>Body, soul &amp; spirit cleansing and inner healing</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Re-read Part A. Then read Isaiah 61:1 and Luke 4:14&ndash;21 slowly, twice. Deliverance is for ALL disciples of Yasha &mdash; it encompasses body, soul, and spirit cleansing and inner healing, obtained and maintained through a lifestyle of holiness and service unto the Adon.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write the definition of spiritual deliverance in your own words without looking at the text. Then compare against the teaching and correct.</span></li>
+        <li><input type="checkbox"><span>Privately list the areas of your body, soul, and spirit where you know cleansing and inner healing are needed. This list is between you and AhaYah &mdash; you will use it again in Session Five.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 3 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="4">
+    <div class="day-head"><div class="daynum">4</div><div class="day-title"><b>THE KINGDOM OF LIGHT</b><span>Faith &middot; love &middot; joy &middot; peace &middot; hope</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read every Kingdom of Light Scripture: Daniel 7:13&ndash;14; Matthew 6:33; Mark 1:14&ndash;15; Luke 6:20; Luke 13:18&ndash;21; Luke 17:20&ndash;21; John 8:1; Colossians 1:13; 1 John 1:5; 1 Peter 2:9. This is the legal realm of your Creator &mdash; the realm you should want to live in for eternity.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Beside each passage, write one sentence: what does this reveal about the Kingdom of Light?</span></li>
+        <li><input type="checkbox"><span>Make a five-line chart &mdash; faith, love, joy, peace, hope &mdash; and record where each one is presently evident, or absent, in your life.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 4 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="5">
+    <div class="day-head"><div class="daynum">5</div><div class="day-title"><b>THE ILLEGAL REALM</b><span>Exposing the adversary&rsquo;s bondage</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Luke 22:31&ndash;34; John 3:19&ndash;20; Ephesians 6:12; Colossians 1:13; 1 John 5:19. Satan&rsquo;s realm is illegal &mdash; it has kept human beings in bondage from the beginning, producing suffering, shame, guilt, and condemnation.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Build a two-column contrast chart: the Kingdom of Light&rsquo;s fruit on one side; the adversary&rsquo;s produce (suffering, shame, guilt, condemnation) on the other.</span></li>
+        <li><input type="checkbox"><span>Journal honestly: where has the adversary presented his realm to you as attractive &mdash; and what did embracing it actually cost?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 5 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="6">
+    <div class="day-head"><div class="daynum">6</div><div class="day-title"><b>AUTHORITY IN HIS NAME</b><span>The Great Commission for all believers</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Psalm 8:4&ndash;6; Matthew 18:18; Matthew 28:18&ndash;20; Mark 16:15&ndash;20; Luke 10:18&ndash;24; John 16:33; John 17:26; 2 Corinthians 10:4&ndash;5; Ephesians 1:19&ndash;24; Ephesians 2:4&ndash;6. Your authority and identity are in Yasha&mdash;Christ and in His Name alone.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write out Matthew 28:18&ndash;20 by hand and begin memorizing it &mdash; the Great Commission belongs to ALL believers, including you.</span></li>
+        <li><input type="checkbox"><span>From today&rsquo;s passages, list every statement of what Yasha has been given and what He has given to His disciples.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 6 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="7">
+    <div class="day-head"><div class="daynum">7</div><div class="day-title"><b>NOW AUTHORITY</b><span>Through Ruach, the Word &amp; prayer &mdash; not the flesh</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>This is a NOW something &mdash; not a later something. Read Romans 8:5&ndash;7 and Ephesians 5:8. Your authority works through Ruach Hakodesh, not the flesh; through the Word of AhaYah including His Torah &mdash; the first five books, which provide spiritual understanding, read from the culture they were written from; and through prayer.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>In prayer, thank Yasha aloud that His authority was won at the cross and the resurrection &mdash; and that it is yours NOW, in His Name.</span></li>
+        <li><input type="checkbox"><span>Write the three channels your authority works through (Ruach Hakodesh, the Word including Torah, prayer) and one practical way you will engage each channel daily.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 7 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="8">
+    <div class="day-head"><div class="daynum">8</div><div class="day-title"><b>REVIEW &amp; REPORT</b><span>Self-examination report &mdash; submitted to ministry</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Re-read the entire Session One teaching. Then write your Week One Self-Examination Report and submit it to the ministry before taking the Day 9 quiz.</p>
+      <h4>Report Prompts &mdash; answer all five</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>1. In your own words: what is spiritual deliverance, and who is it for?</span></li>
+        <li><input type="checkbox"><span>2. Describe the two opposing kingdoms and why Satan&rsquo;s realm is called illegal.</span></li>
+        <li><input type="checkbox"><span>3. Where is your authority found, how was it won, and through what three channels does it work?</span></li>
+        <li><input type="checkbox"><span>4. What did your seven days of fieldwork expose about your present walk?</span></li>
+        <li><input type="checkbox"><span>5. What daily habit are you committing to renew this week, per Romans 12:2?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 8 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="9">
+    <div class="day-head"><div class="daynum">9</div><div class="day-title"><b>THE GATE &middot; QUIZ DAY</b><span>50 questions &middot; 80% to pass &middot; 3 attempts</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Take the Session One quiz below. A passing score of 80% (40 of 50) unlocks Session Two. You have three attempts. If the third attempt does not pass, contact the ministry at the support email provided with your enrollment.</p>
+      <button class="mark-done">Mark Day 9 Complete (after passing)</button>
+    </div>
+  </div>
+</section>
+
+<section id="quizsec">
+  <div class="kicker">Day Nine</div>
+  <h2>Session One Quiz</h2>
+  <div class="rule"></div>
+  <div class="quiz-gate">
+    <p>50 multiple-choice questions drawn from this session&rsquo;s coursework. Pass mark: <strong style="color:var(--gold-light)">80% (40 of 50)</strong>. Attempts allowed: <strong style="color:var(--gold-light)">3</strong>.</p>
+    <p id="attemptinfo" style="color:var(--muted);margin:10px 0 20px"></p>
+    <button class="btn" id="startquiz">Begin the Quiz</button>
+  </div>
+  <div id="quizbody" style="display:none"></div>
+  <div style="text-align:center"><button class="btn" id="submitquiz" style="display:none;margin-top:10px">Submit Answers</button></div>
+  <div class="result" id="result"></div>
+</section>
+
+<footer>
+  <div class="seal">UNIVERSAL GOSPEL FELLOWSHIP CENTER</div>
+  <p>The 66-Day Gauntlet of Deliverance &amp; Inner Healing &middot; Session One of Seven</p>
+  <p style="font-style:italic;margin-top:6px">&ldquo;Be transformed by the renewing of your mind.&rdquo; &mdash; Romans 12:2</p>
+</footer>
+
+</div>
+<script>
+/* ---------- storage with safe fallback ---------- */
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}
+
+/* ---------- day accordions & progress ---------- */
+var days=document.querySelectorAll('.day');
+days.forEach(function(d){
+  var n=d.getAttribute('data-day');
+  if(sget('ugfc_wk1_day'+n)==='1'){d.classList.add('done');}
+  d.querySelector('.day-head').addEventListener('click',function(){d.classList.toggle('open');});
+  d.querySelector('.mark-done').addEventListener('click',function(){
+    d.classList.add('done'); sset('ugfc_wk1_day'+n,'1'); updateProgress();
+  });
+});
+function updateProgress(){
+  var done=document.querySelectorAll('.day.done').length;
+  document.getElementById('pbar').style.width=(done/9*100)+'%';
+  document.getElementById('plabel').textContent=done+' of 9 days completed';
+}
+updateProgress();
+
+/* ---------- quiz data: [question, [4 options], correctIndex] ---------- */
+var Q=[
+["AhaYah is:",["The Holy Spirit","Father God, our Creator","An angelic messenger","The first high priest"],1],
+["Yasha is:",["A prophet of the Old Testament","An archangel","The Anointed One, our Savior — AhaYah, God in the flesh; the Son, Christ Jesus","Another name for Moses"],2],
+["Ruach haKodesh is:",["The Holy Spirit","The Torah","The Kingdom of Light","The congregation of believers"],0],
+["Adon means:",["Servant","Teacher","Father","Lord"],3],
+["Deliverance ministry within the context of self-deliverance is:",["A modern invention of the church","A continuation of Yasha's ministry and a core part of the gospel","Reserved for ordained clergy only","An Old Testament practice that ended at the cross"],1],
+["Which Scripture set anchors deliverance as part of the gospel in this lesson?",["Genesis 1; Exodus 20; Psalm 23","Matthew 12:29; Matthew 15:21–28; Mark 7:24–30; Revelation 1:18","Romans 1–8 only","Acts 2; Acts 10; Acts 15"],1],
+["Spiritual deliverance is for:",["Only pastors and deliverance ministers","Only new converts","All disciples of Yasha who have believed the gospel and confessed with their own voice that Yasha is Adon and Master over their lives","Those who have completed seminary"],2],
+["Deliverance encompasses:",["The spirit only","Body, soul, and spirit cleansing and inner healing","Physical healing only","Emotional wellness only"],1],
+["According to the teaching, deliverance from evil spirits and from emotional, mental, and physical illnesses is:",["Rare and unpredictable","Impossible until heaven","Easily obtained and maintained by believers committed to a lifestyle of holiness and service unto the Adon","Automatic for every church member"],2],
+["Isaiah 61:1 and Luke 4:14–21 establish:",["The genealogy of Yasha","The anointing to preach good tidings and deliverance to the captives","The order of temple worship","The end-times timeline"],1],
+["The two opposing kingdoms in the war are:",["Rome's and Israel's","AhaYah our Creator's Kingdom vs. Satan our Adversary's realm","Heaven's and earth's governments","The church's and the world's economies"],1],
+["The Kingdom of Light brings:",["Wealth, fame, comfort, ease, and power","Faith, love, joy, peace, and hope","Rules, rituals, and ceremonies","Visions, dreams, signs, and wonders only"],1],
+["Satan's realm causes:",["Untold suffering, shame, guilt, and condemnation","Temporary discomfort only","Nothing — it has no real effect","Only physical sickness"],0],
+["Which verse declares we are delivered from the power of darkness and translated into the Kingdom of His dear Son?",["1 Peter 2:9","Colossians 1:13","Daniel 7:13–14","Matthew 6:33"],1],
+["\"God is light and in Him is no darkness at all\" is found in:",["1 John 1:5","John 8:1","Luke 6:20","Mark 1:14–15"],0],
+["1 Peter 2:9 declares believers are:",["Strangers without a kingdom","A royal priesthood, called out of darkness into His marvelous light","Servants under the law","Watchers on the wall"],1],
+["The course describes Satan's realm as:",["Legal","Neutral","Illegal","Temporary but lawful"],2],
+["1 John 5:19 reveals that:",["The whole world lies in wickedness","The world is improving steadily","Satan has no influence on earth","Only nonbelievers face spiritual war"],0],
+["In Luke 22:31–34, Satan desired to:",["Tempt Yasha in the wilderness","Sift Simon as wheat","Destroy the temple","Enter the herd of swine"],1],
+["John 3:19–20 teaches that men loved darkness rather than light because:",["They could not find the light","The light had not yet come","Their deeds were evil","They were never invited"],2],
+["Ephesians 6:12 says our wrestle is NOT against:",["Principalities","Powers","Flesh and blood","Spiritual wickedness in high places"],2],
+["The believer's authority and identity are found:",["In church membership","In years of experience","In Yasha—Christ and in His Name alone","In personal willpower and discipline"],2],
+["Matthew 28:18–20 is identified in this course as:",["The Beatitudes","The Great Commission for ALL believers","The Lord's Prayer","The Sermon on the Mount"],1],
+["This course declares the believer's authority is:",["A later something, received in heaven","A NOW something — not a later something","Reserved for the apostles' generation","Earned through years of ministry"],1],
+["The NOW authority was won by Yasha through:",["His teachings alone","His miracles alone","His death on the cross and His resurrection from the dead by the power of Ruach Hakodesh","The faith of His disciples"],2],
+["Although the rebellion continues until Yasha returns, all disciples can:",["Only endure defeat until heaven","Live in victory over the evil hordes of Satan as they walk in the light and expose the deeds of darkness","Avoid spiritual warfare entirely","Negotiate peace with the enemy"],1],
+["Which reference accompanies walking in the light and exposing the deeds of darkness?",["Ephesians 5:8","Romans 8:5–7","Psalm 8:4–6","Matthew 18:18"],0],
+["Our authority works through:",["The flesh, when disciplined","Ruach Hakodesh — not through the flesh","Human reasoning","Religious tradition"],1],
+["Romans 8:5–7 contrasts:",["Law and grace","Faith and works","Minding the flesh versus minding the Spirit","Jew and Gentile"],2],
+["The Torah is:",["The Psalms and Proverbs","The first five books of Scripture","The four Gospels","The prophetic books"],1],
+["The Torah provides:",["Historical record only","Spiritual understanding","Ceremonial rules with no present value","Poetry for worship"],1],
+["The Old and New Testaments must be read and understood:",["Through modern Western eyes","From the culture they were written from","Symbolically only","Literally with no context needed"],1],
+["Besides Ruach Hakodesh and the Word, our authority also works through:",["Prayer","Fasting alone","Church attendance","Tithing"],0],
+["Mark 16:15–20 belongs to which Session One theme?",["The two kingdoms","The authority of the disciple, with signs following believers","The definition of deliverance","The Names of God"],1],
+["In Luke 10:18–24, Yasha:",["Calmed the storm","Saw Satan fall as lightning and gave His disciples authority","Fed the five thousand","Cleansed the temple"],1],
+["2 Corinthians 10:4–5 declares our weapons are:",["Carnal but effective","Not carnal, but mighty through AhaYah to the pulling down of strongholds","Physical armor and swords","Words of human wisdom"],1],
+["Ephesians 2:4–6 reveals believers are:",["Waiting outside the Kingdom","Raised up and seated together in heavenly places in Yasha","Servants in the outer court","Still dead in trespasses"],1],
+["Psalm 8:4–6 speaks of man being:",["Cast out of the garden","Crowned with glory and honor and given dominion","Scattered among the nations","Silenced before kings"],1],
+["Matthew 18:18 gives believers authority to:",["Judge the nations now","Bind and loose","Build the temple","Appoint kings"],1],
+["Daily work is required in this course because:",["The ministry needs proof of payment","Habits are broken and a new way of living is learned only by daily completion — otherwise one risks reverting to old ways and lifestyles","It fills the 66 days conveniently","Weekly study is forbidden in Scripture"],1],
+["Romans 12:2 commands believers to:",["Be conformed to this world","Be transformed by the renewing of the mind","Renew the body through fasting","Withdraw from the world entirely"],1],
+["The 66 days of the Gauntlet correspond to:",["The years of Yasha's earthly life","One day for every book of Scripture","The number of disciples sent out","Days of creation multiplied by eleven"],1],
+["Days 64–66 of the Gauntlet are devoted to:",["Catching up on missed quizzes","Fasting, prayer, and reflection — as though one has entered the tomb for three days and nights, having died to self","Celebration and feasting","Recruiting new participants"],1],
+["On Day 67, the adult participant:",["Begins the course again","Submits a testimony by voice recording and/or video, after which the earned certificate of completion is released","Receives automatic ordination","Takes the final 100-question exam"],1],
+["The double portion revelation teaches that 6 + 6 becomes:",["66","13","12","7"],2],
+["Receiving the double portion transforms a person's thinking so that they:",["Merely hope they were delivered","Not just believe, but KNOW they have received a double portion","Depend on the minister for ongoing freedom","No longer need daily disciplines"],1],
+["Who gave spiritual authority to all believers?",["The apostles by laying on of hands","Yasha—Christ","The early church councils","Angels"],1],
+["Ephesians 1:19–24 reveals:",["The armor of God","The exceeding greatness of His power — Yasha seated far above all principality and power","The fruit of the Spirit","The order of church offices"],1],
+["The Kingdom of Light is the realm:",["We visit only in prayer","We should all want to live in for eternity","Reserved for angels alone","That ended with the apostles"],1],
+["To pass each weekly quiz in the Gauntlet, a participant must score:",["70% with unlimited attempts","100% on the first attempt","80% within three attempts","50% within two attempts"],2]
+];
+
+/* ---------- quiz engine ---------- */
+var ATT_KEY='ugfc_wk1_attempts', PASS_KEY='ugfc_wk1_passed';
+function attempts(){return parseInt(sget(ATT_KEY)||'0',10)}
+function refreshAttemptInfo(){
+  var a=attempts(), el=document.getElementById('attemptinfo');
+  if(sget(PASS_KEY)==='1'){el.textContent='PASSED — Session Two is unlocked. Well done.';el.style.color='#7fc98f';document.getElementById('startquiz').style.display='none';return;}
+  if(a>=3){el.textContent='All 3 attempts used. Contact the ministry for review before retaking.';document.getElementById('startquiz').disabled=true;return;}
+  el.textContent='Attempts used: '+a+' of 3.';
+}
+refreshAttemptInfo();
+
+document.getElementById('startquiz').addEventListener('click',function(){
+  var body=document.getElementById('quizbody'); body.innerHTML='';
+  Q.forEach(function(item,i){
+    var div=document.createElement('div'); div.className='q'; div.id='q'+i;
+    var h='<p class="qt">'+(i+1)+'. '+item[0]+'</p>';
+    item[1].forEach(function(opt,j){
+      h+='<label><input type="radio" name="q'+i+'" value="'+j+'"><span>'+opt+'</span></label>';
+    });
+    div.innerHTML=h; body.appendChild(div);
+  });
+  body.style.display='block';
+  document.getElementById('submitquiz').style.display='inline-block';
+  this.style.display='none';
+  document.getElementById('result').style.display='none';
+});
+
+document.getElementById('submitquiz').addEventListener('click',function(){
+  var unanswered=0, score=0;
+  Q.forEach(function(item,i){
+    var sel=document.querySelector('input[name="q'+i+'"]:checked');
+    if(!sel){unanswered++;}
+  });
+  if(unanswered>0){alert('Please answer all questions — '+unanswered+' remain unanswered. Every question counts toward your 80%.');return;}
+  var a=attempts()+1; sset(ATT_KEY,String(a));
+  Q.forEach(function(item,i){
+    var sel=document.querySelector('input[name="q'+i+'"]:checked');
+    var qdiv=document.getElementById('q'+i);
+    qdiv.classList.remove('correct','wrong');
+    if(parseInt(sel.value,10)===item[2]){score++;qdiv.classList.add('correct');}
+    else{qdiv.classList.add('wrong');}
+  });
+  var pct=Math.round(score/Q.length*100);
+  var passed=pct>=80;
+  var res=document.getElementById('result');
+  if(passed){
+    sset(PASS_KEY,'1');
+    res.innerHTML='<h3>PASSED — '+score+' / 50 ('+pct+'%)</h3><p>Session One is complete. Mark Day 9 done above. Session Two — The Nature of Demonic Oppression — is now unlocked. Walk in what you have learned: the authority is NOW.</p>';
+  }else{
+    var left=3-a;
+    res.innerHTML='<h3>'+score+' / 50 ('+pct+'%) — below the 80% gate</h3><p>Questions marked in red were missed. Return to the teaching, review your fieldwork, and try again.'+(left>0?' Attempts remaining: '+left+'.':' No attempts remain — contact the ministry for review.')+'</p>';
+  }
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth'});
+  this.style.display='none';
+  if(!passed && a<3){var sb=document.getElementById('startquiz');sb.style.display='inline-block';sb.textContent='Retake the Quiz';}
+  refreshAttemptInfo();
+});
+</script>
+</body>
+</html>

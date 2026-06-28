@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Certificate of Completion &middot; The 66-Day Gauntlet &middot; Universal Gospel Fellowship Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --midnight:#0A1026; --deep:#121B3A; --panel:#16224A;
+    --gold:#D4AF37; --gold-light:#F0D98C; --gold-deep:#8B6914;
+    --cream:#F2ECD9; --muted:#8A93B8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#05080f;
+    font-family:'Cormorant Garamond',Georgia,serif;
+    color:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:24px;
+  }
+
+  .cert{
+    position:relative;
+    width:1100px; max-width:100%;
+    aspect-ratio:11 / 8.5;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 32%, rgba(212,175,55,0.10) 0%, transparent 60%),
+      linear-gradient(160deg, #0c1430 0%, var(--midnight) 55%, #080d20 100%);
+    border:2px solid var(--gold);
+    box-shadow:0 30px 70px rgba(0,0,0,.6);
+    padding:34px;
+    overflow:hidden;
+  }
+  /* inner frame */
+  .cert::before{
+    content:"";position:absolute;inset:14px;
+    border:1px solid var(--gold-deep);
+    pointer-events:none;
+  }
+  .cert::after{
+    content:"";position:absolute;inset:20px;
+    border:1px solid rgba(212,175,55,.35);
+    pointer-events:none;
+  }
+  /* corner flourishes */
+  .corner{position:absolute;width:46px;height:46px;border:0;color:var(--gold);font-size:46px;line-height:1;opacity:.9}
+  .c-tl{top:8px;left:10px} .c-tr{top:8px;right:10px;transform:scaleX(-1)}
+  .c-bl{bottom:0px;left:10px;transform:scaleY(-1)} .c-br{bottom:0px;right:10px;transform:scale(-1,-1)}
+
+  .inner{
+    position:relative;z-index:2;height:100%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    padding:26px 40px;
+  }
+
+  .org{
+    font-family:'Cinzel',serif;font-size:13px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold-light);margin-top:4px;
+  }
+  .org-sub{
+    font-family:'Cinzel',serif;font-size:9px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--muted);margin-top:5px;
+  }
+  .rule{
+    width:160px;height:1px;margin:12px auto 10px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+
+  h1{
+    font-family:'Cinzel Decorative',serif;font-weight:900;
+    font-size:42px;letter-spacing:.04em;color:var(--gold-light);
+    text-shadow:0 2px 14px rgba(212,175,55,.25);
+    line-height:1;margin-bottom:2px;
+  }
+  .eyebrow{
+    font-family:'Cinzel',serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--muted);margin:14px 0 6px;
+  }
+
+  .name{
+    font-family:'Great Vibes',cursive;
+    font-size:52px;line-height:1.05;color:var(--cream);
+    margin:2px 0 4px;
+  }
+  .name-rule{
+    width:62%;max-width:560px;height:1px;margin:0 auto 4px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .name-cap{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+
+  .body{
+    font-family:'Cormorant Garamond',serif;font-size:17px;line-height:1.5;color:var(--cream);
+    max-width:760px;margin:12px auto 0;
+  }
+  .verse{
+    font-style:italic;color:var(--gold-light);font-size:17px;line-height:1.45;
+    max-width:680px;margin:12px auto 0;
+  }
+  .verse cite{display:block;font-style:normal;font-family:'Cinzel',serif;font-size:9.5px;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+  .commission{
+    font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.5;color:var(--cream);
+    max-width:740px;margin:11px auto 0;
+  }
+
+  /* seal + signatures row */
+  .footrow{
+    margin-top:34px;width:100%;
+    display:flex;align-items:flex-end;justify-content:space-between;gap:18px;
+    padding-top:14px;
+  }
+  .sig{width:34%;text-align:center}
+  .sig-line{border-top:1.5px solid var(--gold);margin:0 auto 5px;width:88%}
+  .sig-name{font-family:'Cinzel',serif;font-size:12.5px;letter-spacing:.08em;color:var(--cream);font-weight:600}
+  .sig-title{font-family:'Cinzel',serif;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-top:3px}
+
+  .seal-wrap{width:32%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+  .seal-medallion{
+    width:104px;height:104px;border-radius:50%;
+    background:radial-gradient(circle at 50% 38%, #1c2a55, #0c1430 75%);
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 26px rgba(212,175,55,.28), inset 0 0 18px rgba(0,0,0,.5);
+    position:relative;
+  }
+  .seal-medallion::after{
+    content:"";position:absolute;inset:7px;border:1px solid rgba(212,175,55,.5);border-radius:50%;
+  }
+  .seal-label{
+    font-family:'Cinzel',serif;font-size:8px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-light);margin-top:7px;
+  }
+  .date-line{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--muted);
+    margin-top:8px;
+  }
+  .date-line b{color:var(--cream);font-style:normal;font-weight:600}
+
+  @media print{
+    @page{size:landscape;margin:0}
+    body{background:#05080f;padding:0}
+    .cert{box-shadow:none;width:100%;height:100vh;aspect-ratio:auto}
+  }
+  @media(max-width:720px){
+    .cert{padding:18px}
+    h1{font-size:30px} .name{font-size:38px} .body,.commission{font-size:14px} .verse{font-size:14px}
+    .footrow{flex-direction:column;align-items:center;gap:22px}
+    .sig,.seal-wrap{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<div class="cert">
+  <div class="corner c-tl">&#10086;</div>
+  <div class="corner c-tr">&#10086;</div>
+  <div class="corner c-bl">&#10086;</div>
+  <div class="corner c-br">&#10086;</div>
+
+  <div class="inner">
+    <div class="org">Universal Gospel Fellowship Center</div>
+    <div class="org-sub">The Remnant &middot; Est. 2005</div>
+    <div class="rule"></div>
+
+    <h1>Certificate of Completion</h1>
+    <div class="eyebrow">This certifies that</div>
+
+    <div class="name">&#10100; Recipient&rsquo;s Name &#10101;</div>
+    <div class="name-rule"></div>
+    <div class="name-cap">Overcomer &middot; Recipient of the Overcomer&rsquo;s Seal</div>
+
+    <p class="body">
+      has, by the grace of AhaYah and through faithful obedience, completed all sixty&#8209;six days of the
+      <strong style="color:var(--gold-light)">66&#8209;Day Gauntlet of Deliverance &amp; Inner Healing</strong> &mdash;
+      receiving authority, spotting and untying every knot, forgiving every name, filling every room,
+      exchanging every lie for truth, and entering the tomb to die to self and rise an overcomer.
+    </p>
+
+    <p class="verse">
+      &ldquo;And they overcame him by the blood of the Lamb, and by the word of their testimony.&rdquo;
+      <cite>Revelation 12:11</cite>
+    </p>
+
+    <p class="commission">
+      Having walked the full road and given testimony before the Ministry, this one is recognized and
+      commissioned as an <strong style="color:var(--gold-light)">Overcomer</strong> &mdash; sent to walk in
+      maintained freedom and to carry deliverance to others, to the glory of AhaYah alone.
+    </p>
+
+    <div class="footrow">
+      <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-name">Jimmy B. Street II</div>
+        <div class="sig-title">Ordained Minister</div>
+      </div>
+
+      <div class="seal-wrap">
+        <div class="seal-medallion">
+          <svg viewBox="0 0 120 120" width="74" height="74" aria-label="Overcomer's crown seal">
+            <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="3"/>
+            <path d="M 30 76 L 34 46 L 46 60 L 60 38 L 74 60 L 86 46 L 90 76 Z" fill="none" stroke="#D4AF37" stroke-width="4" stroke-linejoin="round"/>
+            <line x1="30" y1="84" x2="90" y2="84" stroke="#D4AF37" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="60" cy="38" r="3.5" fill="#F0D98C"/><circle cx="34" cy="46" r="3" fill="#F0D98C"/><circle cx="86" cy="46" r="3" fill="#F0D98C"/>
+          </svg>
+        </div>
+        <div class="seal-label">The Overcomer&rsquo;s Seal</div>
+        <div class="date-line">Conferred on <b>&#10100; date &#10101;</b></div>
+      </div>
+
+      <div class="sig">
+        <div class="sig-line"></div>
+        <div class="sig-name">Leslie Ann Street</div>
+        <div class="sig-title">Founding &amp; Ordained Minister</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

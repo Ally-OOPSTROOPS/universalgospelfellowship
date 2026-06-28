@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 66-Day Gauntlet &middot; Session Six &middot; Inner Healing, Broken Hearts &amp; Soul Ties</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --midnight:#0A1026; --deep:#121B3A; --panel:#16224A; --ink:#0E1530;
+  --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(180deg,var(--midnight),var(--deep));color:var(--cream);
+  font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;line-height:1.65;min-height:100vh}
+.wrap{max-width:920px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3{font-family:'Cinzel Decorative',Georgia,serif;color:var(--gold-light);font-weight:700}
+header{text-align:center;padding:54px 0 30px;border-bottom:1px solid rgba(212,175,55,.35)}
+header .eyebrow{letter-spacing:.35em;font-size:13px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+header h1{font-size:clamp(26px,4.5vw,42px);letter-spacing:.08em;margin-bottom:10px}
+header .sub{font-size:18px;color:var(--cream);font-style:italic}
+header .days{margin-top:14px;color:var(--gold);letter-spacing:.2em;font-size:14px}
+.progressbar{margin:26px auto 0;max-width:560px;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.4);border-radius:999px;height:14px;overflow:hidden}
+.progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,#8a6d1f,var(--gold),var(--gold-light));transition:width .5s}
+.progresslabel{font-size:14px;color:var(--muted);margin-top:8px}
+section{margin-top:54px}
+.kicker{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:14px;letter-spacing:.3em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+h2{font-size:clamp(22px,3.4vw,30px);text-align:center;margin-bottom:26px}
+.rule{width:200px;height:1.5px;margin:0 auto 30px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.card{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;padding:28px 30px;margin-bottom:20px}
+.card h3{font-size:19px;margin-bottom:12px;letter-spacing:.04em}
+.card p{margin-bottom:14px}
+.card p:last-child{margin-bottom:0}
+.scripture{border-left:3px solid var(--gold);padding:10px 18px;margin:14px 0;font-style:italic;color:var(--gold-light);background:rgba(212,175,55,.06);border-radius:0 8px 8px 0}
+.reflist{color:var(--muted);font-size:17px}
+.callout{background:var(--ink);border:1.5px solid var(--gold);border-radius:12px;padding:24px 28px;text-align:center;margin:30px 0}
+.callout strong{color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.08em;display:block;margin-bottom:8px;font-size:17px}
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:6px}
+.name{background:var(--ink);border:1px solid rgba(212,175,55,.5);border-radius:10px;padding:18px;text-align:center}
+.name b{font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:17px;display:block;margin-bottom:6px}
+.name span{font-size:16px}
+/* days */
+.day{background:var(--panel);border:1px solid rgba(212,175,55,.45);border-radius:12px;margin-bottom:14px;overflow:hidden}
+.day-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
+.day-head:hover{background:rgba(212,175,55,.07)}
+.daynum{flex:0 0 46px;height:46px;border-radius:50%;border:2px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:20px;font-weight:700}
+.day.done .daynum{background:var(--gold);color:var(--midnight);border-color:var(--gold)}
+.day-title{flex:1}
+.day-title b{font-family:'Cinzel Decorative',serif;font-size:16px;color:var(--gold-light);letter-spacing:.04em}
+.day-title span{display:block;color:var(--muted);font-size:15px}
+.chev{color:var(--gold);transition:transform .3s;font-size:20px}
+.day.open .chev{transform:rotate(90deg)}
+.day-body{display:none;padding:6px 26px 24px;border-top:1px solid rgba(212,175,55,.25)}
+.day.open .day-body{display:block}
+.day-body h4{color:var(--gold);font-size:15px;letter-spacing:.18em;text-transform:uppercase;margin:18px 0 8px;font-family:'Cinzel Decorative',serif}
+ul.tasks{list-style:none}
+ul.tasks li{display:flex;gap:12px;align-items:flex-start;padding:7px 0}
+ul.tasks input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.mark-done{margin-top:18px;background:transparent;border:1.5px solid var(--gold);color:var(--gold-light);font-family:'Cinzel Decorative',serif;letter-spacing:.1em;padding:10px 22px;border-radius:999px;cursor:pointer;font-size:14px}
+.mark-done:hover{background:var(--gold);color:var(--midnight)}
+.day.done .mark-done{background:var(--gold);color:var(--midnight)}
+/* quiz */
+.quiz-gate{text-align:center}
+.q{background:var(--panel);border:1px solid rgba(212,175,55,.4);border-radius:12px;padding:22px 26px;margin-bottom:14px}
+.q p.qt{font-weight:600;margin-bottom:12px}
+.q label{display:flex;gap:10px;align-items:flex-start;padding:6px 4px;border-radius:8px;cursor:pointer}
+.q label:hover{background:rgba(212,175,55,.08)}
+.q input{margin-top:7px;accent-color:var(--gold)}
+.q.correct{border-color:#5fae6e}
+.q.wrong{border-color:#c0564f}
+.btn{background:var(--gold);color:var(--midnight);border:none;font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.1em;padding:15px 36px;border-radius:999px;cursor:pointer;font-size:16px}
+.btn:hover{background:var(--gold-light)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.result{margin:22px auto;max-width:640px;border-radius:12px;padding:24px;border:1.5px solid var(--gold);background:var(--ink);text-align:center;display:none}
+.result h3{font-size:22px;margin-bottom:8px}
+footer{margin-top:70px;text-align:center;color:var(--muted);font-size:15px;border-top:1px solid rgba(212,175,55,.3);padding-top:26px}
+footer .seal{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.25em;font-size:13px;margin-bottom:6px}
+@media (max-width:600px){body{font-size:17px}.card{padding:20px}}
+:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<style>
+/* Session 2 additions: inventory + badge */
+.inv-item{display:flex;gap:12px;align-items:flex-start;padding:9px 12px;border-radius:8px;border:1px solid rgba(212,175,55,.2);margin-bottom:8px;background:rgba(212,175,55,.04)}
+.inv-item:hover{background:rgba(212,175,55,.1)}
+.inv-item input{margin-top:7px;width:17px;height:17px;accent-color:var(--gold);flex:0 0 17px;cursor:pointer}
+.inv-cat{font-family:'Cinzel Decorative',serif;color:var(--gold);letter-spacing:.18em;font-size:14px;text-transform:uppercase;margin:24px 0 10px}
+.inv-count{text-align:center;color:var(--muted);margin-top:14px;font-size:16px}
+textarea.reflect{width:100%;min-height:110px;background:var(--ink);border:1px solid rgba(212,175,55,.45);border-radius:10px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:17px;padding:14px;margin:8px 0 18px;resize:vertical}
+textarea.reflect:focus{outline:2px solid var(--gold-light)}
+/* badge */
+#badgewrap{display:none;margin-top:30px;text-align:center}
+#badge{max-width:640px;margin:0 auto;background:linear-gradient(180deg,#0E1530,#16224A);border:3px double var(--gold);border-radius:16px;padding:44px 36px;position:relative}
+#badge .seal-ring{width:130px;height:130px;border-radius:50%;border:3px solid var(--gold);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1a2752,#0E1530);box-shadow:0 0 0 6px rgba(212,175,55,.18)}
+#badge .seal-ring span{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:44px}
+#badge h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:24px;letter-spacing:.12em;margin-bottom:6px}
+#badge .b-sub{color:var(--gold);letter-spacing:.25em;font-size:13px;text-transform:uppercase;margin-bottom:18px}
+#badge .b-name{font-size:28px;color:var(--cream);font-style:italic;border-bottom:1px solid rgba(212,175,55,.5);display:inline-block;padding:0 26px 6px;margin-bottom:16px;min-height:38px}
+#badge .b-text{font-size:16px;color:var(--cream);max-width:460px;margin:0 auto 16px}
+#badge .b-date{color:var(--muted);font-size:14px;letter-spacing:.1em}
+#badge .b-min{margin-top:18px;color:var(--gold);font-family:'Cinzel Decorative',serif;font-size:12px;letter-spacing:.22em}
+#namefield{background:var(--ink);border:1px solid var(--gold);border-radius:8px;color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:19px;padding:10px 16px;width:min(380px,90%);text-align:center;margin:14px 0}
+@media print{
+  body *{visibility:hidden}
+  #badge,#badge *{visibility:visible}
+  #badge{position:fixed;inset:0;margin:auto;height:fit-content;border:3px double #8a6d1f}
+  body{background:#fff}
+}
+</style>
+<style>
+.exch{background:var(--ink);border:1px solid rgba(212,175,55,.35);border-radius:10px;padding:16px;margin-bottom:14px}
+.exch b{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:14px;letter-spacing:.08em}
+.exch .lielab{color:#e8b8b3}
+.exch textarea{min-height:64px}
+.chartbtns{text-align:center;margin:18px 0}
+.chartbtns a{display:inline-block;background:var(--gold);color:var(--midnight);font-family:'Cinzel Decorative',serif;font-weight:700;letter-spacing:.08em;padding:13px 30px;border-radius:999px;text-decoration:none;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">Universal Gospel Fellowship Center &middot; The 66-Day Gauntlet</div>
+  <h1>Session Six</h1>
+  <div class="sub">Inner Healing, Broken Hearts, Soul Ties &mdash; Replacing Lies with Truth</div>
+  <div class="days">DAYS 46 &ndash; 54 OF 66</div>
+  <div class="progressbar" aria-label="Session progress"><div id="pbar"></div></div>
+  <div class="progresslabel" id="plabel">0 of 9 days completed</div>
+</header>
+
+<section>
+  <div class="kicker">This Module&rsquo;s Purpose</div>
+  <h2>Why This Session Exists</h2>
+  <div class="rule"></div>
+  <div class="callout">
+    <p>This session ministers what deliverance makes possible: the binding up of the broken heart, the severing of ungodly soul ties, and the exchange of every lie believed over a lifetime for AhaYah&rsquo;s Scriptural truth. All of us have bruises that need healing and deliverance &mdash; and once we go through deliverance, then and only then can inner healing be ministered. This is where true spiritual warfare is experienced.</p>
+  </div>
+  <div class="card">
+    <h3>Review &mdash; Bringing What You Have Learned Back to the Table</h3>
+    <p>In Session Five you walked the steps: examined, repented toward the irrevocable, forgave every name, renounced every knot, and filled every emptied room with Ruach HaKodesh. The rooms are clean &mdash; now they are healed and furnished. The wounds that once served as footholds (Session Two) are bound up; the words that once cursed (Session Three) now carry memorized truth; the knots you spotted (Session Four) leave scars that the Healer Himself touches this week.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lesson Six</div>
+  <h2>Inner Healing, Broken Hearts, Soul Ties &amp; Lies</h2>
+  <div class="rule"></div>
+
+  <div class="card">
+    <h3>A &middot; The Anointing and the Blueprint</h3>
+    <div class="scripture">&ldquo;The Spirit of the Adon, the AhlaHayam of Israel, is upon me; because the Adon has anointed me to preach good tidings unto the meek; he has sent me to bind up the brokenhearted, to proclaim liberty to the captives, and the opening of the prison to them that are bound.&rdquo; &mdash; Isaiah 61:1</div>
+    <p>Yasha Himself quoted Isaiah 61:1 when He stood in the synagogue, having returned from the Jordan and the wilderness, led by Ruach Hakodesh: &ldquo;He has anointed me to preach the gospel to the poor; he has sent me to heal the brokenhearted, to preach deliverance to the captives, and recovering of sight to the blind, to set at liberty them that are bruised, to preach the acceptable year of the Adon.&rdquo; Then He closed the book, gave it to the minister, and sat down &mdash; and all eyes were upon Him (Luke 4:18).</p>
+    <p>This is the Scriptural foundation for inner healing and true wholeness &mdash; body, soul, and spirit: &ldquo;Now may the God of peace himself cause you to be completely dedicated to him; and may your spirit, soul, and body be kept intact and blameless at our Adon Yasha&rsquo;s coming&rdquo; (1 Thessalonians 5:23). Yasha gave us the blueprint for deliverance ministry: preach the gospel, heal the brokenhearted, preach deliverance to those held captive at Hasatan&rsquo;s will, and restore sight to the blind &mdash; spiritual blindness more than physical &mdash; setting at liberty all that are bruised.</p>
+  </div>
+
+  <div class="card">
+    <h3>B &middot; Access to the Promises</h3>
+    <p>Once the gospel has been presented to one that is meek, they decide to accept it or reject it. &ldquo;The sacrifices of AhaYah are a broken spirit; a broken and contrite heart, O AhaYah, you will not despise&rdquo; (Psalm 51:17) &mdash; He wants humility and godly sorrow; when people humble themselves and turn from their sins, He will not refuse them.</p>
+    <p>After believing the gospel and receiving Yasha as Savior, they have access to inner healing &mdash; liberation from captivity, known or unknown spiritual bondage &mdash; released from being held captive at the enemy&rsquo;s will: &ldquo;They have been trapped by the devil and he makes them obey him, but God may help them escape&rdquo; (2 Timothy 2:26). A wholly converted human has access to ALL the promises in Scripture. Physical and spiritual cleansing and healing are benefits of becoming a Son of the Most High, the God of Abraham, Isaac, and Jacob, the God of Israel, our Creator and Sovereign King: &ldquo;For no matter how many promises AhaYah has made, they are Yes in Yasha&rdquo; (2 Corinthians 1:20).</p>
+  </div>
+
+  <div class="card">
+    <h3>C &middot; Deliverance First &mdash; Then the Mending of the Broken Heart</h3>
+    <p>All of us have bruises that need healing and deliverance. Once we go through deliverance, then and only then can inner healing be ministered. Connecting inner healing &mdash; based on traumas, fears, abuse, neglect, abandonment, evil intentions &mdash; with deliverance is crucial to help someone understand how to sever ungodly soul ties and break unhealthy soul-binding relationships. As revelation comes, they can replace lies with truth.</p>
+    <p>Once we have experienced deliverance, our inner healing process starts, and we can truly have our minds transformed: &ldquo;Be not conformed to this world, but be transformed by the renewing of your mind&rdquo; (Romans 12:2). Continuing prayer ministry reveals through deliverance what areas of the soul need inner healing. Broken hearts can be mended when surrendered completely to the Adon. Effective prayer and continued counsel in the Word are the main tools for those seeking inner healing.</p>
+  </div>
+
+  <div class="card">
+    <h3>D &middot; Soul Ties, Soul-Binding Relationships &amp; Codependency</h3>
+    <p>The breaking of all ungodly soul ties and soul-binding relationships should be further explored for those who have been in abusive and manipulative relationships. Codependency must be broken as well, so that healthy relationships can be formed in the future. Fragmented souls may take longer to heal and should be handled with great care and consideration &mdash; especially children and the emotionally immature, who need further instruction on how to effectively recover from these traumas.</p>
+  </div>
+
+  <div class="card">
+    <h3>E &middot; Replacing Lies with the Truth &mdash; True Spiritual Warfare</h3>
+    <p>This is where true spiritual warfare is experienced. By recognizing the lies, we take steps to change our beliefs to Scriptural truths &mdash; defeating the enemy by identifying the recurring, derogatory thoughts and conversations and replacing them with truthful thoughts and statements. <strong style="color:var(--gold-light)">If the thought or speech does not align with Scripture, it is from the enemy</strong> &mdash; and must be spoken to with authority and renounced. Replace negative thoughts, perspectives, and hype with positive thoughts and memorized Scripture, retraining your brain and heart. This process takes discipline and time, but it will eventually take root, and your thoughts and speech will improve.</p>
+    <div class="scripture">&ldquo;If you continue in my word, then you are my disciples indeed; and you will know the truth, and the truth will make you free.&rdquo; &mdash; John 8:31&ndash;32. Converts are to be taught how to exchange lies they have believed their entire lives for Scriptural truth.</div>
+    <p class="reflist">The weapons of this warfare: Ephesians 6:10&ndash;19 (the whole armor of AhaYah, the sword of the Spirit which is the spoken Word) &middot; 2 Corinthians 10:3&ndash;6 (casting down imaginations, bringing every thought into captivity to the obedience of Yasha) &middot; Matthew 12:34&ndash;37 (out of the abundance of the heart the mouth speaks) &middot; 2 Thessalonians 2:8&ndash;14 (they perished because they received not the love of the truth &mdash; and were sent strong delusion to believe a lie).</p>
+  </div>
+
+  <div class="chartbtns">
+    <a href="GAUNTLET-LIES-TO-TRUTH-CHART.html" target="_blank">Open the Lies-to-Truth Exchange Chart &mdash; Print or Download</a>
+  </div>
+
+  <div class="callout">
+    <strong>Lesson Summarization &mdash; Three Truths to Carry</strong>
+    <p>Deliverance first, then and only then inner healing &mdash; the bruise is touched after the captor is evicted. &nbsp;&middot;&nbsp; Ungodly soul ties keep wounds open; severed in Yasha&rsquo;s Name, the soul is knit to the Adon and restored. &nbsp;&middot;&nbsp; Any thought or word that does not align with Scripture is from the enemy &mdash; renounce it with authority and replace it with memorized truth.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">The Nine-Day Journey</div>
+  <h2>Daily Assignments &amp; Fieldwork &middot; Days 46&ndash;54</h2>
+  <div class="rule"></div>
+
+  <div class="day" data-day="1">
+    <div class="day-head"><div class="daynum">46</div><div class="day-title"><b>INTAKE &amp; THE BLUEPRINT</b><span>Isaiah 61:1 &middot; Luke 4:18 &middot; receive the chart</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read the entire Session Six teaching in one sitting. Open the Lies-to-Truth Exchange Chart, print it or save it as PDF, and keep it beside you all nine days &mdash; rows 17&ndash;20 are blank on purpose; they are yours.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write out Isaiah 61:1 by hand. Read Luke 4:16&ndash;21 aloud and sit with the moment all eyes were on Him &mdash; the blueprint was being declared over you.</span></li>
+        <li><input type="checkbox"><span>Print or download your Exchange Chart and place it where you study daily.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 46 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="2">
+    <div class="day-head"><div class="daynum">47</div><div class="day-title"><b>THE BRUISE INVENTORY</b><span>Traumas, fears, abuse, neglect, abandonment</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Parts B and C with Psalm 51:17; 2 Timothy 2:26; 2 Corinthians 1:20; 1 Thessalonians 5:23. Every promise is Yes in Yasha &mdash; including the mending of what was bruised.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Privately, before AhaYah alone, write your bruise inventory: the traumas, fears, abuse, neglect, abandonment, and evil intentions done against you. These are not knots you tied &mdash; they are wounds you carry, and the Healer asks to see each one.</span></li>
+        <li><input type="checkbox"><span>Over each entry, write: &ldquo;He was anointed to bind up THIS.&rdquo;</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 47 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="3">
+    <div class="day-head"><div class="daynum">48</div><div class="day-title"><b>THE SURRENDERED HEART</b><span>Broken hearts mend when surrendered completely</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Broken hearts can be mended when surrendered completely to the Adon. Effective prayer and continued counsel in the Word are the main tools. Read Psalm 147:3 and Psalm 51:17 again, slowly.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Take your bruise inventory into unhurried prayer. One wound at a time, surrender it completely: name it, hand it over, and do not take it back. Write the date beside each surrendered wound.</span></li>
+        <li><input type="checkbox"><span>Write one paragraph: which wound resisted surrender the most, and what does that resistance tell you?</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 48 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="4">
+    <div class="day-head"><div class="daynum">49</div><div class="day-title"><b>SOUL TIES SEVERED</b><span>Soul-binding relationships &amp; codependency broken</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Part D. Ungodly soul ties and soul-binding relationships &mdash; especially from abusive and manipulative relationships &mdash; keep wounds open and futures chained. Codependency must be broken so healthy relationships can form. Fragmented souls take longer and are handled with great care.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Write your relationship inventory: every ungodly soul tie and soul-binding relationship, past or present, including codependent patterns.</span></li>
+        <li><input type="checkbox"><span>One at a time, aloud: &ldquo;In the Name of Yasha, I sever every ungodly soul tie between myself and ____. I take back what was given, I return what was taken, and my soul is knit to the Adon alone.&rdquo; If a current relationship requires wisdom or safety planning, contact the ministry &mdash; do not walk that alone.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 49 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="5">
+    <div class="day-head"><div class="daynum">50</div><div class="day-title"><b>THE EXCHANGE &middot; PART I</b><span>Recognize &middot; renounce &middot; replace</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Study Part E and the chart&rsquo;s sixteen exchanges. The test is absolute: if the thought or speech does not align with Scripture, it is from the enemy. Read John 8:31&ndash;32 aloud &mdash; freedom belongs to those who CONTINUE in His word.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Identify the five lies you have believed the longest &mdash; use the chart&rsquo;s sixteen as mirrors, and your bruise inventory as the map of where lies entered. Enter them in your Exchange Work below.</span></li>
+        <li><input type="checkbox"><span>For each lie, find and write the replacing truth with its Scripture &mdash; then fill rows 17&ndash;20 of your printed chart with your own.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 50 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="6">
+    <div class="day-head"><div class="daynum">51</div><div class="day-title"><b>THE EXCHANGE &middot; PART II</b><span>Every thought taken captive</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read 2 Corinthians 10:3&ndash;6 and Matthew 12:34&ndash;37. The weapons are not carnal: imaginations are cast down, and every thought is brought into captivity to the obedience of Yasha.</p>
+      <h4>Fieldwork &mdash; Thought-Watch Day</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>For one full day, every time a recurring derogatory thought rises, work the exchange in real time: recognize it, renounce it aloud with authority, and speak its replacement Scripture. Tally how many exchanges you made.</span></li>
+        <li><input type="checkbox"><span>Begin memorizing the five replacement Scriptures from your Exchange Work &mdash; the sword must be in hand, not on the shelf.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 51 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="7">
+    <div class="day-head"><div class="daynum">52</div><div class="day-title"><b>THE ARMOR &amp; THE LOVE OF THE TRUTH</b><span>Ephesians 6:10&ndash;19 &middot; 2 Thessalonians 2:8&ndash;14</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Read Ephesians 6:10&ndash;19 piece by piece &mdash; loins girt with truth, breastplate of righteousness, feet shod with the gospel of peace, shield of faith, helmet of salvation, the sword of the Spirit which is the spoken Word of AhaYah, praying always. Then read 2 Thessalonians 2:8&ndash;14: those who perished &ldquo;received not the LOVE of the truth&rdquo; &mdash; and were sent strong delusion to believe a lie. The exchange you are making this week is not technique; it is loving the truth.</p>
+      <h4>Fieldwork</h4>
+      <ul class="tasks">
+        <li><input type="checkbox"><span>Dress in the armor aloud this morning, piece by piece, and every morning through Day 67.</span></li>
+        <li><input type="checkbox"><span>Write one sentence per armor piece: how this piece guards the inner healing AhaYah has worked in you this week.</span></li>
+      </ul>
+      <button class="mark-done">Mark Day 52 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="8">
+    <div class="day-head"><div class="daynum">53</div><div class="day-title"><b>DEEP REFLECTION</b><span>Five questions &middot; short paragraph answers &middot; submitted to ministry</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Answer each question in short paragraph form and submit them with your Week Six report. Your words save on this device as you type.</p>
+      <h4>The Five Questions</h4>
+      <p><strong style="color:var(--gold-light)">1.</strong> Why can inner healing be ministered only after deliverance &mdash; what happens when the order is reversed?</p>
+      <textarea class="reflect" data-r="1" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">2.</strong> John 8:31&ndash;32 promises freedom to those who CONTINUE in His word. Why does the exchange of lies for truth require continuing rather than a single decision?</p>
+      <textarea class="reflect" data-r="2" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">3.</strong> Which lie had you believed your entire life &mdash; and what truth with its Scripture now stands in its place?</p>
+      <textarea class="reflect" data-r="3" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">4.</strong> How does an ungodly soul tie keep a wound open &mdash; and what changed in you when you severed one this week?</p>
+      <textarea class="reflect" data-r="4" placeholder="Write your short paragraph here..."></textarea>
+      <p><strong style="color:var(--gold-light)">5.</strong> 2 Thessalonians 2:10&ndash;11 says they perished because they received not the LOVE of the truth. What does loving the truth &mdash; not merely knowing it &mdash; look like in your daily walk?</p>
+      <textarea class="reflect" data-r="5" placeholder="Write your short paragraph here..."></textarea>
+      <button class="mark-done">Mark Day 53 Complete</button>
+    </div>
+  </div>
+
+  <div class="day" data-day="9">
+    <div class="day-head"><div class="daynum">54</div><div class="day-title"><b>THE GATE &middot; THE MENDED HEART SEAL</b><span>Exchange work acceptance &middot; receive your award</span></div><div class="chev">&#10095;</div></div>
+    <div class="day-body">
+      <h4>Assignment</h4>
+      <p>Finalize your Exchange Work below, confirm your fieldwork, and make your affirmation. Acceptance releases your printable and downloadable <strong style="color:var(--gold-light)">Mended Heart Seal</strong> and unlocks Session Seven &mdash; Maintaining Freedom, and the approach to the tomb.</p>
+      <button class="mark-done">Mark Day 54 Complete (after the affirmation)</button>
+    </div>
+  </div>
+</section>
+
+<section id="exchsec">
+  <div class="kicker">Your Working Document</div>
+  <h2>The Exchange Work</h2>
+  <div class="rule"></div>
+  <div class="card">
+    <p>Five exchanges, worked this week and carried for life. Name the lie; then write the truth that replaces it with its Scripture. Your entries save on this device. Memorize every replacement &mdash; the sword of the Spirit is the SPOKEN Word.</p>
+    <div id="exchlist"></div>
+  </div>
+</section>
+
+<section id="gatesec">
+  <div class="kicker">Day Fifty-Four &middot; The Gate</div>
+  <h2>Fieldwork Acceptance &amp; The Mended Heart Seal</h2>
+  <div class="rule"></div>
+
+  <div class="callout">
+    <strong>Affirmation Before the Seal</strong>
+    <ul class="tasks">
+      <li><input type="checkbox" id="aff1"><span>I wrote my bruise inventory honestly and surrendered each wound completely to the Adon &mdash; and I have not taken them back.</span></li>
+      <li><input type="checkbox" id="aff2"><span>I severed every ungodly soul tie and soul-binding pattern aloud in Yasha&rsquo;s Name, seeking the ministry&rsquo;s counsel where wisdom or safety required it.</span></li>
+      <li><input type="checkbox" id="aff3"><span>My Exchange Work is complete: five lifelong lies named, renounced with authority, and replaced with memorized Scripture &mdash; and rows 17&ndash;20 of my chart are filled.</span></li>
+      <li><input type="checkbox" id="aff4"><span>I have written my five reflection paragraphs and submitted my Week Six report &mdash; and I put on the whole armor of AhaYah daily, loving the truth that makes me free.</span></li>
+    </ul>
+    <div style="text-align:center;margin-top:16px">
+      <input type="text" id="namefield" placeholder="Type your full name as it should appear on your Seal">
+      <br>
+      <button class="btn" id="sealbtn" disabled>Release My Mended Heart Seal</button>
+      <p id="sealhint" style="color:var(--muted);font-size:15px;margin-top:10px"></p>
+    </div>
+  </div>
+
+  <div id="badgewrap">
+    <div id="badge">
+      <svg viewBox="0 0 120 120" width="130" height="130" style="display:block;margin:0 auto 18px" aria-label="Mended heart seal">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="3"/>
+        <path d="M60 92 C 30 70, 26 46, 40 36 C 50 29, 58 35, 60 42 C 62 35, 70 29, 80 36 C 94 46, 90 70, 60 92 Z" fill="none" stroke="#D4AF37" stroke-width="4"/>
+        <path d="M 49 40 L 56 52 L 50 62 L 58 74 L 54 84" fill="none" stroke="#F0D98C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>THE MENDED HEART SEAL</h3>
+      <div class="b-sub">The 66-Day Gauntlet &middot; Session Six Completed &middot; Bound Up by the Healer</div>
+      <div class="b-name" id="bname">&nbsp;</div>
+      <div class="b-text">has completed Days 46&ndash;54, Inner Healing, Broken Hearts &amp; Soul Ties &mdash; surrendering every bruise to the Adon, severing every ungodly soul tie in Yasha&rsquo;s Name, and exchanging the lies of a lifetime for AhaYah&rsquo;s memorized truth. The golden seam is the Healer&rsquo;s signature: mended, not merely patched.</div>
+      <div class="b-date" id="bdate"></div>
+      <div class="b-min">UNIVERSAL GOSPEL FELLOWSHIP CENTER &middot; ISAIAH 61:1 &middot; PSALM 147:3 &middot; JOHN 8:31&ndash;32</div>
+    </div>
+    <div style="margin-top:20px">
+      <button class="btn" onclick="window.print()">Print My Seal</button>
+      <button class="btn" id="dlbtn" style="margin-left:10px">Download My Seal</button>
+    </div>
+    <p style="color:var(--muted);font-size:15px;margin-top:10px">Session Seven &mdash; Maintaining Freedom &mdash; is now unlocked. The tomb draws near.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="seal">UNIVERSAL GOSPEL FELLOWSHIP CENTER</div>
+  <p>The 66-Day Gauntlet of Deliverance &amp; Inner Healing &middot; Session Six of Seven</p>
+  <p style="font-style:italic;margin-top:6px">&ldquo;You will know the truth, and the truth will make you free.&rdquo; &mdash; John 8:32</p>
+</footer>
+
+</div>
+<script>
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}}
+
+var days=document.querySelectorAll('.day');
+days.forEach(function(d){
+  var n=d.getAttribute('data-day');
+  if(sget('ugfc_wk6_day'+n)==='1'){d.classList.add('done');}
+  d.querySelector('.day-head').addEventListener('click',function(){d.classList.toggle('open');});
+  d.querySelector('.mark-done').addEventListener('click',function(){
+    d.classList.add('done'); sset('ugfc_wk6_day'+n,'1'); updateProgress(); checkSeal();
+  });
+});
+function updateProgress(){
+  var done=document.querySelectorAll('.day.done').length;
+  document.getElementById('pbar').style.width=(done/9*100)+'%';
+  document.getElementById('plabel').textContent=done+' of 9 days completed';
+}
+updateProgress();
+
+document.querySelectorAll('textarea.reflect').forEach(function(t){
+  var k='ugfc_wk6_reflect'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+/* Exchange Work: 5 lie/truth pairs */
+var el=document.getElementById('exchlist'), html='';
+for(var i=1;i<=5;i++){
+  html+='<div class="exch"><b>EXCHANGE '+i+'</b>'
+   +'<p class="lielab" style="margin:8px 0 4px;font-style:italic">The lie I have believed:</p>'
+   +'<textarea class="reflect exwork" data-r="lie'+i+'" placeholder="Name the lie plainly..."></textarea>'
+   +'<p style="margin:8px 0 4px;color:var(--gold-light);font-style:italic">AhaYah&rsquo;s truth that replaces it &mdash; with its Scripture:</p>'
+   +'<textarea class="reflect exwork" data-r="truth'+i+'" placeholder="Write the truth and the Scripture you are memorizing..."></textarea></div>';
+}
+el.innerHTML=html;
+document.querySelectorAll('textarea.exwork').forEach(function(t){
+  var k='ugfc_wk6_ex'+t.getAttribute('data-r');
+  var saved=sget(k); if(saved){t.value=saved;}
+  t.addEventListener('input',function(){sset(k,t.value);});
+});
+
+['aff1','aff2','aff3','aff4'].forEach(function(id){
+  document.getElementById(id).addEventListener('change',checkSeal);
+});
+document.getElementById('namefield').addEventListener('input',checkSeal);
+function checkSeal(){
+  var done=document.querySelectorAll('.day.done').length;
+  var affs=['aff1','aff2','aff3','aff4'].every(function(id){return document.getElementById(id).checked});
+  var named=document.getElementById('namefield').value.trim().length>1;
+  var ok=(done===9)&&affs&&named;
+  document.getElementById('sealbtn').disabled=!ok;
+  var hint=document.getElementById('sealhint');
+  if(ok){hint.textContent='All requirements met — release your Seal.';hint.style.color='#7fc98f';}
+  else{
+    var need=[];
+    if(done<9){need.push((9-done)+' day'+(9-done===1?'':'s')+' not yet marked complete');}
+    if(!affs){need.push('affirmation boxes unchecked');}
+    if(!named){need.push('your name not yet entered');}
+    hint.textContent='Remaining: '+need.join(' · ');
+    hint.style.color='var(--muted)';
+  }
+}
+checkSeal();
+
+document.getElementById('sealbtn').addEventListener('click',function(){
+  var name=document.getElementById('namefield').value.trim();
+  document.getElementById('bname').textContent=name;
+  var d=new Date();
+  document.getElementById('bdate').textContent='Sealed this day: '+d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  sset('ugfc_wk6_passed','1'); sset('ugfc_wk6_name',name);
+  document.getElementById('badgewrap').style.display='block';
+  document.getElementById('badgewrap').scrollIntoView({behavior:'smooth'});
+});
+if(sget('ugfc_wk6_passed')==='1'){
+  document.getElementById('bname').textContent=sget('ugfc_wk6_name')||'';
+  document.getElementById('bdate').textContent='Seal previously earned';
+  document.getElementById('badgewrap').style.display='block';
+}
+
+document.getElementById('dlbtn').addEventListener('click',function(){
+  var name=(document.getElementById('bname').textContent||'').trim()||'Disciple of Yasha';
+  var date=document.getElementById('bdate').textContent;
+  var esc=function(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')};
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="Georgia, serif">'
+   +'<rect width="900" height="640" fill="#0E1530"/><rect x="18" y="18" width="864" height="604" fill="none" stroke="#D4AF37" stroke-width="3"/><rect x="28" y="28" width="844" height="584" fill="none" stroke="#D4AF37" stroke-width="1"/>'
+   +'<g transform="translate(450,145)"><circle r="64" fill="none" stroke="#D4AF37" stroke-width="4"/>'
+   +'<path d="M0 36 C -33 12, -38 -14, -22 -25 C -11 -33, -2 -26, 0 -19 C 2 -26, 11 -33, 22 -25 C 38 -14, 33 12, 0 36 Z" fill="none" stroke="#D4AF37" stroke-width="4.5"/>'
+   +'<path d="M -12 -22 L -4 -8 L -11 4 L -2 18 L -7 30" fill="none" stroke="#F0D98C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></g>'
+   +'<text x="450" y="296" text-anchor="middle" fill="#F0D98C" font-size="37" letter-spacing="7" font-weight="bold">THE MENDED HEART SEAL</text>'
+   +'<text x="450" y="331" text-anchor="middle" fill="#D4AF37" font-size="15" letter-spacing="4">THE 66-DAY GAUNTLET &#183; SESSION SIX &#183; BOUND UP BY THE HEALER</text>'
+   +'<text x="450" y="396" text-anchor="middle" fill="#F2ECD9" font-size="34" font-style="italic">'+esc(name)+'</text>'
+   +'<line x1="250" y1="414" x2="650" y2="414" stroke="#D4AF37" stroke-width="1"/>'
+   +'<text x="450" y="456" text-anchor="middle" fill="#F2ECD9" font-size="16">has surrendered every bruise, severed every ungodly tie, and exchanged</text>'
+   +'<text x="450" y="480" text-anchor="middle" fill="#F2ECD9" font-size="16">the lies of a lifetime for AhaYah&#8217;s memorized truth &#8212; Days 46&#8211;54</text>'
+   +'<text x="450" y="524" text-anchor="middle" fill="#8A93B8" font-size="14" letter-spacing="2">'+esc(date)+'</text>'
+   +'<text x="450" y="576" text-anchor="middle" fill="#D4AF37" font-size="13" letter-spacing="4">UNIVERSAL GOSPEL FELLOWSHIP CENTER &#183; ISAIAH 61:1 &#183; JOHN 8:31&#8211;32</text>'
+   +'</svg>';
+  var blob=new Blob([svg],{type:'image/svg+xml'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Mended-Heart-Seal-Session-6.svg';
+  document.body.appendChild(a); a.click(); a.remove();
+});
+</script>
+</body>
+</html>

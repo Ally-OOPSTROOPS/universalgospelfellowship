@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>The 66-Day Gauntlet &middot; Your Journey &middot; Universal Gospel Fellowship Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --midnight:#0A1026; --deep:#121B3A; --ink:#0E1530; --panel:#16224A;
+    --gold:#D4AF37; --gold-light:#F0D98C; --cream:#F2ECD9; --muted:#8A93B8;
+    --locked:#5b6585; --sealgreen:#7fc98f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(ellipse at top, rgba(212,175,55,0.07) 0%, transparent 55%),
+      var(--midnight);
+    color:var(--cream);
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:17px; line-height:1.6;
+    min-height:100vh; padding:2.5rem 1.25rem 5rem;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+
+  .crest{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 1.1rem;
+    background:radial-gradient(circle,var(--gold-light),var(--gold) 70%,var(--gold) 100%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel Decorative',serif;font-weight:900;font-size:1.5rem;color:var(--midnight);
+    box-shadow:0 0 28px rgba(240,217,140,0.45);border:1px solid var(--gold-light);
+  }
+  .kicker{
+    text-align:center;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;
+    font-family:'Cinzel Decorative',serif;
+  }
+  h1{
+    text-align:center;font-family:'Cinzel Decorative',serif;font-weight:700;
+    color:var(--gold-light);font-size:clamp(1.9rem,6vw,2.8rem);line-height:1.1;margin-bottom:.4rem;
+  }
+  .sub{
+    text-align:center;font-style:italic;color:var(--cream);font-size:1.1rem;margin-bottom:1.8rem;
+  }
+  .welcome{
+    background:var(--panel);border:1px solid rgba(212,175,55,.32);
+    border-left:3px solid var(--gold);border-radius:6px;
+    padding:1.1rem 1.3rem;margin:0 auto 1.6rem;font-size:1.02rem;color:var(--cream);
+  }
+  .welcome strong{color:var(--gold-light)}
+
+  .progress-shell{margin:0 auto 2rem;max-width:520px}
+  .progress-label{
+    text-align:center;font-family:'Cinzel Decorative',serif;font-size:.7rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:.55rem;
+  }
+  .progress-track{height:8px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;border:1px solid rgba(212,175,55,.2)}
+  .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .6s ease}
+
+  .session{
+    display:flex;align-items:center;gap:1rem;
+    background:var(--panel);border:1px solid rgba(212,175,55,.18);
+    border-radius:8px;padding:1.15rem 1.2rem;margin-bottom:1rem;position:relative;
+    transition:border-color .25s,transform .25s,box-shadow .25s;
+  }
+  .session.unlocked{border-color:rgba(212,175,55,.55);box-shadow:0 0 22px rgba(212,175,55,.12)}
+  .session.unlocked:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+  .session.completed{border-color:rgba(127,201,143,.4)}
+  .session.locked{opacity:.62}
+
+  .s-badge{
+    flex-shrink:0;width:54px;height:54px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel Decorative',serif;font-weight:700;font-size:1.25rem;
+    border:1px solid rgba(212,175,55,.5);
+  }
+  .unlocked .s-badge{background:radial-gradient(circle,var(--gold-light),var(--gold));color:var(--midnight);box-shadow:0 0 16px rgba(240,217,140,.4)}
+  .completed .s-badge{background:radial-gradient(circle,#bfe9c8,var(--sealgreen));color:#0c2d18;border-color:rgba(127,201,143,.7)}
+  .locked .s-badge{background:rgba(255,255,255,.05);color:var(--locked);border-color:rgba(120,130,165,.4)}
+
+  .s-body{flex:1;min-width:0}
+  .s-eyebrow{font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.15rem}
+  .locked .s-eyebrow{color:var(--locked)}
+  .s-title{font-family:'Cinzel Decorative',serif;font-size:1.12rem;color:var(--cream);line-height:1.25}
+  .completed .s-title{color:var(--cream)}
+  .s-state{font-size:.92rem;font-style:italic;color:var(--muted);margin-top:.25rem}
+  .completed .s-state{color:var(--sealgreen)}
+
+  .s-action{flex-shrink:0;text-align:right}
+  .btn{
+    display:inline-block;font-family:'Cinzel Decorative',serif;font-size:.72rem;letter-spacing:.12em;
+    text-transform:uppercase;text-decoration:none;padding:.6rem 1.1rem;border-radius:99px;font-weight:700;white-space:nowrap;
+  }
+  .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--midnight);box-shadow:0 0 16px rgba(240,217,140,.35)}
+  .btn-gold:hover{box-shadow:0 0 26px rgba(240,217,140,.6)}
+  .btn-ghost{background:transparent;border:1px solid rgba(127,201,143,.6);color:var(--sealgreen)}
+  .btn-ghost:hover{background:rgba(127,201,143,.12)}
+  .lock-ico{font-size:1.2rem;color:var(--locked)}
+
+  .capstone{
+    margin-top:1.6rem;text-align:center;padding:1.5rem 1.3rem;
+    background:linear-gradient(135deg,rgba(42,21,72,.45),var(--panel));
+    border:1px dashed rgba(212,175,55,.5);border-radius:8px;
+  }
+  .capstone .cap-eyebrow{font-family:'Cinzel Decorative',serif;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+  .capstone h3{font-family:'Cinzel Decorative',serif;color:var(--gold-light);font-size:1.3rem;margin-bottom:.5rem}
+  .capstone p{color:var(--cream);font-size:1rem;font-style:italic;max-width:520px;margin:0 auto}
+
+  footer{margin-top:3rem;text-align:center;border-top:1px solid rgba(212,175,55,.2);padding-top:1.6rem}
+  .seal-line{font-family:'Cinzel Decorative',serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+  .verse{font-style:italic;color:var(--muted);font-size:1rem;margin-bottom:1rem}
+  footer a{color:var(--gold-light);text-decoration:none;font-family:'Cinzel Decorative',serif;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+  footer a:hover{color:var(--cream)}
+
+  @media(max-width:560px){
+    .session{flex-wrap:wrap;gap:.7rem}
+    .s-action{flex-basis:100%;text-align:left;margin-top:.4rem}
+    .s-badge{width:46px;height:46px;font-size:1.05rem}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crest">&#10013;</div>
+  <div class="kicker">Universal Gospel Fellowship Center</div>
+  <h1>The 66-Day Gauntlet</h1>
+  <p class="sub">Deliverance &amp; Inner Healing &mdash; Your Journey</p>
+
+  <div class="welcome">
+    <strong>All seven sessions are yours.</strong> The road opens in order &mdash; complete each session&rsquo;s seal and the next unlocks here automatically. Walk it in sequence; that is how freedom is built and held. Your progress is remembered on this device.
+  </div>
+
+  <div class="progress-shell">
+    <div class="progress-label" id="plabel">Loading your journey&hellip;</div>
+    <div class="progress-track"><div class="progress-fill" id="pfill"></div></div>
+  </div>
+
+  <div id="sessions"></div>
+
+  <div class="capstone">
+    <div class="cap-eyebrow">Day 67 &middot; The Finish Line</div>
+    <h3>The Overcomer&rsquo;s Certificate</h3>
+    <p>After your testimony is received, the ministry issues your official Certificate of Completion &mdash; hand-signed and sealed. It is earned at the end of the road, not unlocked by a click.</p>
+  </div>
+
+  <footer>
+    <div class="seal-line">The Remnant &middot; Est. 2005</div>
+    <p class="verse">&ldquo;They overcame him by the blood of the Lamb, and by the word of their testimony.&rdquo; &mdash; Revelation 12:11</p>
+    <a href="index.html">&larr; Return to Main Site</a>
+  </footer>
+
+</div>
+
+<script>
+/* ---- safe storage (mirrors the modules' own fallback) ---- */
+var mem={};
+function sget(k){try{return localStorage.getItem(k)}catch(e){return mem[k]||null}}
+
+/* ---- session map: titles are the ministry's own (verified from each module) ---- */
+var SESSIONS=[
+  {n:1, roman:'I',   title:'Foundations &amp; Authority',                    days:'Days 1\u20139',   file:'GAUNTLET-WK1-MODULE.html'},
+  {n:2, roman:'II',  title:'The Nature of Demonic Oppression',              days:'Days 10\u201318', file:'GAUNTLET-WK2-MODULE.html'},
+  {n:3, roman:'III', title:'Curses &amp; the Power of Words',                 days:'Days 19\u201327', file:'GAUNTLET-WK3-MODULE.html'},
+  {n:4, roman:'IV',  title:'The 16 Strongman Spirits',                       days:'Days 28\u201336', file:'GAUNTLET-WK4-MODULE.html'},
+  {n:5, roman:'V',   title:'Steps to Spiritual Freedom',                     days:'Days 37\u201345', file:'GAUNTLET-WK5-MODULE.html'},
+  {n:6, roman:'VI',  title:'Inner Healing, Broken Hearts &amp; Soul Ties',    days:'Days 46\u201354', file:'GAUNTLET-WK6-MODULE.html'},
+  {n:7, roman:'VII', title:'Maintaining Freedom &amp; the Tomb',              days:'Days 55\u201366 &middot; Day 67', file:'GAUNTLET-WK7-MODULE.html'}
+];
+
+function passed(n){return sget('ugfc_wk'+n+'_passed')==='1';}
+
+function render(){
+  var host=document.getElementById('sessions');
+  host.innerHTML='';
+  var completedCount=0;
+
+  SESSIONS.forEach(function(s){
+    var isDone=passed(s.n);
+    var isUnlocked=(s.n===1)||passed(s.n-1);
+    if(isDone) completedCount++;
+
+    var state, action, cls;
+    if(isDone){
+      cls='completed';
+      state='&#10003; Sealed &mdash; complete';
+      action='<a class="btn btn-ghost" href="'+s.file+'">Revisit</a>';
+    } else if(isUnlocked){
+      cls='unlocked';
+      state= (s.n===1) ? 'Unlocked &mdash; begin here' : 'Unlocked &mdash; ready for you';
+      action='<a class="btn btn-gold" href="'+s.file+'">'+(s.n===1?'Begin':'Enter')+'</a>';
+    } else {
+      cls='locked';
+      state='Locked &mdash; complete Session '+(s.n-1)+' to unlock';
+      action='<span class="lock-ico">&#128274;</span>';
+    }
+
+    var badge = isDone ? '&#10003;' : (isUnlocked ? s.roman : '&#128274;');
+
+    var el=document.createElement('div');
+    el.className='session '+cls;
+    el.innerHTML=
+      '<div class="s-badge">'+badge+'</div>'+
+      '<div class="s-body">'+
+        '<div class="s-eyebrow">Session '+roman(s.n)+' &middot; '+s.days+'</div>'+
+        '<div class="s-title">'+s.title+'</div>'+
+        '<div class="s-state">'+state+'</div>'+
+      '</div>'+
+      '<div class="s-action">'+action+'</div>';
+    host.appendChild(el);
+  });
+
+  var pct=Math.round(completedCount/7*100);
+  document.getElementById('pfill').style.width=pct+'%';
+  var unlockedNow=0;
+  SESSIONS.forEach(function(s){ if(s.n===1||passed(s.n-1)) unlockedNow++; });
+  document.getElementById('plabel').textContent=
+    completedCount+' of 7 sealed \u00b7 '+unlockedNow+' of 7 unlocked';
+}
+
+function roman(n){return ['','One','Two','Three','Four','Five','Six','Seven'][n];}
+
+render();
+/* re-check when the visitor returns to this tab after finishing a session */
+document.addEventListener('visibilitychange',function(){ if(!document.hidden) render(); });
+window.addEventListener('focus',render);
+</script>
+</body>
+</html>
