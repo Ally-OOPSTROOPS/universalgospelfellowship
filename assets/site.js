@@ -13,7 +13,7 @@
   // ====== STARFIELD ======
   function initStarfield() {
     const canvas = document.getElementById('starfield');
-    if (!canvas) return
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let stars = [];
     function resize() {
@@ -154,41 +154,16 @@
 
   // ====== SOW (Freewill) CTAS ======
   function initSowCTAs() {
-    document.querySelectorAll('.sow-cta').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        const stream = btn.dataset.sowStream;
-        btn.disabled = true;
-        const originalText = btn.textContent;
-        btn.textContent = 'Loading…';
-
-        try {
-          const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ offering: 'freewill', sowStream: stream })
-          });
-          if (!response.ok) throw new Error('Sow checkout creation failed');
-          const data = await response.json();
-          if (data.url) {
-            window.location.href = data.url;
-          } else {
-            throw new Error('No checkout URL returned');
-          }
-        } catch (err) {
-          console.error('Sow error:', err);
-          btn.textContent = originalText;
-          btn.disabled = false;
-          // Graceful fallback while Stripe is not yet active: route to the contact form.
-          const reason = document.querySelector('select[name="reason"]');
-          if (reason) reason.value = 'general';
-          const contactSection = document.getElementById('contact');
-          if (contactSection) { if (scrollHelper.landOn) scrollHelper.landOn(contactSection, true); else contactSection.scrollIntoView({ behavior: 'smooth' }); }
-          const status = document.getElementById('contactStatus');
-          if (status) {
-            status.textContent = 'To sow into the ministry, send this short form and Leslie will personally respond with how to give.';
-            status.className = 'contact-status success';
-          }
-        }
+    // Each Sow button opens its Stripe "give any amount" payment link.
+    var SOW_LINKS = {
+      ally: 'https://buy.stripe.com/9B600l3Vm3UebJT7JB1ZS01',
+      swat: 'https://buy.stripe.com/dRm4gB8bC2Qag09e7Z1ZS02',
+      work: 'https://buy.stripe.com/fZucN777y8au15f2ph1ZS00'
+    };
+    document.querySelectorAll('.sow-cta').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var url = SOW_LINKS[btn.dataset.sowStream];
+        if (url) { window.location.href = url; }
       });
     });
   }
