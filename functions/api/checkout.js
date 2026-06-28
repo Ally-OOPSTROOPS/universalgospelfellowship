@@ -122,7 +122,7 @@ export async function onRequestPost({ request, env }) {
   form.append("mode", "payment");
   form.append("line_items[0][price]", stripePriceId);
   form.append("line_items[0][quantity]", "1");
-  form.append("success_url", `${siteBase}/thank-you.html?session_id={CHECKOUT_SESSION_ID}`);
+  form.append("success_url", `${siteBase}/GAUNTLET-WELCOME.html?session_id={CHECKOUT_SESSION_ID}`);
   form.append("cancel_url", `${siteBase}/#offerings`);
   form.append("allow_promotion_codes", "true");
   form.append("billing_address_collection", "auto");
