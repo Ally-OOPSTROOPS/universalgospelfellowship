@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sow Monthly · Universal Gospel Fellowship Center</title>
+<meta name="description" content="Become a monthly partner with Universal Gospel Fellowship Center. Name your own monthly gift — whatever you are led to give.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --midnight:#04080F; --deep-navy:#070D1C; --navy:#0B1228;
+    --gold-bright:#F2C45A; --gold-mid:#C9A84C; --gold-deep:#8B6914;
+    --cream:#F5EDD8; --cream-dim:#C8B89A; --blood-mid:#5A1414;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--midnight); color:var(--cream);
+    font-family:'Cormorant Garamond',Georgia,serif; font-size:18px; line-height:1.6;
+    min-height:100vh;
+  }
+  #starfield{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
+  .wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:3.5rem 1.5rem 5rem;}
+  .brand{text-align:center;margin-bottom:2rem;}
+  .brand a{color:var(--gold-bright);text-decoration:none;font-family:'Cinzel',serif;
+    font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;}
+  .card{
+    background:rgba(11,18,40,.6);border:1px solid rgba(201,168,76,.4);
+    border-radius:8px;padding:2.5rem 2rem;box-shadow:0 30px 60px rgba(0,0,0,.5);
+  }
+  .eyebrow{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--gold-mid);text-align:center;margin-bottom:.8rem;}
+  h1{font-family:'Cinzel Decorative',serif;color:var(--gold-bright);
+    font-size:2rem;text-align:center;line-height:1.2;margin-bottom:1rem;}
+  .lede{text-align:center;font-style:italic;color:var(--cream-dim);
+    font-size:1.15rem;margin-bottom:2rem;}
+  .field-label{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gold-mid);margin-bottom:.7rem;display:block;}
+  .streams{display:grid;gap:.7rem;margin-bottom:1.8rem;}
+  .stream{
+    display:flex;align-items:flex-start;gap:.8rem;padding:1rem 1.1rem;
+    background:rgba(4,8,15,.5);border:1px solid rgba(201,168,76,.28);
+    border-radius:4px;cursor:pointer;transition:border-color .2s,background .2s;
+  }
+  .stream:hover{border-color:rgba(242,196,90,.55);}
+  .stream input{margin-top:.35rem;accent-color:var(--gold-bright);width:18px;height:18px;flex-shrink:0;}
+  .stream.selected{border-color:var(--gold-bright);background:rgba(242,196,90,.08);}
+  .stream-name{font-family:'Cinzel',serif;font-size:.92rem;letter-spacing:.05em;color:var(--cream);}
+  .stream-desc{font-size:.98rem;color:var(--cream-dim);font-style:italic;margin-top:.15rem;}
+  .amount-row{position:relative;margin-bottom:.4rem;}
+  .amount-row .dollar{position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    font-size:1.6rem;color:var(--gold-mid);font-family:'Cinzel',serif;}
+  #amount{
+    width:100%;padding:1rem 1rem 1rem 2.6rem;font-size:1.6rem;
+    background:rgba(4,8,15,.6);border:1px solid rgba(201,168,76,.4);
+    color:var(--cream);border-radius:4px;font-family:'Cinzel',serif;
+  }
+  #amount:focus{outline:none;border-color:var(--gold-bright);box-shadow:0 0 14px rgba(242,196,90,.25);}
+  .per-month{text-align:right;color:var(--cream-dim);font-style:italic;font-size:.95rem;margin-bottom:1.6rem;}
+  .give-btn{
+    width:100%;padding:1.05rem 1rem;border:none;border-radius:3px;cursor:pointer;
+    background:linear-gradient(135deg,var(--gold-mid),var(--gold-bright));
+    color:var(--midnight);font-family:'Cinzel',serif;font-size:.9rem;
+    letter-spacing:.18em;text-transform:uppercase;font-weight:700;
+    transition:box-shadow .3s,transform .2s;
+  }
+  .give-btn:hover{box-shadow:0 0 25px rgba(242,196,90,.6);transform:translateY(-2px);}
+  .give-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+  .status{margin-top:1rem;padding:.8rem;text-align:center;font-style:italic;border-radius:3px;min-height:1px;}
+  .status.error{background:rgba(90,20,20,.3);color:var(--cream);}
+  .notice{
+    margin-top:1.6rem;padding:1rem 1.2rem;background:rgba(90,20,20,.15);
+    border:1px solid rgba(90,20,20,.4);border-radius:4px;
+    font-size:.92rem;color:var(--cream-dim);line-height:1.5;
+  }
+  .notice strong{color:var(--gold-bright);}
+  .notice a{color:var(--gold-bright);}
+  .cancel-note{text-align:center;margin-top:1rem;font-size:.9rem;color:var(--cream-dim);font-style:italic;}
+  .back{display:block;text-align:center;margin-top:2rem;color:var(--gold-bright);
+    text-decoration:none;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;}
+  .onetime-note{text-align:center;margin-top:.6rem;font-size:.92rem;color:var(--cream-dim);}
+  .onetime-note a{color:var(--gold-bright);}
+</style>
+</head>
+<body>
+<canvas id="starfield"></canvas>
+
+<div class="wrap">
+  <div class="brand"><a href="index.html">&larr; Universal Gospel Fellowship Center</a></div>
+
+  <div class="card">
+    <div class="eyebrow">Become a Monthly Partner</div>
+    <h1>Sow Monthly into the Work</h1>
+    <p class="lede">Whatever you are led to give, we receive.<br>Freely received, freely given.</p>
+
+    <span class="field-label">Where would you like to sow?</span>
+    <div class="streams" id="streams">
+      <label class="stream selected">
+        <input type="radio" name="stream" value="work" checked>
+        <span>
+          <span class="stream-name">Into the Work</span>
+          <span class="stream-desc">Wherever the Spirit directs across the whole ministry.</span>
+        </span>
+      </label>
+      <label class="stream">
+        <input type="radio" name="stream" value="ally">
+        <span>
+          <span class="stream-name">Into Ally</span>
+          <span class="stream-desc">The children&rsquo;s outreach.</span>
+        </span>
+      </label>
+      <label class="stream">
+        <input type="radio" name="stream" value="swat">
+        <span>
+          <span class="stream-name">Into SWAT</span>
+          <span class="stream-desc">The outreach ministry.</span>
+        </span>
+      </label>
+    </div>
+
+    <span class="field-label">Your monthly gift</span>
+    <div class="amount-row">
+      <span class="dollar">$</span>
+      <input type="number" id="amount" inputmode="decimal" min="1" step="1" placeholder="0" aria-label="Monthly gift amount in US dollars">
+    </div>
+    <div class="per-month">per month, until you choose to stop</div>
+
+    <button class="give-btn" id="giveBtn">Give Monthly &rarr;</button>
+    <div class="status" id="status"></div>
+
+    <p class="cancel-note">You may cancel anytime &mdash; no reason needed.</p>
+
+    <div class="notice">
+      <strong>A gift, not a purchase.</strong> Monthly gifts to UGFC are received as offerings to a ministry, not as purchases of goods or services, and are non&#8209;refundable. Canceling stops all future monthly gifts; it does not refund a month already given. See our <a href="legal.html#s4">Legal Disclosures</a>.
+    </div>
+
+    <p class="onetime-note">Prefer to give once instead? <a href="index.html#partner">Make a one&#8209;time gift &rarr;</a></p>
+
+    <a class="back" href="index.html">Return to the main site</a>
+  </div>
+</div>
+
+<script>
+  // Highlight the selected stream card.
+  document.querySelectorAll('.stream input').forEach(function(inp){
+    inp.addEventListener('change', function(){
+      document.querySelectorAll('.stream').forEach(function(s){ s.classList.remove('selected'); });
+      inp.closest('.stream').classList.add('selected');
+    });
+  });
+
+  var btn = document.getElementById('giveBtn');
+  var statusEl = document.getElementById('status');
+
+  btn.addEventListener('click', async function(){
+    var stream = (document.querySelector('input[name="stream"]:checked') || {}).value;
+    var amount = parseFloat(document.getElementById('amount').value);
+
+    statusEl.className = 'status';
+    statusEl.textContent = '';
+
+    if (!amount || amount <= 0) {
+      statusEl.className = 'status error';
+      statusEl.textContent = 'Please enter a monthly amount.';
+      return;
+    }
+    if (amount < 1) {
+      statusEl.className = 'status error';
+      statusEl.textContent = 'The smallest monthly gift is $1.00.';
+      return;
+    }
+
+    btn.disabled = true;
+    var original = btn.textContent;
+    btn.textContent = 'Preparing\u2026';
+
+    try {
+      var resp = await fetch('/api/give-monthly', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: amount, stream: stream })
+      });
+      var data = await resp.json();
+      if (!resp.ok || !data.url) {
+        throw new Error((data && data.error) || 'Could not start the monthly gift.');
+      }
+      window.location.href = data.url;
+    } catch (err) {
+      console.error('Monthly give error:', err);
+      btn.disabled = false;
+      btn.textContent = original;
+      statusEl.className = 'status error';
+      statusEl.textContent = err.message + ' Please try again, or email allystoryhorse@pm.me.';
+    }
+  });
+
+  // Starfield (matches the main site).
+  (function(){
+    var c = document.getElementById('starfield');
+    if (!c) return;
+    var ctx = c.getContext('2d'); var stars = [];
+    function resize(){
+      c.width = innerWidth; c.height = innerHeight; stars = [];
+      for (var i=0;i<90;i++) stars.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.3+0.2,o:Math.random()*0.6+0.2});
+    }
+    function draw(){
+      ctx.clearRect(0,0,c.width,c.height);
+      stars.forEach(function(s){ ctx.fillStyle='rgba(242,196,90,'+s.o+')'; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); });
+      requestAnimationFrame(draw);
+    }
+    resize(); addEventListener('resize',resize,{passive:true}); draw();
+  })();
+</script>
+</body>
+</html>
