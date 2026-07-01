@@ -103,12 +103,21 @@ export async function onRequestPost({ request, env }) {
     return jsonResponse({ error: "Invalid 'priceIdRef'." }, 400);
   }
 
-  const stripePriceId = env[resolvedRef];
-  if (!stripePriceId) {
-    return jsonResponse(
-      { error: `Server is missing environment variable ${resolvedRef}.` },
-      500
-    );
+  // The 66-Day Gauntlet uses INLINE pricing ($777 one-time) so it never depends
+  // on a separately-created Stripe Price object. Every other offering resolves
+  // to a Price ID stored in an environment variable.
+  const isGauntlet = resolvedRef === "PRICE_GAUNTLET";
+  const GAUNTLET_CENTS = 77700;
+
+  let stripePriceId = null;
+  if (!isGauntlet) {
+    stripePriceId = env[resolvedRef];
+    if (!stripePriceId) {
+      return jsonResponse(
+        { error: `Server is missing environment variable ${resolvedRef}.` },
+        500
+      );
+    }
   }
 
   if (!env.STRIPE_SECRET_KEY) {
@@ -120,9 +129,16 @@ export async function onRequestPost({ request, env }) {
   // Build the application/x-www-form-urlencoded body that Stripe expects.
   const form = new URLSearchParams();
   form.append("mode", "payment");
-  form.append("line_items[0][price]", stripePriceId);
-  form.append("line_items[0][quantity]", "1");
-  form.append("success_url", `${siteBase}/GAUNTLET-WELCOME.html?session_id={CHECKOUT_SESSION_ID}`);
+  if (isGauntlet) {
+    form.append("line_items[0][price_data][currency]", "usd");
+    form.append("line_items[0][price_data][unit_amount]", String(GAUNTLET_CENTS));
+    form.append("line_items[0][price_data][product_data][name]", "66-Day Gauntlet");
+    form.append("line_items[0][quantity]", "1");
+  } else {
+    form.append("line_items[0][price]", stripePriceId);
+    form.append("line_items[0][quantity]", "1");
+  }
+  form.append("success_url", `${siteBase}/thank-you.html?session_id={CHECKOUT_SESSION_ID}`);
   form.append("cancel_url", `${siteBase}/#offerings`);
   form.append("allow_promotion_codes", "true");
   form.append("billing_address_collection", "auto");
